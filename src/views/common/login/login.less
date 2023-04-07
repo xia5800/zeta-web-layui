@@ -1,0 +1,97 @@
+/** 登录页样式 */
+
+.wave {
+  position: fixed;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.login-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 18rem;
+  padding: 0 2rem;
+}
+
+.logo {
+  width: 350px;
+  height: 80px;
+}
+
+.img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  #banner {
+    width: 500px;
+    margin-top: 100px;
+  }
+}
+
+.login-box {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.login-form {
+  width: 360px;
+
+  h2 {
+    text-transform: uppercase;
+    margin: 15px 0;
+    color: #999;
+    font: bold 200% Consolas, Monaco, monospace;
+  }
+
+  .verifyCode {
+    width: 120px;
+    height: 36px;
+  }
+
+  &-password-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .login-container {
+    grid-gap: 9rem;
+  }
+
+  .login-form {
+    width: 360px;
+
+    h2 {
+      font-size: 2.4rem;
+      margin: 8px 0;
+    }
+  }
+
+  .img #banner {
+    width: 360px;
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .wave {
+    display: none;
+  }
+
+  .img {
+    display: none;
+  }
+
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+
+  .login-box {
+    justify-content: center;
+  }
+}

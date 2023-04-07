@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "usernamehw.errorlens",
+    "unional.vscode-sort-package-json",
+    "dbaeumer.vscode-eslint",
+    "antfu.iconify",
+    "naumovs.color-highlight"
+  ]
+}

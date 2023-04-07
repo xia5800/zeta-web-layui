@@ -1,0 +1,88 @@
+/** 分页查询返回结果 */
+export const pageResult = {
+  code: 0,
+  message: '操作成功',
+  data: {
+    list: [
+      {
+        id: '1610517190090424322',
+        createTime: '2023-01-04 14:03:15',
+        createdBy: '0',
+        updateTime: '2023-01-04 14:03:15',
+        updatedBy: '0',
+        name: '普通用户',
+        code: 'USER',
+        describe: '普通用户，拥有管理员赋予的权利',
+        readonly: false,
+      },
+      {
+        id: '1610517190090424321',
+        createTime: '2023-01-04 14:03:15',
+        createdBy: '0',
+        updateTime: '2023-01-04 14:03:15',
+        updatedBy: '0',
+        name: '管理员',
+        code: 'ADMIN',
+        describe: '管理员，拥有99%的权利',
+        readonly: false,
+      },
+      {
+        id: '1610517190090424320',
+        createTime: '2023-01-04 14:03:15',
+        createdBy: '0',
+        updateTime: '2023-01-04 14:03:15',
+        updatedBy: '0',
+        name: '超级管理员',
+        code: 'SUPER_ADMIN',
+        describe: '超级管理员，拥有至高无上的权利',
+        readonly: true,
+      },
+    ],
+    count: '3',
+  },
+  error: null,
+  success: true,
+}
+
+/** 批量查询返回结果 */
+export const queryResult = {
+  code: 0,
+  message: '操作成功',
+  data: [
+    {
+      id: '1610517190090424320',
+      createTime: '2023-01-04 14:03:15',
+      createdBy: '0',
+      updateTime: '2023-01-04 14:03:15',
+      updatedBy: '0',
+      name: '超级管理员',
+      code: 'SUPER_ADMIN',
+      describe: '超级管理员，拥有至高无上的权利',
+      readonly: true,
+    },
+    {
+      id: '1610517190090424321',
+      createTime: '2023-01-04 14:03:15',
+      createdBy: '0',
+      updateTime: '2023-01-04 14:03:15',
+      updatedBy: '0',
+      name: '管理员',
+      code: 'ADMIN',
+      describe: '管理员，拥有99%的权利',
+      readonly: false,
+    },
+    {
+      id: '1610517190090424322',
+      createTime: '2023-01-04 14:03:15',
+      createdBy: '0',
+      updateTime: '2023-01-04 14:03:15',
+      updatedBy: '0',
+      name: '普通用户',
+      code: 'USER',
+      describe: '普通用户，拥有管理员赋予的权利',
+      readonly: false,
+    },
+  ],
+  error: null,
+  success: true,
+}

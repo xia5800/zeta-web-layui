@@ -1,0 +1,12 @@
+/** zeta-web-layui 公共样式 */
+
+/** 容器 */
+.z-container {
+  padding: var(--layout-content-padding)!important;
+}
+
+.z-form-card {
+  padding-top: 10px;
+}
+
+/** TODO: 辅助类...  */

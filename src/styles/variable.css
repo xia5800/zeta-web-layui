@@ -1,0 +1,23 @@
+/** zeta-web-layui css变量 */
+
+:root {
+  /** 顶部navbar高度 */
+  --layout-nav-height: 50px;
+  /** 菜单选项卡高度 */
+  --layout-tab-height: 40px;
+  /** 页脚高度 */
+  --layout-footer-height: 40px;
+
+  /** layout内容区 padding值 */
+  --layout-content-padding: 10px;
+
+  /** 菜单展开宽度 */
+  --layout-side-unfold-width: 200px;
+  /** 菜单折叠宽度 */
+  --layout-side-fold-width: 60px;
+
+  /** 展开时菜单图标大小  */
+  --layout-side-icon-unfold-size: 14px;
+  /** 收起时菜单图标大小 */
+  --layout-side-icon-fold-size: 22px;
+}

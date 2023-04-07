@@ -1,0 +1,56 @@
+{
+  "name": "Zeta-Web-Layui",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "yarn@1.22.19",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@layui/layui-vue": "^1.10.0",
+    "@vueuse/core": "^9.13.0",
+    "axios": "^1.3.5",
+    "crypto-js": "^4.1.1",
+    "echarts": "^5.4.2",
+    "lottie-web": "^5.10.2",
+    "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.33",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.4",
+    "@iconify/vue": "^4.1.1",
+    "@types/crypto-js": "^4.1.1",
+    "@types/lodash-es": "^4.17.7",
+    "@types/mockjs": "^1.0.7",
+    "@types/node": "^18.15.11",
+    "@types/nprogress": "^0.2.0",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "eslint": "^8.37.0",
+    "less": "^4.1.3",
+    "lodash-es": "^4.17.21",
+    "rollup-plugin-visualizer": "^5.9.0",
+    "typescript": "^5.0.3",
+    "unplugin-auto-import": "^0.15.2",
+    "unplugin-vue-components": "^0.24.1",
+    "unplugin-vue-define-options": "^1.3.3",
+    "vite": "^4.2.1",
+    "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-remove-console": "^2.1.0",
+    "vue-tsc": "^1.2.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ]
+}

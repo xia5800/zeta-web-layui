@@ -1,0 +1,88 @@
+export const columns = [
+  // {
+  //   title: '',
+  //   type: 'checkbox',
+  //   width: '50px',
+  //   fixed: 'left',
+  // },
+  {
+    title: '#',
+    type: 'number',
+    width: '50px',
+    fixed: 'left',
+  },
+  {
+    key: 'bizType',
+    title: '业务类型',
+    minWidth: '100px',
+    align: 'center',
+  },
+  {
+    key: 'bucket',
+    title: '桶',
+    minWidth: '100px',
+    align: 'center',
+  },
+  {
+    key: 'storageType',
+    title: '存储策略',
+    hide: true,
+    minWidth: '100px',
+    align: 'center',
+  },
+  {
+    key: 'url',
+    title: '访问地址',
+    align: 'left',
+  },
+  {
+    key: 'path',
+    title: '文件路径',
+    align: 'left',
+  },
+  {
+    key: 'uniqueFileName',
+    title: '文件名称',
+    align: 'left',
+  },
+  {
+    key: 'fileType',
+    title: '文件类型',
+    minWidth: '100px',
+    align: 'center',
+  },
+  {
+    key: 'contentType',
+    title: '内容类型',
+    hide: true,
+    align: 'center',
+  },
+  {
+    key: 'suffix',
+    title: '后缀',
+    hide: true,
+    width: '80px',
+    align: 'center',
+  },
+  {
+    key: 'size',
+    title: '文件大小',
+    hide: true,
+    align: 'center',
+    customSlot: 'size',
+  },
+  {
+    key: 'createTime',
+    title: '上传时间',
+    width: '180px',
+    align: 'center',
+  },
+  {
+    key: 'operator',
+    title: '操作',
+    width: '80px',
+    align: 'center',
+    customSlot: 'operator',
+    fixed: 'right',
+  },
+]

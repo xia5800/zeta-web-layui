@@ -1,0 +1,83 @@
+<script setup lang="ts">
+import {
+  TheContent,
+  TheFooter,
+  TheHeader,
+  TheLogo,
+  TheMenu,
+  TheTabs,
+} from './components'
+
+const themeStore = useThemeStore()
+const sideWidth = computed(() =>
+  themeStore.collaspeSide
+    ? 'var(--layout-side-fold-width)'
+    : 'var(--layout-side-unfold-width)',
+)
+const menuTheme = computed(() => {
+  if (themeStore.settings.sideThemeInverse) {
+    return themeStore.settings.themeMode === 'dark' ? 'light' : 'dark'
+  } else {
+    return themeStore.settings.themeMode
+  }
+})
+</script>
+
+<template>
+  <div class="zeta-admin">
+    <lay-layout>
+      <!-- 侧边栏 -->
+      <lay-side v-show="isPC" :width="sideWidth" :class="menuTheme">
+        <!-- logo -->
+        <lay-logo v-if="themeStore.settings.showLogo">
+          <TheLogo />
+        </lay-logo>
+        <!-- 菜单 -->
+        <lay-scroll
+          class="menu-scroll"
+          :style="{
+            height: themeStore.settings.showLogo
+              ? 'calc(100% - var(--layout-nav-height))'
+              : '100%',
+          }"
+        >
+          <TheMenu :theme="menuTheme" />
+        </lay-scroll>
+      </lay-side>
+
+      <lay-layout>
+        <!-- header -->
+        <lay-header>
+          <!-- 头部 -->
+          <TheHeader />
+          <!-- 多页签 -->
+          <TheTabs v-if="themeStore.settings.showTabs" />
+        </lay-header>
+
+        <!-- 内容 -->
+        <lay-body>
+          <TheContent />
+          <!-- 回到顶部 -->
+          <lay-backtop :show-height="200" :bottom="60" :right="20" />
+        </lay-body>
+
+        <!-- 页脚 -->
+        <lay-footer v-if="themeStore.settings.showFoot">
+          <TheFooter />
+        </lay-footer>
+      </lay-layout>
+    </lay-layout>
+  </div>
+</template>
+
+<style scoped>
+/** 隐藏菜单滚动条 */
+:deep(.menu-scroll .layui-scroll-y .layui-scroll-track) {
+  display: none;
+}
+
+/** 侧边栏亮色 */
+.layui-side.light {
+  background-color: white;
+}
+</style>

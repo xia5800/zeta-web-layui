@@ -1,0 +1,165 @@
+/** zeta-web-layui 布局 */
+
+/** 过度动画 */
+.layui-layout .layui-logo,
+.layui-layout .layui-side,
+.layui-layout .layui-body,
+.layui-layout .layui-header {
+  transition: all 0.3s;
+}
+
+/** 布局 */
+.layui-layout {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/** 顶部 */
+.layui-header {
+  height: auto;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/** 顶部-nav */
+.layui-header .the-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--layout-nav-height);
+}
+/** 顶部-nav项 */
+.layui-header .the-nav .the-nav-item {
+  margin-left: 16px;
+}
+
+/** 顶部-选项卡 */
+.layui-header .the-tab {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  height: var(--layout-tab-height);
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+.layui-header .the-tab .layui-tab {
+  flex-grow: 1;
+  width: calc(100% - 40px);
+}
+.layui-header .the-tab .layui-tab .layui-tab-bar {
+  border: none;
+  border-left: 1px solid whitesmoke;
+}
+.layui-header .the-tab .layui-tab .layui-tab-bar.prev {
+  border-left: none;
+}
+.layui-header .the-tab .layui-tab .dot {
+  display: inline-block;
+  background-color: whitesmoke;
+  margin-right: 8px;
+  border-radius: 50px;
+  height: 8px;
+  width: 8px;
+}
+.layui-header .the-tab .layui-tab .layui-this .dot {
+  background-color: var(--global-primary-color);
+}
+.layui-header .the-tab .layui-tab .layui-tab-close:hover {
+  background: transparent !important;
+  color: #e2e2e2 !important;
+}
+.layui-header .the-tab .layui-tab .layui-tab-head .layui-tab-title li {
+  border-right: 1px solid whitesmoke;
+}
+.layui-header .the-tab .layui-tab .layui-tab-content {
+  padding: 0px;
+}
+.layui-header .the-tab .layui-tab .layui-tab-title .layui-this:after {
+  border: none;
+}
+
+/** logo */
+.layui-logo {
+  height: var(--layout-nav-height);
+  width: 100%;
+  font-size: 20px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  -webkit-user-select: none;
+  user-select: none;
+}
+/** logo-组件 */
+.layui-logo .the-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/** logo-组件图标 */
+.layui-logo .the-logo .logo {
+  height: 40px;
+  width: 40px;
+}
+/** logo-组件标题 */
+.layui-logo .the-logo .logo-title {
+  margin-left: 8px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/** 内容区 */
+.layui-body {
+  overflow-x: hidden;
+  background-color: whitesmoke;
+}
+
+/** 侧边栏 */
+.layui-side {
+  z-index: 10000;
+  background-color: #28333e;
+  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+  -webkit-user-select: none;
+  user-select: none;
+}
+/** 侧边栏-菜单 */
+.layui-side .layui-nav {
+  width: 100%;
+  background-color: transparent;
+}
+
+/** 侧边栏-菜单图标(展开) */
+.layui-side .layui-nav .nav-unfold-icon {
+  font-size: var(--layout-side-icon-unfold-size)
+}
+
+/** 侧边栏-菜单图标(收起) */
+.layui-side .layui-nav .nav-fold-icon {
+  display: flex;
+  justify-content: center;
+  font-size: var(--layout-side-icon-fold-size)
+}
+
+/** 弃用，改为v-if控制 */
+/* @media screen and (max-width: 767px) {
+  .layui-side {
+    position: absolute;
+    height: 100vh;
+    width: 0 !important;
+  }
+} */
+
+/** 页脚 */
+.layui-footer {
+  width: 100%;
+  height: auto;
+}
+
+/** 页脚-组件 */
+.layui-footer .the-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--layout-footer-height);
+  font-size: 14px;
+  font-weight: 700;
+}

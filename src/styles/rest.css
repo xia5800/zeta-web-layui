@@ -1,0 +1,19 @@
+/** zeta-web-layui 自定义样式，样式覆盖 */
+
+/** 表单label, 表格分页, 按钮, 文本框... 文字不允许选中 */
+.layui-form-label, .layui-table-page,
+.layui-btn, .layui-layer-btn, .layui-input-wrapper {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/** 表格单元格文字不允许选中。 这个看需求，可以注释掉 */
+/* .layui-table-cell {
+  -webkit-user-select: none;
+  user-select: none;
+} */
+
+/** 修复popper在弹窗中不显示问题 */
+.layui-popper {
+  z-index: 100050!important;
+}
