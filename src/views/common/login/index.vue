@@ -55,6 +55,7 @@ async function handleSubmit() {
     layer.notifiy({
       title: '登录成功',
       content: '欢迎回来~',
+      area: '300px',
       icon: 1,
       time: 1000,
     })

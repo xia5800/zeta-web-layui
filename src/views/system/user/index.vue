@@ -180,14 +180,14 @@ function handlerResetPwd(id: string) {
 }
 
 /** 修改用户状态 */
-async function changeState(val: number, id: string) {
-  const { success, message } = await updateUserStateApi({ id, state: val })
+async function changeState(val: number, row: SysUser) {
+  const { success, message } = await updateUserStateApi({ id: row.id as string, state: val })
   if (!success) {
-    // TODO: 不知道修改失败之后，怎么让switch还原
     layer.msg(message || '修改失败', { icon: 2 })
     return
   }
   layer.msg(message || '修改成功', { icon: 1 })
+  row.state = val
 }
 </script>
 
@@ -278,12 +278,12 @@ async function changeState(val: number, id: string) {
         <!-- 状态列 -->
         <template #state="{ row }">
           <lay-switch
-            v-model="row.state"
+            :model-value="row.state"
             onswitch-text="启用"
             :onswitch-value="1"
             unswitch-text="停用"
             :unswitch-value="0"
-            @change="(val) => changeState(val as number, row.id)"
+            @change="(val) => changeState(val as number, row)"
           />
         </template>
       </lay-table>

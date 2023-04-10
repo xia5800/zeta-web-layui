@@ -28,6 +28,7 @@ async function logout(request = true) {
   layer.notifiy({
     title: '登出成功',
     content: '记得回来~',
+    area: '300px',
     time: 1000,
   })
   userStore
