@@ -6,6 +6,15 @@ zeta-web-layui是一个基于Vue3、Vite4、Pinia、TypeScript、layui-vue开发
 
 本项目只提供了一个最基础的RBAC用户角色权限功能。不像其它开源项目那样大而全，本项目相当精简。
 
+## 如何启动
+
+本项目推荐使用yarn, 当然您用其它的也可以
+
+```bash
+yarn install
+yarn run dev
+```
+
 ## 技术选型
 
 | 技术                       | 说明                                                         |
@@ -37,3 +46,12 @@ zeta-web-layui是一个基于Vue3、Vite4、Pinia、TypeScript、layui-vue开发
 - layui-vue：[https://gitee.com/layui/layui-vue](https://gitee.com/layui/layui-vue)
 - pear-admin-next [https://gitee.com/pear-admin/pear-admin-next](https://gitee.com/pear-admin/pear-admin-next)
 - zeta-kotlin：[https://gitee.com/xia5800/zeta-kotlin](https://gitee.com/xia5800/zeta-kotlin)
+
+## 项目截图
+
+![登录页面](./_docs/预览图/登录页面.png)
+![用户管理页面](./_docs/预览图/用户管理页面.png)
+![系统设置](./_docs/预览图/系统设置.png)
+![菜单搜索](./_docs/预览图/菜单搜索.png)
+![多级菜单](./_docs/预览图/多级菜单.png)
+![关于](./_docs/预览图/关于.png)
