@@ -28,7 +28,6 @@ export const baseRoutes: RouteRecordRaw[] = [
       component: () => import('~/views/index.vue'),
       meta: {
         title: '首页',
-        icon: 'ri:home-3-line',
         affix: true,
       },
     }],

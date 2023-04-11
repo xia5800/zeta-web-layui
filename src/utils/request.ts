@@ -16,7 +16,7 @@ import { API_BASE_URL } from '~/config/setting'
  *  headers: { xxxx },
  *  isToken: false,  // 不携带token
  *  repeatSubmit: false, // 不允许短时间内重复请求
- *  repeatTips: true, // 启动重复请求提示
+ *  repeatInterval: 3000, // 3000ms内不进行第二次请求
  * })
  * ```
  */
