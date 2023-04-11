@@ -34,7 +34,7 @@ const parentPath = ref<string>('')
 async function fetchTableData(sysMenu?: SysMenu) {
   setLoading(true)
   try {
-    // 分页查询
+    // 树查询
     const { success, data } = await menuTreeApi({
       ...sysMenu,
     })

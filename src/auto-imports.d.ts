@@ -128,6 +128,7 @@ declare global {
   const pageRoleApi: typeof import('./api/system/role')['pageRoleApi']
   const pageUserApi: typeof import('./api/system/user')['pageUserApi']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const primaryColor: typeof import('./hooks/ui')['primaryColor']
   const provide: typeof import('vue')['provide']
   const queryDictApi: typeof import('./api/system/dict')['queryDictApi']
   const queryDictItemApi: typeof import('./api/system/dictItem')['queryDictItemApi']
@@ -322,6 +323,7 @@ declare global {
   const useTextSelection: typeof import('@vueuse/core')['useTextSelection']
   const useTextareaAutosize: typeof import('@vueuse/core')['useTextareaAutosize']
   const useThemeStore: typeof import('./store/modules/theme')['useThemeStore']
+  const useThemeStoreHook: typeof import('./store/modules/theme')['useThemeStoreHook']
   const useThrottle: typeof import('@vueuse/core')['useThrottle']
   const useThrottleFn: typeof import('@vueuse/core')['useThrottleFn']
   const useThrottledRefHistory: typeof import('@vueuse/core')['useThrottledRefHistory']
@@ -498,6 +500,7 @@ declare module 'vue' {
     readonly pageRoleApi: UnwrapRef<typeof import('./api/system/role')['pageRoleApi']>
     readonly pageUserApi: UnwrapRef<typeof import('./api/system/user')['pageUserApi']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly primaryColor: UnwrapRef<typeof import('./hooks/ui')['primaryColor']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
@@ -692,6 +695,7 @@ declare module 'vue' {
     readonly useTextSelection: UnwrapRef<typeof import('@vueuse/core')['useTextSelection']>
     readonly useTextareaAutosize: UnwrapRef<typeof import('@vueuse/core')['useTextareaAutosize']>
     readonly useThemeStore: UnwrapRef<typeof import('./store/modules/theme')['useThemeStore']>
+    readonly useThemeStoreHook: UnwrapRef<typeof import('./store/modules/theme')['useThemeStoreHook']>
     readonly useThrottle: UnwrapRef<typeof import('@vueuse/core')['useThrottle']>
     readonly useThrottleFn: UnwrapRef<typeof import('@vueuse/core')['useThrottleFn']>
     readonly useThrottledRefHistory: UnwrapRef<typeof import('@vueuse/core')['useThrottledRefHistory']>
