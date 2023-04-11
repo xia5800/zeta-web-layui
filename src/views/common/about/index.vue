@@ -31,11 +31,11 @@ const infoSchema: SchemaItem[] = [
   },
   {
     label: '预览地址',
-    value: '<a href="#" style="color:#409EFF">暂无</a>',
+    value: '<a href="https://bestgcc.online" target="_blank" style="color:#409EFF">预览地址</a>',
   },
   {
     label: '文档地址',
-    value: '<a href="#" style="color:#409EFF">暂无</a>',
+    value: '<a href="https://gitee.com/xia5800/zeta-web-layui/tree/master/_docs" target="_blank" style="color:#409EFF">_docs</a>',
   },
   {
     label: 'github',
