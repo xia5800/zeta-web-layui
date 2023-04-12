@@ -22,7 +22,6 @@ export const columns = [
   {
     key: 'sortValue',
     title: '排序',
-    sort: true,
     width: '100px',
     align: 'center',
   },

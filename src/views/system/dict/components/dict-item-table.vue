@@ -52,9 +52,9 @@ async function fetchTableData(param?: PageParam<SysDictItem>) {
   try {
     // 分页查询
     const { success, data } = await pageDictItemApi({
-      model: { dictId: dictId! } as SysDictItem,
       ...pageParam,
       ...param,
+      model: { dictId: dictId! } as SysDictItem,
     })
 
     if (!success) return
@@ -76,6 +76,20 @@ function changePage(data: any) {
     ...pageParam,
     page: data.current,
     limit: data.limit,
+  } as PageParam<SysDictItem>
+
+  // 获取表格数据
+  fetchTableData(param)
+}
+
+/** 排序事件 */
+function changeSort(columnName: string, order: string) {
+  // 自定义分页查询参数
+  const param = {
+    ...{ model: searchForm },
+    ...{ page: page.value.current, limit: page.value.limit },
+    sort: columnName,
+    order,
   } as PageParam<SysDictItem>
 
   // 获取表格数据
@@ -196,6 +210,7 @@ watch(
       :default-toolbar="defaultToolbar"
       :height="450"
       @change="changePage"
+      @sort-change="changeSort"
     >
       <!-- 工具栏 -->
       <template #toolbar>

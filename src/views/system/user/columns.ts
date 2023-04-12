@@ -76,6 +76,7 @@ export const columns = [
     key: 'createTime',
     title: '注册时间',
     width: '180px',
+    sort: true,
     align: 'center',
   },
   {

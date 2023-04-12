@@ -42,6 +42,7 @@ export const dictItemColumns = [
   {
     key: 'sortValue',
     title: '排序',
+    sort: true,
     align: 'center',
   },
   {

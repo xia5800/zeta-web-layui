@@ -29,12 +29,14 @@ export const columns = [
   {
     key: 'createTime',
     title: '创建时间',
+    sort: true,
     align: 'center',
     width: '180px',
   },
   {
     key: 'updateTime',
     title: '修改时间',
+    sort: true,
     align: 'center',
     width: '180px',
   },

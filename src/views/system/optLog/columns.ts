@@ -28,6 +28,7 @@ export const columns = [
   {
     key: 'httpMethod',
     title: '请求方式',
+    sort: true,
     minWidth: '100px',
     align: 'center',
   },
@@ -47,6 +48,7 @@ export const columns = [
     key: 'spendTime',
     title: '消耗时间',
     minWidth: '100px',
+    sort: true,
     align: 'center',
     customSlot: 'spendTime',
   },
@@ -77,6 +79,7 @@ export const columns = [
   {
     key: 'createTime',
     title: '操作时间',
+    sort: true,
     width: '180px',
     align: 'center',
   },

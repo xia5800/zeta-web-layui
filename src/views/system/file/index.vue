@@ -75,6 +75,23 @@ function changePage(data: any) {
   fetchTableData(param)
 }
 
+/** 排序事件 */
+function changeSort(columnName: string, order: string) {
+  // 获取搜索组件查询条件
+  const formModel = searchForm.value.formModel
+
+  // 自定义分页查询参数
+  const param = {
+    ...{ model: formModel },
+    ...{ page: page.value.current, limit: page.value.limit },
+    sort: columnName,
+    order,
+  } as PageParam<SysFile>
+
+  // 获取表格数据
+  fetchTableData(param)
+}
+
 /** 表单搜索事件 */
 function handleSearch(formModel: SysFile) {
   // 自定义分页查询参数
@@ -141,6 +158,7 @@ function handleDelete(id: string) {
         :auto-cols-width="true"
         max-height="450px"
         @change="changePage"
+        @sort-change="changeSort"
       >
         <!-- 工具栏 -->
         <template #toolbar>
