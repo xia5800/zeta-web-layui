@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, resultError, resultOk } from '../_util'
-import type { requestParams } from '../_util'
+import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
+import type { RequestParams } from '../_util'
 import type { PageResult, SysUser, UserInfo, UserMenu } from '../../src/types'
 import { loginUserInfo, loginUserMenu } from '../_data/login'
 import { pageResult, queryResult } from '../_data/user'
@@ -10,7 +10,7 @@ function pageApi(): MockMethod {
   return {
     url: '/mock-api/system/user/page',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -28,7 +28,7 @@ function queryApi(): MockMethod {
   return {
     url: '/mock-api/system/user/query',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -44,16 +44,17 @@ function getApi(): MockMethod {
   return {
     url: '/mock-api/system/user/:id',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      const query = request.query
-      if (!query.id) return checkFailure('用户id不能为空')
+      // fix: 解决生产环境获取不到:id值的问题
+      const params = parseRequestParams(request.url, '/mock-api/system/user/:id')
+      if (!params.id) return checkFailure('用户id不能为空')
 
-      const user = queryResult.data?.find(i => i.id === query.id!)
+      const user = queryResult.data?.find(i => i.id === params.id!)
       return resultOk<SysUser>(user as unknown as SysUser)
     },
   }
@@ -64,7 +65,7 @@ function addApi(): MockMethod {
   return {
     url: '/mock-api/system/user',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -89,7 +90,7 @@ function updateApi(): MockMethod {
   return {
     url: '/mock-api/system/user',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -114,13 +115,15 @@ function deleteApi(): MockMethod {
   return {
     url: '/mock-api/system/user/:id',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      if (request.query.id === '1610517191113834496') {
+      // fix: 解决生产环境获取不到:id值的问题
+      const params = parseRequestParams(request.url, '/mock-api/system/user/:id')
+      if (params.id === '1610517191113834496') {
         return resultError('用户[zeta管理员]禁止删除')
       }
 
@@ -134,7 +137,7 @@ function batchDeleteApi(): MockMethod {
   return {
     url: '/mock-api/system/user/batch',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -155,7 +158,7 @@ function changePwdApi(): MockMethod {
   return {
     url: '/mock-api/system/user/changePwd',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -175,7 +178,7 @@ function resetPwdApi(): MockMethod {
   return {
     url: '/mock-api/system/user/restPwd',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -199,7 +202,7 @@ function updateStateApi(): MockMethod {
   return {
     url: '/mock-api/system/user/state',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -221,9 +224,9 @@ function updateStateApi(): MockMethod {
 /** 验证字段是否存在 */
 function existenceApi(): MockMethod {
   return {
-    url: '\/mock-api\/system\/user\/existence',
+    url: '/mock-api/system/user/existence',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -251,7 +254,7 @@ function userInfoApi(): MockMethod {
   return {
     url: '/mock-api/system/user/info',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -267,7 +270,7 @@ function userMenuApi(): MockMethod {
   return {
     url: '/mock-api/system/user/menu',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })

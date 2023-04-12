@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../_util'
-import type { requestParams } from '../_util'
+import type { RequestParams } from '../_util'
 import type { SysMenu } from '../../src/types'
 import { menuTree, menuTreeNoButton } from '../_data/menu'
 
@@ -9,7 +9,7 @@ function queryMenuTreeApi(): MockMethod {
   return {
     url: '/mock-api/system/menu/tree',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -32,7 +32,7 @@ function addApi(): MockMethod {
   return {
     url: '/mock-api/system/menu',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -56,7 +56,7 @@ function updateApi(): MockMethod {
   return {
     url: '/mock-api/system/menu',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -80,7 +80,7 @@ function deleteApi(): MockMethod {
   return {
     url: '/mock-api/system/menu/:id',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -96,7 +96,7 @@ function batchDeleteApi(): MockMethod {
   return {
     url: '/mock-api/system/menu/batch',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })

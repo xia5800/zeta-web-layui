@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, resultError, resultOk } from '../_util'
-import type { requestParams } from '../_util'
+import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
+import type { RequestParams } from '../_util'
 import type { PageResult, SysRole } from '../../src/types'
 import { pageResult, queryResult } from '../_data/role'
 
@@ -9,7 +9,7 @@ function pageApi(): MockMethod {
   return {
     url: '/mock-api/system/role/page',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -25,7 +25,7 @@ function queryApi(): MockMethod {
   return {
     url: '/mock-api/system/role/query',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -41,16 +41,17 @@ function getApi(): MockMethod {
   return {
     url: '/mock-api/system/role/:id',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      const query = request.query
-      if (!query.id) return checkFailure('id不能为空')
+      // fix: 解决生产环境获取不到:id值的问题
+      const params = parseRequestParams(request.url, '/mock-api/system/role/:id')
+      if (!params.id) return checkFailure('id不能为空')
 
-      const role = queryResult.data?.find(i => i.id === query.id!)
+      const role = queryResult.data?.find(i => i.id === params.id!)
       return resultOk<SysRole>(role as SysRole)
     },
   }
@@ -61,7 +62,7 @@ function addApi(): MockMethod {
   return {
     url: '/mock-api/system/role',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -81,7 +82,7 @@ function updateApi(): MockMethod {
   return {
     url: '/mock-api/system/role',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -105,13 +106,15 @@ function deleteApi(): MockMethod {
   return {
     url: '/mock-api/system/role/:id',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      if (request.query.id === '1610517190090424320') {
+      // fix: 解决生产环境获取不到:id值的问题
+      const params = parseRequestParams(request.url, '/mock-api/system/role/:id')
+      if (params.id === '1610517190090424320') {
         return resultError('角色[超级管理员]禁止删除')
       }
 
@@ -125,7 +128,7 @@ function batchDeleteApi(): MockMethod {
   return {
     url: '/mock-api/system/role/batch',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })

@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, resultError, resultOk } from '../_util'
-import type { requestParams } from '../_util'
+import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
+import type { RequestParams } from '../_util'
 import type { PageResult, SysDict } from '../../src/types'
 import { pageResult, queryResult } from '../_data/dict'
 
@@ -9,7 +9,7 @@ function pageApi(): MockMethod {
   return {
     url: '/mock-api/system/dict/page',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -27,7 +27,7 @@ function queryApi(): MockMethod {
   return {
     url: '/mock-api/system/dict/query',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -43,16 +43,17 @@ function getApi(): MockMethod {
   return {
     url: '/mock-api/system/dict/:id',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      const query = request.query
-      if (!query.id) return checkFailure('id不能为空')
+      // fix: 解决生产环境获取不到:id值的问题
+      const params = parseRequestParams(request.url, '/mock-api/system/dict/:id')
+      if (!params.id) return checkFailure('id不能为空')
 
-      const data = queryResult.data?.find(i => i.id === query.id!)
+      const data = queryResult.data?.find(i => i.id === params.id!)
       return resultOk<SysDict>(data as SysDict)
     },
   }
@@ -63,7 +64,7 @@ function addApi(): MockMethod {
   return {
     url: '/mock-api/system/dict',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -83,7 +84,7 @@ function updateApi(): MockMethod {
   return {
     url: '/mock-api/system/dict',
     method: 'put',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -104,7 +105,7 @@ function deleteApi(): MockMethod {
   return {
     url: '/mock-api/system/dict/:id',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -120,7 +121,7 @@ function batchDeleteApi(): MockMethod {
   return {
     url: '/mock-api/system/dict/batch',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })

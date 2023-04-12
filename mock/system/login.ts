@@ -1,6 +1,6 @@
 import type { MockMethod, Recordable } from 'vite-plugin-mock'
 import { getRequestToken, resultError, resultOk } from '../_util'
-import type { requestParams } from '../_util'
+import type { RequestParams } from '../_util'
 import type { CaptchaResult, UserInfo, UserMenu } from '../../src/types'
 import captcha from '../_data/captcha'
 import { loginUserInfo, loginUserMenu } from '../_data/login'
@@ -70,7 +70,7 @@ function userInfoApi(): MockMethod {
   return {
     url: '/mock-api/system/user/info',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -86,7 +86,7 @@ function userMenuApi(): MockMethod {
   return {
     url: '/mock-api/system/user/menu',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })

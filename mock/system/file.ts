@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, resultError, resultOk } from '../_util'
-import type { requestParams } from '../_util'
+import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
+import type { RequestParams } from '../_util'
 import type { PageResult, SysFile } from '../../src/types'
 import { pageResult, queryResult, uploadResult } from '../_data/file'
 
@@ -9,7 +9,7 @@ function pageApi(): MockMethod {
   return {
     url: '/mock-api/system/file/page',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -27,7 +27,7 @@ function queryApi(): MockMethod {
   return {
     url: '/mock-api/system/file/query',
     method: 'post',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -43,16 +43,17 @@ function getApi(): MockMethod {
   return {
     url: '/mock-api/system/file/:id',
     method: 'get',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      const query = request.query
-      if (!query.id) return checkFailure('id不能为空')
+      // fix: 解决生产环境获取不到:id值的问题
+      const params = parseRequestParams(request.url, '/mock-api/system/file/:id')
+      if (!params.id) return checkFailure('id不能为空')
 
-      const data = queryResult.data?.find(i => i.id === query.id!)
+      const data = queryResult.data?.find(i => i.id === params.id!)
       return resultOk<SysFile>(data as SysFile)
     },
   }
@@ -60,25 +61,16 @@ function getApi(): MockMethod {
 
 /** 上传api */
 function uploadApi(): MockMethod {
-  // return {
-  //   url: '/mock-api/system/file/upload',
-  //   method: 'post',
-  //   response: (request: requestParams) => {
-  //     const token = getRequestToken(request)
-  //     if (!token) {
-  //       return resultError('未能读取到有效Token', { code: 401 })
-  //     }
-
-  //     return resultOk<SysFile>(uploadResult.data)
-  //   },
-  // }
-
   return {
     url: '/mock-api/system/file/upload',
     method: 'post',
-    statusCode: 500,
-    response: () => {
-      return resultError('系统错误', { code: 500 })
+    response: (request: RequestParams) => {
+      const token = getRequestToken(request)
+      if (!token) {
+        return resultError('未能读取到有效Token', { code: 401 })
+      }
+
+      return resultOk<SysFile>(uploadResult.data)
     },
   }
 }
@@ -88,7 +80,7 @@ function deleteApi(): MockMethod {
   return {
     url: '/mock-api/system/file/:id',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -104,7 +96,7 @@ function batchDeleteApi(): MockMethod {
   return {
     url: '/mock-api/system/file/batch',
     method: 'delete',
-    response: (request: requestParams) => {
+    response: (request: RequestParams) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
