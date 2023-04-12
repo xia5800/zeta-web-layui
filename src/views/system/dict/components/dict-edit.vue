@@ -162,7 +162,13 @@ watch(
         <lay-textarea v-model="form.describe" placeholder="请填写" allow-clear />
       </lay-form-item>
       <lay-form-item label="排序" prop="sortvalue">
-        <lay-input v-model="form.sortValue" type="number" placeholder="请填写" allow-clear />
+        <lay-input-number
+          v-model="form.sortValue"
+          :min="0"
+          placeholder="请填写"
+          position="right"
+          allow-clear
+        />
       </lay-form-item>
     </lay-form>
   </lay-layer>
