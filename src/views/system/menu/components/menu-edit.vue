@@ -5,7 +5,6 @@ import { cloneDeep } from 'lodash-es'
 import { filterMenu, toTreeData } from '../utils'
 import type { SysMenu, SysMenuSaveParam, SysMenuUpdateParam } from '~/types'
 import { BLANK_LAYOUT_NAME, FRAME_VIEW_NAME } from '~/types'
-import { debug } from 'console'
 
 const {
   visible = false,
