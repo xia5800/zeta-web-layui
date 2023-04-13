@@ -65,13 +65,7 @@ function changeGreyMode(val: boolean) {
       <!-- 布局设置 -->
       <lay-field title="布局设置">
         <div class="setting-item">
-          <span>
-            开启黑暗模式
-            <lay-tooltip content="目前layui-vue的黑暗模式有不少样式问题, 请耐心等待作者修复">
-              <!-- 比如黑暗模式下修改主题不生效 -->
-              <lay-icon type="layui-icon-about" />
-            </lay-tooltip>
-          </span>
+          开启黑暗模式
           <lay-switch v-model="settings.themeMode" onswitch-value="dark" unswitch-value="light" />
         </div>
       </lay-field>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { layer } from '@layui/layui-vue'
 import { dictColumns } from './columns'
 import DictEditModel from './components/dict-edit.vue'
 import DictItemTable from './components/dict-item-table.vue'
@@ -135,7 +136,7 @@ async function handleDelete() {
 <template>
   <lay-container fluid="true" class="z-container">
     <lay-card>
-      <lay-row>
+      <lay-row space="8">
         <lay-col :lg="6" :md="10" :sm="24" :xs="24">
           <lay-table
             id="id"
@@ -179,7 +180,7 @@ async function handleDelete() {
           </lay-table>
         </lay-col>
         <lay-col :lg="18" :md="14" :sm="24" :xs="24">
-          <DictItemTable :dict-id="selectedKey" style="padding-left: 8px;" />
+          <DictItemTable :dict-id="selectedKey" />
         </lay-col>
       </lay-row>
     </lay-card>
