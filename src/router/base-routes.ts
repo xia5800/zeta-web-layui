@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { HOME_ROUTE, LOGIN_ROUTE, REDIRECT_PATH } from '~/types'
+import { HOME_ROUTE, LOGIN_ROUTE, REDIRECT_PATH, USER_PROFILE_ROUTE } from '~/types'
 import BaseLayout from '~/layouts/BaseLayout.vue'
 import Redirect from '~/layouts/RedirectView.vue'
 
@@ -44,6 +44,20 @@ export const baseRoutes: RouteRecordRaw[] = [
     path: `${REDIRECT_PATH}/:path(.*)`,
     name: 'redirect',
     component: Redirect,
+  },
+  {
+    path: USER_PROFILE_ROUTE,
+    name: 'profile',
+    component: BaseLayout,
+    children: [{
+      path: '',
+      name: 'user_profile',
+      component: () => import('~/views/common/profile/index.vue'),
+      meta: {
+        title: '用户信息',
+        hide: true,
+      },
+    }],
   },
   {
     path: '/:path(.*)*',

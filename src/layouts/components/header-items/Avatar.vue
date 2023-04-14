@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PasswordModal from './PasswordModal.vue'
 import defaultAvatar from '~/assets/default-avatar.jpg'
-import { LOGIN_ROUTE } from '~/types'
+import { LOGIN_ROUTE, USER_PROFILE_ROUTE } from '~/types'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -46,14 +46,23 @@ async function logout(request = true) {
       </div>
       <template #content>
         <lay-dropdown-menu>
-          <lay-dropdown-menu-item>
+          <lay-dropdown-menu-item @click="router.push(USER_PROFILE_ROUTE)">
+            <template #prefix>
+              <lay-icon type="layui-icon-username" />
+            </template>
             用户信息
           </lay-dropdown-menu-item>
           <lay-dropdown-menu-item @click="showModal = true">
+            <template #prefix>
+              <lay-icon type="layui-icon-hide" />
+            </template>
             修改密码
           </lay-dropdown-menu-item>
           <lay-line margin="5px" theme="#EEE" />
           <lay-dropdown-menu-item @click="logout">
+            <template #prefix>
+              <lay-icon type="layui-icon-unlink" />
+            </template>
             注销登录
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>

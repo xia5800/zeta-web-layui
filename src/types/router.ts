@@ -1,12 +1,15 @@
 import type { RouteMeta } from 'vue-router'
 
-/** 登陆页路由地址 */
+/** 登陆页-路由地址 */
 export const LOGIN_ROUTE = '/login'
 
-/** 首页路由地址 */
+/** 首页-路由地址 */
 export const HOME_ROUTE = '/'
 
-/** 重定向路由地址 */
+/** 用户信息页-路由地址 */
+export const USER_PROFILE_ROUTE = '/profile'
+
+/** 重定向-路由地址 */
 export const REDIRECT_PATH = '/redirect'
 
 /** Iframe视图组件名称 */

@@ -2,7 +2,6 @@ import type { MockMethod } from 'vite-plugin-mock'
 import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
 import type { RequestParams } from '../_util'
 import type { PageResult, SysUser, UserInfo, UserMenu } from '../../src/types'
-import { loginUserInfo, loginUserMenu } from '../_data/login'
 import { pageResult, queryResult } from '../_data/user'
 
 /** 分页查询api */
@@ -249,38 +248,6 @@ function existenceApi(): MockMethod {
   }
 }
 
-/** 获取登录用户信息api */
-function userInfoApi(): MockMethod {
-  return {
-    url: '/mock-api/system/user/info',
-    method: 'get',
-    response: (request: RequestParams) => {
-      const token = getRequestToken(request)
-      if (!token) {
-        return resultError('未能读取到有效Token', { code: 401 })
-      }
-
-      return resultOk<UserInfo>(loginUserInfo as UserInfo)
-    },
-  }
-}
-
-/** 获取登录用户可访问菜单api */
-function userMenuApi(): MockMethod {
-  return {
-    url: '/mock-api/system/user/menu',
-    method: 'get',
-    response: (request: RequestParams) => {
-      const token = getRequestToken(request)
-      if (!token) {
-        return resultError('未能读取到有效Token', { code: 401 })
-      }
-
-      return resultOk<UserMenu[]>(loginUserMenu as UserMenu[])
-    },
-  }
-}
-
 export default [
   existenceApi(),
   getApi(),
@@ -294,6 +261,4 @@ export default [
   resetPwdApi(),
   updateStateApi(),
   existenceApi(),
-  userInfoApi(),
-  userMenuApi(),
 ] as MockMethod[]
