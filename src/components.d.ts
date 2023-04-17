@@ -35,7 +35,6 @@ declare module '@vue/runtime-core' {
     LayHeader: typeof import('@layui/layui-vue')['LayHeader']
     LayIcon: typeof import('@layui/icons-vue')['LayIcon']
     LayIconPicker: typeof import('@layui/layui-vue')['LayIconPicker']
-    LayIcons: typeof import('@layui/layui-vue')['LayIcons']
     LayInput: typeof import('@layui/layui-vue')['LayInput']
     LayInputNumber: typeof import('@layui/layui-vue')['LayInputNumber']
     LayLayer: typeof import('@layui/layer-vue')['LayLayer']
