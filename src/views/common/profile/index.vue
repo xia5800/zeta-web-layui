@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layui-vue'
 import type { Rules } from 'async-validator'
 import { cloneDeep } from 'lodash'
 import defaultAvatar from '~/assets/default-avatar.jpg'

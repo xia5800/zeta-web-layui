@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layer-vue'
 import { filterCheckedMenuId, toTreeData } from '../../menu/utils'
 import type { TreeData } from '~/types'
 

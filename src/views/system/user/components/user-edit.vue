@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layui-vue'
 import type { InternalRuleItem, Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { ExistParam, SelectOption, SysRole, SysUser, SysUserSaveParam, SysUserUpdateParam } from '~/types'

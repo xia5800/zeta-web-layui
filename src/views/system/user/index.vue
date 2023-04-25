@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layer-vue'
 import { columns } from './columns'
 import UserSearchForm from './components/user-search.vue'
 import UserEdit from './components/user-edit.vue'

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layui-vue'
 import type { Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { SysDictItem, SysDictItemSaveParam, SysDictItemUpdateParam } from '~/types'

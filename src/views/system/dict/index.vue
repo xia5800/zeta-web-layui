@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layui-vue'
 import { dictColumns } from './columns'
 import DictEditModel from './components/dict-edit.vue'
 import DictItemTable from './components/dict-item-table.vue'

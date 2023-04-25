@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layer-vue'
 import { columns } from './columns'
 import RoleSearchForm from './components/role-search.vue'
 import RoleEdit from './components/role-edit.vue'

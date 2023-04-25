@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { layer } from '@layui/layui-vue'
 import type { SysFileUploadParam } from '~/types'
 
 const {
