@@ -1,16 +1,16 @@
 export const columns = [
-  {
-    title: '',
-    type: 'checkbox',
-    width: '50px',
-    fixed: 'left',
-  },
   // {
-  //   title: '#',
-  //   type: 'number',
+  //   title: '',
+  //   type: 'checkbox',
   //   width: '50px',
   //   fixed: 'left',
   // },
+  {
+    title: '#',
+    type: 'number',
+    width: '50px',
+    fixed: 'left',
+  },
   {
     key: 'state',
     title: '状态',
