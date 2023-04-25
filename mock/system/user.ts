@@ -1,7 +1,7 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
 import type { RequestParams } from '../_util'
-import type { PageResult, SysUser, UserInfo, UserMenu } from '../../src/types'
+import type { PageResult, SysUser } from '../../src/types'
 import { pageResult, queryResult } from '../_data/user'
 
 /** 分页查询api */
