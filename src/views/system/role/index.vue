@@ -24,7 +24,6 @@ const page = ref({
   limit: 10,
   current: 1,
   showRefresh: true,
-  theme: primaryColor, // auto import hooks/ui.ts
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)

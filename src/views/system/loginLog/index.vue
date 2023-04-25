@@ -30,7 +30,6 @@ const page = ref({
   limit: 10,
   current: 1,
   showRefresh: true,
-  theme: primaryColor, // auto import hooks/ui.ts
 })
 // 默认分页查询参数
 const pageParam: PageParam<SysLoginLog> = { page: 1, limit: 10, sort: 'id', order: 'desc' }

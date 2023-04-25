@@ -23,7 +23,6 @@ const page = ref({
   current: 1,
   showSkip: false,
   showLimit: false,
-  theme: primaryColor, // auto import hooks/ui.ts
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)
