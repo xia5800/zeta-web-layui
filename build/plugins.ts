@@ -11,11 +11,10 @@ import RemoveConsole from 'vite-plugin-remove-console'
 /**
  * 创建vite插件
  * @param viteEnv
- * @param isBuild
+ * @param command
  * @returns
  */
-export function createVitePlugins(viteEnv: ViteEnv, command: string) {
-  const isBuild = command === 'build'
+export function createVitePlugins(viteEnv: ViteEnv, _command: string) {
   const { VITE_USE_MOCK, VITE_DROP_CONSOLE, VITE_VISUALIZER } = viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
