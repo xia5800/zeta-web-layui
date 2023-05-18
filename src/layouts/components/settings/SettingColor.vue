@@ -12,11 +12,12 @@ const {
 const emits = defineEmits(['update:modelValue'])
 const options: Color[] = [
   { name: '主题色一(保存配置方可生效)', value: '#009688' },
-  { name: '主题色二(保存配置方可生效)', value: '#36b368' },
-  { name: '主题色三(保存配置方可生效)', value: '#2d8cf0' },
-  { name: '主题色四(保存配置方可生效)', value: '#f6ad55' },
-  { name: '主题色五(保存配置方可生效)', value: '#f56c6c' },
-  { name: '主题色六(保存配置方可生效)', value: '#3963bc' },
+  { name: '主题色二(保存配置方可生效)', value: '#16baaa' },
+  { name: '主题色三(保存配置方可生效)', value: '#36b368' },
+  { name: '主题色四(保存配置方可生效)', value: '#2d8cf0' },
+  { name: '主题色五(保存配置方可生效)', value: '#f6ad55' },
+  { name: '主题色六(保存配置方可生效)', value: '#f56c6c' },
+  { name: '主题色七(保存配置方可生效)', value: '#3963bc' },
 ]
 
 /**
