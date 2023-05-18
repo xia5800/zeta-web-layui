@@ -44,7 +44,7 @@ function handleChange(id: string) {
  */
 function handleClose(id: string) {
   if (tabs.value.length === 1) {
-    layer.msg('已经是最后一个标签了', { icon: 3 })
+    layer.msg('已经是最后一个标签了', { icon: 7 })
     return
   }
   const currentTab = tabs.value.find(i => i.path === id) as unknown as Tab
@@ -85,7 +85,7 @@ function closeRight() {
 /** 关闭当前 */
 function closeCurrent() {
   if (tabs.value.length === 1) {
-    layer.msg('已经是最后一个标签了', { icon: 3 })
+    layer.msg('已经是最后一个标签了', { icon: 7 })
     return
   }
   const currentTab = tabs.value.find(i => i.name === route.name) as unknown as Tab
