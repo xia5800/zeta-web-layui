@@ -114,11 +114,6 @@ function initData() {
     Object.assign(form, baseFormData)
     isUpdate.value = false
   }
-
-  // fix: 时间组件报错
-  if (!form.birthday) {
-    form.birthday = ''
-  }
 }
 
 /** 关闭弹窗 */

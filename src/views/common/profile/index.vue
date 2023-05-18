@@ -43,11 +43,6 @@ async function fetchUserInfo() {
   // 赋值
   sysUser.value = data as SysUser
   assignObj(data as SysUser, form)
-
-  // fix: 时间组件报错
-  if (!form.birthday) {
-    form.birthday = ''
-  }
 }
 fetchUserInfo()
 
