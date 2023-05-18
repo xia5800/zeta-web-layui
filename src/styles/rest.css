@@ -17,3 +17,16 @@
 .layui-popper {
   z-index: 100050!important;
 }
+
+/** 修复表格滚动条样式 */
+.layui-table-main::-webkit-scrollbar {
+  width: 12px!important;
+  height: 12px!important;
+}
+.layui-table-main::-webkit-scrollbar-thumb {
+  border-radius:6px!important;
+  background-color: #cfcfcf!important;
+}
+.layui-table-main::-webkit-scrollbar-thumb:hover {
+  background-color: #b6b6b6!important;
+}
