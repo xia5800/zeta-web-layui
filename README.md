@@ -44,7 +44,7 @@ yarn run dev
 ## 友情链接 & 特别鸣谢
 
 - layui-vue：[https://gitee.com/layui/layui-vue](https://gitee.com/layui/layui-vue)
-- pear-admin-next [https://gitee.com/pear-admin/pear-admin-next](https://gitee.com/pear-admin/pear-admin-next)
+- parfait [https://github.com/cosmoscatts/parfait](https://github.com/cosmoscatts/parfait)
 - zeta-kotlin：[https://gitee.com/xia5800/zeta-kotlin](https://gitee.com/xia5800/zeta-kotlin)
 
 ## 项目截图
