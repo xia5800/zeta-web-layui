@@ -115,7 +115,7 @@
 
 /** 侧边栏 */
 .layui-side {
-  z-index: 10000;
+  z-index: 1000;
   background-color: #28333e;
   box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
   -webkit-user-select: none;
