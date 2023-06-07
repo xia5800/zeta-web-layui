@@ -16,6 +16,7 @@ export const columns = [
     title: '头像',
     width: '80px',
     align: 'center',
+    hide: true,
     customSlot: 'avatar',
   },
   {
