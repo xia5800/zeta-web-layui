@@ -10,6 +10,8 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
+const route = useRoute()
+const cardTitle = (route.meta?.title || '') as string
 // 表格数据
 const dataSource = ref<SysMenu[]>([])
 // 表格选中数据的key
@@ -114,7 +116,7 @@ async function handleExpand() {
 <template>
   <lay-container fluid="true" class="z-container">
     <!-- 树形表格 -->
-    <lay-card>
+    <lay-card :title="cardTitle">
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"

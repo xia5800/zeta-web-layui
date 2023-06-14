@@ -10,6 +10,8 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
+const route = useRoute()
+const cardTitle = (route.meta?.title || '') as string
 // 表格数据
 const dataSource = ref<SysDict[]>([])
 // 表格选中数据的key,即: dictId
@@ -133,7 +135,7 @@ async function handleDelete() {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <lay-card>
+    <lay-card :title="cardTitle">
       <lay-row space="8">
         <lay-col :lg="6" :md="10" :sm="24" :xs="24">
           <lay-table
