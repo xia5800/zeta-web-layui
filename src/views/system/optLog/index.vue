@@ -6,7 +6,7 @@ import type { PageParam, SelectOption, SysOptLog } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致
-  name: 'system_optLog',
+  name: 'SystemOptLog',
 })
 
 // 操作类型选项
@@ -16,6 +16,8 @@ const typeOptions: SelectOption[] = [
 ]
 
 const { loading, setLoading } = useLoading(true)
+const route = useRoute()
+const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysOptLog[]>([])
@@ -123,11 +125,12 @@ function openViewModal(id: string) {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 表格搜索栏 -->
-    <OptLogSearchForm ref="searchForm" :type-options="typeOptions" @on-search="handleSearch" />
+    <!-- 内容区域 -->
+    <lay-card :title="cardTitle">
+      <!-- 表格搜索栏 -->
+      <OptLogSearchForm ref="searchForm" :type-options="typeOptions" @on-search="handleSearch" />
 
-    <!-- 数据表格 -->
-    <lay-card>
+      <!-- 数据表格 -->
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -137,7 +140,6 @@ function openViewModal(id: string) {
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
         :auto-cols-width="true"
-        :height="450"
         max-height="450px"
         @change="changePage"
         @sort-change="changeSort"

@@ -17,6 +17,8 @@ const stateOptions: SelectOption[] = [
 ]
 
 const { loading, setLoading } = useLoading(true)
+const route = useRoute()
+const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysLoginLog[]>([])
@@ -111,11 +113,12 @@ function handleSearch(formModel: SysLoginLog) {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 表格搜索栏 -->
-    <LoginLogSearchForm ref="searchForm" :state-options="stateOptions" @on-search="handleSearch" />
+    <!-- 内容区域 -->
+    <lay-card :title="cardTitle">
+      <!-- 表格搜索栏 -->
+      <LoginLogSearchForm ref="searchForm" :state-options="stateOptions" @on-search="handleSearch" />
 
-    <!-- 数据表格 -->
-    <lay-card>
+      <!-- 数据表格 -->
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"

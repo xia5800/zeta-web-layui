@@ -87,6 +87,7 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isXs: typeof import('./hooks/ui')['isXs']
   const layer: typeof import('@layui/layer-vue')['layer']
   const listRoleMenuApi: typeof import('./api/system/roleMenu')['listRoleMenuApi']
   const loginApi: typeof import('./api/login')['loginApi']
@@ -469,6 +470,7 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isXs: UnwrapRef<typeof import('./hooks/ui')['isXs']>
     readonly layer: UnwrapRef<typeof import('@layui/layer-vue')['layer']>
     readonly listRoleMenuApi: UnwrapRef<typeof import('./api/system/roleMenu')['listRoleMenuApi']>
     readonly loginApi: UnwrapRef<typeof import('./api/login')['loginApi']>
@@ -845,6 +847,7 @@ declare module '@vue/runtime-core' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isXs: UnwrapRef<typeof import('./hooks/ui')['isXs']>
     readonly layer: UnwrapRef<typeof import('@layui/layer-vue')['layer']>
     readonly listRoleMenuApi: UnwrapRef<typeof import('./api/system/roleMenu')['listRoleMenuApi']>
     readonly loginApi: UnwrapRef<typeof import('./api/login')['loginApi']>

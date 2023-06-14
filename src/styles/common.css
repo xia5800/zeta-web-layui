@@ -5,8 +5,8 @@
   padding: var(--layout-content-padding)!important;
 }
 
-.z-form-card {
-  padding-top: 10px;
+.z-search-layout {
+  margin-bottom: 8px;
 }
 
 /** TODO: 辅助类...  */

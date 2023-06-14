@@ -11,6 +11,8 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
+const route = useRoute()
+const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysRole[]>([])
@@ -187,11 +189,12 @@ async function handleBatchDelete() {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 表格搜索栏 -->
-    <RoleSearchForm ref="searchForm" @on-search="handleSearch" />
+    <!-- 内容区域 -->
+    <lay-card :title="cardTitle">
+      <!-- 表格搜索栏 -->
+      <RoleSearchForm ref="searchForm" @on-search="handleSearch" />
 
-    <!-- 数据表格 -->
-    <lay-card>
+      <!-- 数据表格 -->
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -200,7 +203,6 @@ async function handleBatchDelete() {
         :columns="columns"
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
-        :height="450"
         max-height="450px"
         @change="changePage"
         @sort-change="changeSort"

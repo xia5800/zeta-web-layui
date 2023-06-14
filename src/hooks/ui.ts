@@ -10,6 +10,7 @@ export const breakpoints = useBreakpoints({
 
 export const isMobile = breakpoints.smaller('sm')
 export const isPC = breakpoints.greaterOrEqual('sm')
+export const isXs = breakpoints.smaller('sm')
 
 // 系统当前主题色
 export const primaryColor = useThemeStoreHook().settings.primaryColor

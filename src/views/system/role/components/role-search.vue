@@ -24,36 +24,39 @@ function reset() {
 </script>
 
 <template>
-  <lay-card class="z-form-card">
-    <lay-form
-      ref="searchFormRef"
-      :model="formModel"
-    >
-      <lay-row>
-        <lay-col :sm="12" :md="8" :lg="6">
-          <lay-form-item label="角色名" prop="name">
-            <lay-input v-model="formModel.name" placeholder="请填写" allow-clear />
-          </lay-form-item>
-        </lay-col>
-        <lay-col :sm="12" :md="8" :lg="6">
-          <lay-form-item label="角色编码" prop="code">
-            <lay-input v-model="formModel.code" placeholder="请填写" allow-clear />
-          </lay-form-item>
-        </lay-col>
-      </lay-row>
-    </lay-form>
-
-    <template #footer>
-      <div style="text-align: center;">
-        <lay-button type="primary" size="sm" @click="search">
-          查询
-        </lay-button>
-        <lay-button size="sm" @click="reset">
-          重置
-        </lay-button>
-      </div>
-    </template>
-  </lay-card>
+  <div class="z-search-layout">
+    <lay-row space="8">
+      <lay-col :md="20" :sm="20" :xs="24">
+        <lay-form
+          ref="searchFormRef"
+          :model="formModel"
+        >
+          <lay-row>
+            <lay-col :md="8" :sm="12" :xs="24">
+              <lay-form-item label="角色名" prop="name">
+                <lay-input v-model="formModel.name" placeholder="请填写" allow-clear />
+              </lay-form-item>
+            </lay-col>
+            <lay-col :md="8" :sm="12" :xs="24">
+              <lay-form-item label="角色编码" prop="code">
+                <lay-input v-model="formModel.code" placeholder="请填写" allow-clear />
+              </lay-form-item>
+            </lay-col>
+          </lay-row>
+        </lay-form>
+      </lay-col>
+      <lay-col :md="4" :sm="4" :xs="24" class="z-text-center">
+        <lay-space direction="horizontal" wrap>
+          <lay-button type="primary" @click="search">
+            <lay-icon type="layui-icon-search" /> 查询
+          </lay-button>
+          <lay-button @click="reset">
+            <lay-icon type="layui-icon-refresh-three" /> 重置
+          </lay-button>
+        </lay-space>
+      </lay-col>
+    </lay-row>
+  </div>
 </template>
 
 <style scoped>
