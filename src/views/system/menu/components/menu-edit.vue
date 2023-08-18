@@ -164,6 +164,7 @@ function handlerSubmitData(model: SysMenu) {
   // 处理菜单图标。 说明：如果是按钮，没有打开方式、图标、frameSrc、href
   if (model.type === 'RESOURCE') {
     model.icon = ''
+    model.path = ''
   }
 }
 
@@ -171,7 +172,7 @@ function handlerSubmitData(model: SysMenu) {
 async function saveData(model: SysMenu, layerId: string) {
   try {
     // 计算path
-    if (parentPath.value) model.path = parentPath.value + (model.path || '')
+    if (parentPath.value && model.type == 'MENU') model.path = parentPath.value + (model.path || '')
 
     // 新增菜单
     const { success, message } = await addMenuApi({
