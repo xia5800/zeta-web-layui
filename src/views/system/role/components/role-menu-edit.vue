@@ -104,10 +104,6 @@ watch(
     ]"
     @close="handleClose"
   >
-    <!--
-      TODO: 注释待删除，
-      下面data类型报错的原因是，lay-tree组件的data类型搞错了，文档上说可以传数组，但是组件里data类型并不支持数组
-    -->
     <lay-tree
       v-model:checkedKeys="checkedKeys"
       :data="treeData"
