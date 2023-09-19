@@ -158,11 +158,7 @@ function changeGreyMode(val: boolean) {
 </template>
 
 <style scoped>
-.the-settings-drawer {
-  display: flex;
-}
-
-.the-settings-drawer .setting-item {
+.setting-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
