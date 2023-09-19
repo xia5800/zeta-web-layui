@@ -124,34 +124,38 @@ onKeyStroke('ArrowDown', handleDown)
 </script>
 
 <template>
-  <lay-layer
-    v-model="show"
-    :title="false"
-    :close-btn="false"
-    offset="80px"
-    :area="['600px']"
-    shade
-    shade-close
-    @close="handleClose"
-  >
-    <lay-input
-      ref="inputRef"
-      v-model="keyword"
-      prefix-icon="layui-icon-search"
-      @input="handleSearch"
-    />
+  <div>
+    <!-- 设置teleport-disable，解决无法修改layui-layer样式问题 -->
+    <lay-layer
+      v-model="show"
+      :title="false"
+      :close-btn="false"
+      :teleport-disabled="true"
+      offset="80px"
+      :area="['600px']"
+      shade
+      shade-close
+      @close="handleClose"
+    >
+      <lay-input
+        ref="inputRef"
+        v-model="keyword"
+        prefix-icon="layui-icon-search"
+        @input="handleSearch"
+      />
 
-    <div class="search-result-container">
-      <lay-empty v-if="resultOptions.length === 0" description="暂无搜索结果" />
-      <lay-scroll v-else class="menu-scroll">
-        <SearchResult
-          v-model:value="activePath"
-          :options="resultOptions as OptionsItem[]"
-          @click="handleEnter"
-        />
-      </lay-scroll>
-    </div>
-  </lay-layer>
+      <div class="search-result-container">
+        <lay-empty v-if="resultOptions.length === 0" description="暂无搜索结果" />
+        <lay-scroll v-else class="menu-scroll">
+          <SearchResult
+            v-model:value="activePath"
+            :options="resultOptions as OptionsItem[]"
+            @click="handleEnter"
+          />
+        </lay-scroll>
+      </div>
+    </lay-layer>
+  </div>
 </template>
 
 <style scoped>
