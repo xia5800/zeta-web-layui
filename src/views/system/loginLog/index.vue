@@ -127,7 +127,8 @@ function handleSearch(formModel: SysLoginLog) {
         :columns="columns"
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
-        max-height="450px"
+        :resize="true"
+        max-height="80%"
         @change="changePage"
         @sort-change="changeSort"
       >

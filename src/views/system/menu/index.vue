@@ -125,6 +125,7 @@ async function handleExpand() {
         :columns="columns"
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
+        :resize="true"
       >
         <!-- 工具栏 -->
         <template #toolbar>

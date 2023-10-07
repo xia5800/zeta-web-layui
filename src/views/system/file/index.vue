@@ -158,7 +158,8 @@ function handleDelete(id: string) {
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
         :auto-cols-width="true"
-        max-height="450px"
+        :resize="true"
+        max-height="80%"
         @change="changePage"
         @sort-change="changeSort"
       >

@@ -39,13 +39,14 @@ export const columns = [
   {
     key: 'os',
     title: '操作系统',
+    width: '120px',
     align: 'center',
   },
   {
     key: 'device',
     title: '设备名称',
     align: 'center',
-    width: '180px',
+    width: '400px',
     ellipsisTooltip: true,
   },
   {

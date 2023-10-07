@@ -74,6 +74,7 @@ export const columns = [
   {
     key: 'ip',
     title: 'ip',
+    minWidth: '100px',
     align: 'center',
   },
   {

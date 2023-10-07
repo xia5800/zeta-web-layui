@@ -33,16 +33,22 @@ export const columns = [
   {
     key: 'url',
     title: '访问地址',
+    minWidth: '100px',
+    ellipsisTooltip: true,
     align: 'left',
   },
   {
     key: 'path',
     title: '文件路径',
+    minWidth: '100px',
+    ellipsisTooltip: true,
     align: 'left',
   },
   {
     key: 'uniqueFileName',
     title: '文件名称',
+    minWidth: '100px',
+    ellipsisTooltip: true,
     align: 'left',
   },
   {

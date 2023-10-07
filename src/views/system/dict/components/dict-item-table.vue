@@ -207,7 +207,8 @@ watch(
       :columns="dictItemColumns"
       :data-source="dataSource"
       :default-toolbar="defaultToolbar"
-      :height="450"
+      :resize="true"
+      max-height="100%"
       @change="changePage"
       @sort-change="changeSort"
     >

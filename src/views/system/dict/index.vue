@@ -146,7 +146,7 @@ async function handleDelete() {
             :columns="dictColumns"
             :data-source="dataSource"
             :default-toolbar="defaultToolbar"
-            :height="450"
+            max-height="100%"
             @change="changePage"
             @row="rowClick"
           >
