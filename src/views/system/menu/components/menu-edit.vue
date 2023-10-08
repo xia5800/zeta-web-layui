@@ -427,7 +427,7 @@ watch(
             <lay-input v-model="form.href" placeholder="请填写" allow-clear />
           </lay-form-item>
           <lay-form-item label="菜单图标" prop="icon">
-            <lay-icon-picker v-model="form.icon" :disabled="form.type === 'RESOURCE'" allow-clear />
+            <lay-icon-picker v-model="form.icon" :disabled="form.type === 'RESOURCE'" page show-search allow-clear />
           </lay-form-item>
           <lay-form-item label="排序" prop="sortValue">
             <lay-input-number v-model="form.sortValue" position="right" :min="0" />

@@ -81,6 +81,7 @@ declare global {
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
+  const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const isDefined: typeof import('@vueuse/core')['isDefined']
   const isMobile: typeof import('./hooks/ui')['isMobile']
   const isPC: typeof import('./hooks/ui')['isPC']
@@ -134,6 +135,7 @@ declare global {
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const primaryColor: typeof import('./hooks/ui')['primaryColor']
   const provide: typeof import('vue')['provide']
+  const provideLocal: typeof import('@vueuse/core')['provideLocal']
   const queryDictApi: typeof import('./api/system/dict')['queryDictApi']
   const queryDictItemApi: typeof import('./api/system/dictItem')['queryDictItemApi']
   const queryFileApi: typeof import('./api/system/file')['queryFileApi']
@@ -464,6 +466,7 @@ declare module 'vue' {
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isMobile: UnwrapRef<typeof import('./hooks/ui')['isMobile']>
     readonly isPC: UnwrapRef<typeof import('./hooks/ui')['isPC']>
@@ -517,6 +520,7 @@ declare module 'vue' {
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly primaryColor: UnwrapRef<typeof import('./hooks/ui')['primaryColor']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
+    readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
     readonly queryFileApi: UnwrapRef<typeof import('./api/system/file')['queryFileApi']>
@@ -841,6 +845,7 @@ declare module '@vue/runtime-core' {
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isMobile: UnwrapRef<typeof import('./hooks/ui')['isMobile']>
     readonly isPC: UnwrapRef<typeof import('./hooks/ui')['isPC']>
@@ -894,6 +899,7 @@ declare module '@vue/runtime-core' {
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly primaryColor: UnwrapRef<typeof import('./hooks/ui')['primaryColor']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
+    readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
     readonly queryFileApi: UnwrapRef<typeof import('./api/system/file')['queryFileApi']>

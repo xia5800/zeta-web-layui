@@ -126,6 +126,7 @@ async function handleExpand() {
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
         :resize="true"
+        :indent-size="15"
       >
         <!-- 工具栏 -->
         <template #toolbar>
@@ -177,7 +178,7 @@ async function handleExpand() {
         <!-- 菜单标题列 -->
         <template #label="{ row }">
           <span>
-            <lay-icon v-if="row.icon" :type="row.icon" style="margin-right: 4px;" />
+            <lay-icon v-if="row.icon && row.type === 'MENU'" :type="row.icon" style="margin-right: 4px;" />
             {{ row.label }}
           </span>
         </template>

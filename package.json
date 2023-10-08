@@ -14,8 +14,8 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@layui/layui-vue": "^2.7.0",
-    "@vueuse/core": "^10.4.1",
+    "@layui/layui-vue": "^2.7.2",
+    "@vueuse/core": "^10.5.0",
     "axios": "^1.5.1",
     "crypto-js": "^4.1.1",
     "echarts": "^5.4.3",
