@@ -14,3 +14,9 @@
 .z-text-center {
   text-align: center
 }
+
+/** 辅助类：文字不允许选中 */
+.z-user-select-none {
+  -webkit-user-select: none;
+  user-select: none;
+}

@@ -1,8 +1,17 @@
 /** zeta-web-layui 自定义样式，样式覆盖 */
 
-/** 表单label, 表格分页, 按钮, 文本框... 文字不允许选中 */
+/** 表单label, 表格分页, 按钮, 单选, switch, 文本框, 数字输入框... 文字不允许选中 */
 .layui-form-label, .layui-table-page,
-.layui-btn, .layui-layer-btn, .layui-input-wrapper {
+.layui-btn, .layui-layer-btn, .layui-radio,
+.layui-form-switch,
+.layui-input-prepend, .layui-input-wrapper,
+.layui-input-number .layui-input input {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/** 卡片标题不允许选中。 这个看需求，可以注释掉 */
+.layui-card-header-title {
   -webkit-user-select: none;
   user-select: none;
 }
