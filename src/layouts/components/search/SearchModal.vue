@@ -4,12 +4,12 @@ import SearchResult from './SearchResult.vue'
 import type { OptionsItem } from './interfaces'
 import type { UserMenu } from '~/types'
 
-const {
-  value = false,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   /** 弹窗显隐 */
   value: boolean
-}>()
+}>(), {
+  value: false,
+})
 const emit = defineEmits(['update:value'])
 
 const router = useRouter()
@@ -24,7 +24,7 @@ const menusData = computed(() => (cloneDeep(useUserStore().menus)))
 /** 弹窗显示隐藏 */
 const show = computed({
   get() {
-    return value
+    return props.value
   },
   set(val: boolean) {
     emit('update:value', val)

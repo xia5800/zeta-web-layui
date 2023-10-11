@@ -2,14 +2,13 @@
 import { filterCheckedMenuId, toTreeData } from '../../menu/utils'
 import type { TreeData } from '~/types'
 
-const {
-  visible = false,
-  roleId,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   visible: boolean
   /** 当前编辑的角色id */
   roleId: string
-}>()
+}>(), {
+  visible: false,
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -18,7 +17,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)
@@ -34,7 +33,7 @@ const treeData = ref<TreeData[]>([] as TreeData[])
 async function initData() {
   try {
     // 获取树数据
-    const { success, message, data } = await listRoleMenuApi(roleId)
+    const { success, message, data } = await listRoleMenuApi(props.roleId)
     if (!success) {
       layer.msg(message || '获取数据失败', { icon: 2 })
       return
@@ -62,7 +61,7 @@ async function handleSubmit() {
   try {
     // 修改角色菜单关联关系
     const { success, message } = await updateRoleMenuApi({
-      roleId,
+      roleId: props.roleId,
       menuIds: checkedKeys.value, // 菜单id列表 为空代表清空角色与菜单的关联
     })
     if (!success) {
@@ -80,7 +79,7 @@ async function handleSubmit() {
 }
 
 watch(
-  () => visible,
+  () => props.visible,
   (visible: boolean) => {
     if (visible) {
       // 初始化弹窗数据

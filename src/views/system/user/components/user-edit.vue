@@ -3,14 +3,13 @@ import type { InternalRuleItem, Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { ExistParam, SelectOption, SysRole, SysUser, SysUserSaveParam, SysUserUpdateParam } from '~/types'
 
-const {
-  visible = false,
-  data,
-} = defineProps<{
-  visible: boolean
+const props = withDefaults(defineProps<{
+  visible: boolean,
   /** 修改时必传，用户基本数据 */
   data?: SysUser
-}>()
+}>(), {
+  visible: false
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -19,7 +18,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)
@@ -104,8 +103,8 @@ async function getRoleOptions() {
 
 /** 初始化表单数据 */
 function initData() {
-  if (data) {
-    Object.assign(form, data)
+  if (props.data) {
+    Object.assign(form, props.data)
     isUpdate.value = true
     if (form.roles) {
       roles.value = form.roles.map((role: SysRole) => role.id!)
@@ -198,7 +197,7 @@ function handleSubmit() {
 }
 
 watch(
-  () => visible,
+  () => props.visible,
   (visible: boolean) => {
     if (visible) {
       // 初始化弹窗数据

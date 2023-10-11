@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import type { SelectOption, SysOptLog } from '~/types'
 
-const {
-  visible = false,
-  typeOptions,
-  data,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   visible: boolean
   /** 操作类型选项 */
   typeOptions: SelectOption[]
   /** 操作日志id */
   data?: string
-}>()
+}>(), {
+  visible: false,
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -20,7 +18,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)
@@ -74,8 +72,8 @@ async function getOptLogInfo(id: string) {
 
 /** 初始化表单数据 */
 function initData() {
-  if (data) {
-    getOptLogInfo(data)
+  if (props.data) {
+    getOptLogInfo(props.data)
   } else {
     Object.assign(form, baseFormData)
   }
@@ -88,7 +86,7 @@ function handleClose() {
 }
 
 watch(
-  () => visible,
+  () => props.visible,
   (visible: boolean) => {
     if (visible) {
       // 初始化弹窗数据

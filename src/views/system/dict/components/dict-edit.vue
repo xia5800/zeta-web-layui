@@ -3,14 +3,13 @@ import type { Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { SysDict, SysDictSaveParam, SysDictUpdateParam } from '~/types'
 
-const {
-  visible = false,
-  data,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   visible: boolean
   /** 修改时必传，角色基本数据 */
   data?: SysDict
-}>()
+}>(), {
+  visible: false,
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -19,7 +18,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)
@@ -46,8 +45,8 @@ const rules = ref<Rules>({
 
 /** 初始化表单数据 */
 function initData() {
-  if (data) {
-    Object.assign(form, cloneDeep(data))
+  if (props.data) {
+    Object.assign(form, cloneDeep(props.data))
     isUpdate.value = true
   } else {
     Object.assign(form, baseFormData)
@@ -126,7 +125,7 @@ function handleSubmit() {
 }
 
 watch(
-  () => visible,
+  () => props.visible,
   (visible: boolean) => {
     if (visible) {
       // 初始化弹窗数据

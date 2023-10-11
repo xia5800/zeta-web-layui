@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import type { SchemaItem } from './interface'
 
-const {
-  schemaItem,
-  column = 2,
-} = defineProps<{
+withDefaults(defineProps<{
   /** 表格项 */
   schemaItem: SchemaItem[]
   /** 总列数 */
   column?: number
-}>()
+}>(), {
+  column: 2,
+})
 </script>
 
 <template>

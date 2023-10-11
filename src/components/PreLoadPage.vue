@@ -6,14 +6,14 @@
 import { PROJECT_NAME } from '~/config/setting'
 import loadingAnimation from '~/assets/lottie/lf20_z9ed2jna.json'
 
-const {
-  beforeLeavingMs = 1200,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   beforeLeavingMs: number
-}>()
+}>(), {
+  beforeLeavingMs: 1200,
+})
 
 const { loading, endLoading } = useLoading(true)
-useTimeoutFn(endLoading, beforeLeavingMs)
+useTimeoutFn(endLoading, props.beforeLeavingMs)
 onMounted(() => useLottie({
   name: 'lottie-loading',
   containerId: '#lottie-loading',

@@ -3,12 +3,7 @@ import { layer } from '@layui/layer-vue'
 import type { ApiResult, SysFile } from '~/types'
 import { getToken } from '~/utils/token'
 
-const {
-  drag = true,
-  dragText = '点击选择文件上传，或将文件拖拽到此处上传',
-  size = 1024 * 1024 * 100,
-  bizType = 'file',
-} = defineProps<{
+const props = withDefaults(defineProps<{
   /** 是否开启拖拽上传 */
   drag?: boolean
   /** 拖拽上传描述文字 */
@@ -17,7 +12,12 @@ const {
   size?: number
   /** 业务类型 例如：order、user_avatar等 会影响文件url的值 */
   bizType?: string
-}>()
+}>(), {
+  drag: true,
+  dragText: '点击选择文件上传，或将文件拖拽到此处上传',
+  size: 1024 * 1024 * 100,
+  bizType: 'file',
+})
 
 const emits = defineEmits<{
   (e: 'success', sysFile: SysFile): void
@@ -39,7 +39,7 @@ const headers = computed(() => {
 /** 上传前检查 */
 function beforeUpload(file: any) {
   let isOver = false
-  if (size > 0 && file.size > size) {
+  if (props.size > 0 && file.size > props.size) {
     isOver = true
     layer.msg('文件大小不能超过100MB', { icon: 2 })
   }

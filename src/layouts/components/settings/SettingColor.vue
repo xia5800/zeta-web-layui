@@ -3,9 +3,7 @@ interface Color {
   name: string
   value: string
 }
-const {
-  modelValue,
-} = defineProps<{
+defineProps<{
   modelValue: string
 }>()
 

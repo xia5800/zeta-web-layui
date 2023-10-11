@@ -18,9 +18,7 @@ export function createVitePlugins(viteEnv: ViteEnv, _command: string) {
   const { VITE_USE_MOCK, VITE_DROP_CONSOLE, VITE_VISUALIZER } = viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
-    Vue({
-      reactivityTransform: true,
-    }),
+    Vue(),
   ]
 
   // 自定义组件名字支持

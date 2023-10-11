@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { SysFileUploadParam } from '~/types'
 
-const {
-  visible = false,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   visible: boolean
-}>()
+}>(), {
+  visible: false,
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)

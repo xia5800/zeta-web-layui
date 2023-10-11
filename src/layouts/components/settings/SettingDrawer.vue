@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import SettingColor from './SettingColor.vue'
 
-const {
-  value,
-} = defineProps<{
+const props = defineProps<{
   /** 抽屉显隐 */
   value: boolean
 }>()
@@ -11,7 +9,7 @@ const emit = defineEmits(['update:value'])
 
 const show = computed({
   get() {
-    return value
+    return props.value
   },
   set(val: boolean) {
     emit('update:value', val)

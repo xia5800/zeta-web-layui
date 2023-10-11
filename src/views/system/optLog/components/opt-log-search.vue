@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { SelectOption, SysOptLog } from '~/types'
 
-const {
-  typeOptions,
-} = defineProps<{
+defineProps<{
   /** 操作类型选项 */
   typeOptions: SelectOption[]
 }>()

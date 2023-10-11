@@ -3,11 +3,11 @@ import type { InternalRuleItem, Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { ChangePasswordParam } from '~/types'
 
-const {
-  visible = false,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   visible: boolean
-}>()
+}>(), {
+  visible: false,
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)

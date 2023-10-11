@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { SelectOption, SysLoginLog } from '~/types'
 
-const {
-  stateOptions,
-} = defineProps<{
+defineProps<{
   /** 状态下拉框数据 */
   stateOptions: SelectOption[]
 }>()

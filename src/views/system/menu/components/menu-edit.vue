@@ -5,12 +5,7 @@ import { filterMenu, toTreeData } from '../utils'
 import type { SysMenu, SysMenuSaveParam, SysMenuUpdateParam } from '~/types'
 import { BLANK_LAYOUT_NAME, FRAME_VIEW_NAME } from '~/types'
 
-const {
-  visible = false,
-  pid,
-  pPath = '',
-  data,
-} = defineProps<{
+const props = withDefaults(defineProps<{
   visible: boolean
   /** 新增子级菜单时必传，父级菜单id */
   pid: string
@@ -18,7 +13,10 @@ const {
   pPath: string
   /** 修改时必传，菜单基本数据 */
   data?: SysMenu
-}>()
+}>(), {
+  visible: false,
+  pPath: '',
+})
 
 const emit = defineEmits<{
   (e: 'done'): void
@@ -27,7 +25,7 @@ const emit = defineEmits<{
 
 const show = computed({
   get() {
-    return visible
+    return props.visible
   },
   set(val: boolean) {
     emit('update:visible', val)
@@ -56,9 +54,9 @@ const baseFormData = {
 } as SysMenu
 const form = reactive<SysMenu>({ ...baseFormData })
 // treeSelect默认选中的值
-const parentId = ref<string>(pid)
+const parentId = ref<string>(props.pid)
 // 父级菜单的路由路径
-const parentPath = ref<string>(pPath)
+const parentPath = ref<string>(props.pPath)
 // 表单校验规则
 const rules = ref<Rules>({
   label: { type: 'string', required: true, message: '菜单名称不能为空' },
@@ -90,10 +88,10 @@ async function getMenuTreeData() {
       children: toTreeData(data),
     }]
     // 如果不是新增子级菜单（即；新增、修改菜单），给treeSelect设置默认值
-    if (!pid) {
+    if (!props.pid) {
       parentId.value = isUpdate.value ? form.parentId as string : '0'
     } else {
-      parentId.value = pid
+      parentId.value = props.pid
     }
   } catch (err) {
     layer.msg((err as Error).message, { icon: 2 })
@@ -110,9 +108,9 @@ function treeChangeHandler(value: string) {
 
 /** 初始化表单数据 */
 function initData() {
-  if (data) {
+  if (props.data) {
     isUpdate.value = true
-    Object.assign(form, data)
+    Object.assign(form, props.data)
 
     // 计算openType
     if (form.href) openType.value = '2'
@@ -120,7 +118,7 @@ function initData() {
   } else {
     isUpdate.value = false
     Object.assign(form, baseFormData)
-    if (pPath) parentPath.value = pPath
+    if (props.pPath) parentPath.value = props.pPath
   }
 }
 
@@ -266,7 +264,7 @@ function handleOpenTypeChange(current: string) {
 }
 
 watch(
-  () => visible,
+  () => props.visible,
   (visible: boolean) => {
     if (visible) {
       // 初始化弹窗数据

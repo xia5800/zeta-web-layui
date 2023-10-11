@@ -3,9 +3,7 @@ import { dictItemColumns } from '../columns'
 import DictItemEdit from './dict-item-edit.vue'
 import type { PageParam, SysDictItem } from '~/types'
 
-const {
-  dictId,
-} = defineProps<{
+const props = defineProps<{
   /** 字典id */
   dictId?: string
 }>()
@@ -37,7 +35,7 @@ const pageParam: PageParam<SysDictItem> = { page: 1, limit: 10, sort: 'sortValue
 // 表格搜索参数
 const searchForm = reactive({
   name: '',
-  dictId,
+  dictId: props.dictId,
 })
 
 /**
@@ -46,14 +44,14 @@ const searchForm = reactive({
  */
 async function fetchTableData(param?: PageParam<SysDictItem>) {
   // 如果没有字典id，则不获取表格数据
-  if (!dictId) return
+  if (!props.dictId) return
 
   try {
     // 分页查询
     const { success, data } = await pageDictItemApi({
       ...pageParam,
       ...param,
-      model: { dictId: dictId! } as SysDictItem,
+      model: { dictId: props.dictId! } as SysDictItem,
     })
 
     if (!success) return
@@ -98,13 +96,13 @@ function changeSort(columnName: string, order: string) {
 /** 表格搜索事件处理 */
 function handleSearch() {
   // 判断是否有字典id
-  if (!dictId) {
+  if (!props.dictId) {
     layer.msg('请先选择字典', { icon: 2 })
     return
   }
 
   // 查询条件携带字典id
-  searchForm.dictId = dictId
+  searchForm.dictId = props.dictId
 
   // 自定义分页查询参数
   const param = {
@@ -123,7 +121,7 @@ function handleSearch() {
  */
 function openEditModal(row?: SysDictItem) {
   // 判断是否有字典id
-  if (!dictId) {
+  if (!props.dictId) {
     layer.msg('请先选择字典', { icon: 2 })
     return
   }
@@ -190,7 +188,7 @@ async function handleBatchDelete() {
 
 // 监听字典id的值
 watch(
-  () => dictId,
+  () => props.dictId,
   () => {
     // 发生变化才获取表格数据
     fetchTableData()

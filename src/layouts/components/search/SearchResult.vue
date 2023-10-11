@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import type { OptionsItem } from './interfaces'
 
-const {
-  value,
-  options,
-} = defineProps<{
+const props = defineProps<{
   value: string
   options: OptionsItem[]
 }>()
@@ -13,7 +10,7 @@ const themeStore = useThemeStore()
 
 const active = computed({
   get() {
-    return value
+    return props.value
   },
   set(val: string) {
     emit('update:value', val)

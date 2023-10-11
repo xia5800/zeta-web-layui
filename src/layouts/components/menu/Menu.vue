@@ -3,15 +3,15 @@ import MenuItem from './MenuItem.vue'
 import { findMenuKeyParentName } from './util'
 import type { RouteItem, UserMenu } from '~/types'
 
-const {
-  theme = 'dark',
-  tree = true,
-} = defineProps<{
+withDefaults(defineProps<{
   /** 主题 */
   theme?: string
   /** 是否菜单树 */
   tree?: boolean
-}>()
+}>(), {
+  theme: 'dark',
+  tree: true,
+})
 
 const route = useRoute()
 const themeStore = useThemeStore()
