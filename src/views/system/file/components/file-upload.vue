@@ -119,7 +119,7 @@ watch(
   () => form.file,
   (newVal: File[]) => {
     // 如果有值，给表格设置数据
-    if (newVal) {
+    if (newVal.length) {
       if (newVal[0].size > (1024 * 1024 * 100)) {
         layer.msg('文件大小不能超过100MB', { icon: 2 })
         return
