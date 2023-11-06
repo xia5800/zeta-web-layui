@@ -90,16 +90,24 @@ function changePage(data: any) {
  * @param isUpdate 是否是编辑弹窗 默认false，即：打开新增弹窗
  */
 function openEditModal(isUpdate = false) {
-  if (isUpdate) {
-    const key = selectedKey.value
-    if (!key) {
-      layer.msg('请选择要编辑的字典', { icon: 2 })
-      return
-    }
-
-    // 查找当前需要编辑的字典
-    current.value = dataSource.value.find(row => row.id === key)
+  // 如果是新增
+  if (!isUpdate) {
+    // fix bug 解决“点击编辑字典，关闭弹窗后点击再次新增字典会有默认值”问题  --by gcc
+    // 清空当前需要编辑的字典
+    current.value = {};
+    showEdit.value = true
+    return
   }
+
+  // 如果是编辑
+  const key = selectedKey.value
+  if (!key) {
+    layer.msg('请选择要编辑的字典', { icon: 2 })
+    return
+  }
+
+  // 查找当前需要编辑的字典
+  current.value = dataSource.value.find(row => row.id === key)
   showEdit.value = true
 }
 
