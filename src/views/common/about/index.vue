@@ -59,7 +59,7 @@ const infoSchema: SchemaItem[] = [
         关于
       </p>
       <p class="header-describe">
-        {{ name }} 是一个基于Vue3、Vite4、Pinia、TypeScript、Layui-Vue 开发的前端脚手架项目。
+        {{ name }} 是一个基于Vue3、Vite5、Pinia、TypeScript、Layui-Vue 开发的前端脚手架项目。
         本项目只提供了一个最基础的RBAC用户角色权限功能。不像其它开源项目那样大而全，本项目相当精简
       </p>
     </lay-card>

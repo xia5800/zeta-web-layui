@@ -2,7 +2,7 @@
 
 ## 简介
 
-zeta-web-layui是一个基于Vue3、Vite4、Pinia、TypeScript、layui-vue开发的项目脚手架。
+zeta-web-layui是一个基于Vue3、Vite5、Pinia、TypeScript、layui-vue开发的项目脚手架。
 
 本项目只提供了一个最基础的RBAC用户角色权限功能。不像其它开源项目那样大而全，本项目相当精简。
 
