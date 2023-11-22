@@ -20,7 +20,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: '0.0.0.0',
       port: viteEnv.VITE_PORT,
-      https: false,
     },
     plugins: createVitePlugins(viteEnv, command),
     json: {
