@@ -16,8 +16,6 @@ const typeOptions: SelectOption[] = [
 ]
 
 const { loading, setLoading } = useLoading(true)
-const route = useRoute()
-const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysOptLog[]>([])
@@ -125,12 +123,13 @@ function openViewModal(id: string) {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 内容区域 -->
-    <lay-card :title="cardTitle">
-      <!-- 表格搜索栏 -->
+    <!-- 表格搜索栏 -->
+    <lay-card>
       <OptLogSearchForm ref="searchForm" :type-options="typeOptions" @on-search="handleSearch" />
+    </lay-card>
 
-      <!-- 数据表格 -->
+    <!-- 数据表格 -->
+    <div class="z-table-box">
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -141,7 +140,7 @@ function openViewModal(id: string) {
         :default-toolbar="defaultToolbar"
         :auto-cols-width="true"
         :resize="true"
-        max-height="80%"
+        :height="'100%'"
         @change="changePage"
         @sort-change="changeSort"
       >
@@ -166,7 +165,8 @@ function openViewModal(id: string) {
           {{ row.spendTime }}ms
         </template>
       </lay-table>
-    </lay-card>
+    </div>
+
 
     <!-- 弹窗 -->
     <OptLogViewModel v-model:visible="showEdit" :type-options="typeOptions" :data="current" @done="fetchTableData" />

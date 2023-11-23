@@ -197,7 +197,7 @@ watch(
 </script>
 
 <template>
-  <div>
+  <div class="z-table-box">
     <lay-table
       id="id"
       v-model:selected-keys="selectedKeys"
@@ -206,20 +206,19 @@ watch(
       :data-source="dataSource"
       :default-toolbar="defaultToolbar"
       :resize="true"
-      max-height="100%"
+      :height="'100%'"
       @change="changePage"
       @sort-change="changeSort"
     >
       <!-- 工具栏 -->
       <template #toolbar>
-        <div class="search-input">
-          <lay-input v-model="searchForm.name" size="xs" placeholder="输入关键字搜索" allow-clear />
-        </div>
+        <lay-input v-model="searchForm.name" size="sm" placeholder="输入关键字搜索" allow-clear style="width: 200px; margin-right: 10px; background: #fff" />
         <lay-button
           size="sm"
           type="primary"
           @click="handleSearch"
         >
+          <lay-icon class="layui-icon-search" />
           查询
         </lay-button>
 
@@ -229,6 +228,7 @@ watch(
           type="primary"
           @click="openEditModal()"
         >
+          <lay-icon class="layui-icon-addition" />
           新增
         </lay-button>
         <lay-button
@@ -237,6 +237,7 @@ watch(
           type="danger"
           @click="handleBatchDelete"
         >
+          <lay-icon class="layui-icon-delete" />
           删除
         </lay-button>
       </template>
@@ -265,27 +266,3 @@ watch(
     <DictItemEdit v-model:visible="showEdit" :dict-id="dictId" :data="current" @done="fetchTableData" />
   </div>
 </template>
-
-<style lang="less" scoped>
-.search-input {
-  width: 220px;
-  float: left;
-  margin-right: 8px;
-
-  :deep(.layui-input-block) {
-    margin-left: 0!important;
-  }
-
-  :deep(.layui-input-append) {
-    padding: 0;
-  }
-
-  :deep(.layui-input-wrapper) {
-    background-color: white;
-  }
-
-  .layui-input[size=xs] {
-    height: 32px;
-  }
-}
-</style>

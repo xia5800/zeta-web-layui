@@ -17,8 +17,6 @@ const stateOptions: SelectOption[] = [
 ]
 
 const { loading, setLoading } = useLoading(true)
-const route = useRoute()
-const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysLoginLog[]>([])
@@ -113,12 +111,13 @@ function handleSearch(formModel: SysLoginLog) {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 内容区域 -->
-    <lay-card :title="cardTitle">
-      <!-- 表格搜索栏 -->
+    <!-- 表格搜索栏 -->
+    <lay-card>
       <LoginLogSearchForm ref="searchForm" :state-options="stateOptions" @on-search="handleSearch" />
+    </lay-card>
 
-      <!-- 数据表格 -->
+    <!-- 数据表格 -->
+    <div class="z-table-box">
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -128,7 +127,7 @@ function handleSearch(formModel: SysLoginLog) {
         :data-source="dataSource"
         :default-toolbar="defaultToolbar"
         :resize="true"
-        max-height="80%"
+        :height="'100%'"
         @change="changePage"
         @sort-change="changeSort"
       >
@@ -136,6 +135,7 @@ function handleSearch(formModel: SysLoginLog) {
           {{ stateOptions.find(state => state.value === row.state)?.label }}
         </template>
       </lay-table>
-    </lay-card>
+    </div>
+
   </lay-container>
 </template>

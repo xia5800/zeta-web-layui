@@ -1,10 +1,10 @@
 export const columns = [
-  // {
-  //   title: '',
-  //   type: 'checkbox',
-  //   width: '50px',
-  //   fixed: 'left',
-  // },
+  {
+    title: '',
+    type: 'checkbox',
+    width: '50px',
+    fixed: 'left',
+  },
   {
     title: '#',
     type: 'number',
@@ -31,18 +31,12 @@ export const columns = [
     align: 'center',
   },
   {
-    key: 'url',
-    title: '访问地址',
-    minWidth: '100px',
-    ellipsisTooltip: true,
-    align: 'left',
-  },
-  {
     key: 'path',
     title: '文件路径',
     minWidth: '100px',
     ellipsisTooltip: true,
     align: 'left',
+    customSlot: 'path',
   },
   {
     key: 'uniqueFileName',

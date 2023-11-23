@@ -4,6 +4,7 @@ import { columns } from './columns'
 import FileSearchForm from './components/file-search.vue'
 import FileUploadModal from './components/file-upload.vue'
 import type { PageParam, SysFile } from '~/types'
+import { bytesToMB } from '~/utils/convert'
 
 defineOptions({
   // 跟路由name保持一致
@@ -11,8 +12,6 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
-const route = useRoute()
-const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysFile[]>([])
@@ -139,16 +138,46 @@ function handleDelete(id: string) {
     }
   })
 }
+
+/** 处理批量删除 */
+async function handleBatchDelete() {
+  // 参数校验
+  const ids = selectedKeys.value
+  if (ids.length === 0) {
+    layer.msg('请选择文件', { icon: 2 })
+    return
+  }
+
+  useConfirm('确定要删除这些文件吗？', async (layerId: string) => {
+    try {
+      // 批量删除
+      const { success, message } = await batchDeleteFileApi(ids)
+      if (!success) {
+        layer.msg(message || '操作失败', { icon: 2 })
+        return
+      }
+
+      layer.msg(message || '操作成功', { icon: 1 })
+      // 重新获取表格数据
+      fetchTableData()
+      // 关闭当前弹窗
+      layer.close(layerId)
+    } catch (err) {
+      layer.msg((err as Error).message, { icon: 2 })
+    }
+  })
+}
 </script>
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 内容区域 -->
-    <lay-card :title="cardTitle">
-      <!-- 表格搜索栏 -->
+    <!-- 表格搜索栏 -->
+    <lay-card>
       <FileSearchForm ref="searchForm" @on-search="handleSearch" />
+    </lay-card>
 
-      <!-- 数据表格 -->
+    <!-- 数据表格 -->
+    <div class="z-table-box">
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -159,7 +188,7 @@ function handleDelete(id: string) {
         :default-toolbar="defaultToolbar"
         :auto-cols-width="true"
         :resize="true"
-        max-height="80%"
+        :height="'100%'"
         @change="changePage"
         @sort-change="changeSort"
       >
@@ -171,7 +200,17 @@ function handleDelete(id: string) {
             type="primary"
             @click="openUploadModal"
           >
+            <lay-icon class="layui-icon-upload-drag" />
             上传
+          </lay-button>
+          <lay-button
+            v-permission="'sys:file:delete'"
+            size="sm"
+            type="danger"
+            @click="handleBatchDelete"
+          >
+            <lay-icon class="layui-icon-delete" />
+            删除
           </lay-button>
         </template>
 
@@ -187,12 +226,22 @@ function handleDelete(id: string) {
           </lay-button>
         </template>
 
+        <template #path="{ row }">
+          <a
+            style="color: #1677ff"
+            :href="row.url ? row.url : 'javascript:void(0)'"
+            target="_blank"
+            >
+            {{ row.path }}
+          </a>
+        </template>
+
         <!-- 文件大小列 -->
         <template #size="{ row }">
-          {{ (row.size / 1024).toFixed(2) }}kb
+          {{ bytesToMB(row.size).toFixed(2) }}MB
         </template>
       </lay-table>
-    </lay-card>
+    </div>
 
     <!-- 弹窗 -->
     <FileUploadModal v-model:visible="showUpload" @done="fetchTableData" />

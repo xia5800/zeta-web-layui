@@ -10,8 +10,6 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
-const route = useRoute()
-const cardTitle = (route.meta?.title || '') as string
 // 表格数据
 const dataSource = ref<SysMenu[]>([])
 // 表格选中数据的key
@@ -116,7 +114,7 @@ async function handleExpand() {
 <template>
   <lay-container fluid="true" class="z-container">
     <!-- 树形表格 -->
-    <lay-card :title="cardTitle">
+    <div class="z-table-box">
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -127,6 +125,7 @@ async function handleExpand() {
         :default-toolbar="defaultToolbar"
         :resize="true"
         :indent-size="15"
+        :height="'100%'"
       >
         <!-- 工具栏 -->
         <template #toolbar>
@@ -136,6 +135,7 @@ async function handleExpand() {
             type="primary"
             @click="openEditModal()"
           >
+            <lay-icon class="layui-icon-addition" />
             新增
           </lay-button>
           <lay-button
@@ -190,15 +190,15 @@ async function handleExpand() {
 
         <!-- 菜单类型列 -->
         <template #type="{ row }">
-          <lay-tag v-if="row.type === 'MENU'" type="normal" bordered>
+          <lay-tag v-if="row.type === 'MENU'" type="normal" variant="light">
             菜单
           </lay-tag>
-          <lay-tag v-else type="warm" bordered>
+          <lay-tag v-else type="warm" variant="light">
             按钮
           </lay-tag>
         </template>
       </lay-table>
-    </lay-card>
+    </div>
 
     <!-- 弹窗 -->
     <MenuEdit v-model:visible="showEdit" :pid="pid" :p-path="parentPath" :data="current" @done="fetchTableData" />

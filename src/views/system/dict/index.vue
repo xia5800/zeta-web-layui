@@ -10,8 +10,6 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
-const route = useRoute()
-const cardTitle = (route.meta?.title || '') as string
 // 表格数据
 const dataSource = ref<SysDict[]>([])
 // 表格选中数据的key,即: dictId
@@ -143,9 +141,10 @@ async function handleDelete() {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <lay-card :title="cardTitle">
-      <lay-row space="8">
-        <lay-col :lg="6" :md="10" :sm="24" :xs="24">
+    <lay-row space="8">
+      <lay-col :lg="6" :md="10" :sm="24" :xs="24">
+        <!-- 数据表格 -->
+        <div class="z-table-box">
           <lay-table
             id="id"
             v-model:selected-key="selectedKey"
@@ -154,7 +153,7 @@ async function handleDelete() {
             :columns="dictColumns"
             :data-source="dataSource"
             :default-toolbar="defaultToolbar"
-            max-height="100%"
+            :height="'100%'"
             @change="changePage"
             @row="rowClick"
           >
@@ -166,6 +165,7 @@ async function handleDelete() {
                 type="primary"
                 @click="openEditModal()"
               >
+                <lay-icon class="layui-icon-addition" />
                 新增
               </lay-button>
               <lay-button
@@ -174,6 +174,7 @@ async function handleDelete() {
                 type="normal"
                 @click="openEditModal(true)"
               >
+                <lay-icon class="layui-icon-edit" />
                 修改
               </lay-button>
               <lay-button
@@ -182,16 +183,17 @@ async function handleDelete() {
                 type="danger"
                 @click="handleDelete"
               >
+                <lay-icon class="layui-icon-delete" />
                 删除
               </lay-button>
             </template>
           </lay-table>
-        </lay-col>
-        <lay-col :lg="18" :md="14" :sm="24" :xs="24">
-          <DictItemTable :dict-id="selectedKey" />
-        </lay-col>
-      </lay-row>
-    </lay-card>
+        </div>
+      </lay-col>
+      <lay-col :lg="18" :md="14" :sm="24" :xs="24">
+        <DictItemTable :dict-id="selectedKey" />
+      </lay-col>
+    </lay-row>
 
     <!-- 编辑弹窗 -->
     <DictEditModel v-model:visible="showEdit" :data="current" @done="fetchTableData" />

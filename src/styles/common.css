@@ -3,10 +3,24 @@
 /** 容器 */
 .z-container {
   padding: var(--layout-content-padding)!important;
+  height: calc(100vh - var(--layout-nav-height) - var(--layout-tab-height) - var(--layout-footer-height) - 10px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .z-search-layout {
+  margin-top: 10px;
   margin-bottom: 8px;
+}
+
+.z-table-box {
+  height: 700px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
 }
 
 /** TODO: 辅助类...  */

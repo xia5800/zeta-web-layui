@@ -10,8 +10,6 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
-const route = useRoute()
-const cardTitle = (route.meta?.title || '') as string
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysUser[]>([])
@@ -211,12 +209,13 @@ async function changeState(val: number, row: SysUser) {
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <!-- 内容区域 -->
-    <lay-card :title="cardTitle">
-      <!-- 表格搜索栏 -->
+    <!-- 表格搜索栏 -->
+    <lay-card>
       <UserSearchForm ref="searchForm" @on-search="handleSearch" />
+    </lay-card>
 
       <!-- 数据表格 -->
+    <div class="z-table-box">
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -227,7 +226,7 @@ async function changeState(val: number, row: SysUser) {
         :default-toolbar="defaultToolbar"
         :auto-cols-width="true"
         :resize="true"
-        max-height="80%"
+        :height="'100%'"
         @change="changePage"
         @sort-change="changeSort"
       >
@@ -239,6 +238,7 @@ async function changeState(val: number, row: SysUser) {
             type="primary"
             @click="openEditModal()"
           >
+            <lay-icon class="layui-icon-addition" />
             新增
           </lay-button>
           <lay-button
@@ -247,6 +247,7 @@ async function changeState(val: number, row: SysUser) {
             type="danger"
             @click="handleBatchDelete"
           >
+            <lay-icon class="layui-icon-delete" />
             删除
           </lay-button>
         </template>
@@ -308,7 +309,7 @@ async function changeState(val: number, row: SysUser) {
           />
         </template>
       </lay-table>
-    </lay-card>
+    </div>
 
     <!-- 弹窗 -->
     <UserEdit v-model:visible="showEdit" :data="current" @done="fetchTableData" />
