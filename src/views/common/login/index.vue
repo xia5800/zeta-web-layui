@@ -2,14 +2,14 @@
 import { layer } from '@layui/layer-vue'
 import { cloneDeep } from 'lodash'
 import loginBg from '~/assets/images/login-bg.png'
-import loginAnime from '~/assets/lottie/lf20_sfiiilbf.json'
-import loginBanner from '~/assets/lottie/lf20_uv2O8HvO2x.json'
 import type { LoginParam } from '~/types'
 import { HOME_ROUTE } from '~/types'
 import { PROJECT_NAME } from '~/config/setting'
+import type { Rules } from 'async-validator'
 
 const { loading, setLoading } = useLoading(false)
 const router = useRouter()
+const refForm = ref()
 const verifyCode = ref<string>('')
 const verifyCodeMaxLength = ref<number>(5)
 const loginForm = reactive<LoginParam>({
@@ -18,6 +18,12 @@ const loginForm = reactive<LoginParam>({
   code: '',
   key: '',
   remember: true,
+})
+// 表单校验规则
+const rules = ref<Rules>({
+  account: { type: 'string', required: true, message: '账号不能为空' },
+  password: { type: 'string', required: true, message: '密码不能为空' },
+  code: { type: 'string', required: true, message: '验证码不能为空' }
 })
 
 /** 设置记住登录 */
@@ -37,33 +43,40 @@ async function changeVerifyCode() {
 }
 
 /** 提交表单数据 */
-async function handleSubmit() {
+function handleSubmit() {
+  // 如果登录按钮正在loading。不再次执行登录
   if (loading.value) return
-  setLoading(true)
-  try {
-    // 登录
-    await loginApi({ ...cloneDeep(loginForm) } as LoginParam)
-    // 路由跳转
-    const { from, ...othersQuery } = router.currentRoute.value.query
-    router.push({
-      path: (from as string) || HOME_ROUTE,
-      query: {
-        ...othersQuery,
-      },
-    })
-    // 登录成功提示
-    layer.notifiy({
-      title: '登录成功',
-      content: '欢迎回来~',
-      area: '300px',
-      icon: 1,
-      time: 1000,
-    })
-  } catch (err) {
-    layer.msg((err as Error).message, { icon: 2 })
-  } finally {
-    setLoading(false)
-  }
+
+  // 表单校验
+  refForm.value.validate(async (isValidate: boolean, model: LoginParam, _errors: any) => {
+      if (!isValidate) return
+
+      setLoading(true)
+      try {
+        // 登录
+        await loginApi({...cloneDeep(model)})
+        // 路由跳转
+        const { from, ...othersQuery } = router.currentRoute.value.query
+        router.push({
+          path: (from as string) || HOME_ROUTE,
+          query: {
+            ...othersQuery,
+          },
+        })
+        // 登录成功提示
+        layer.notifiy({
+          title: '登录成功',
+          content: '欢迎回来~',
+          area: '300px',
+          icon: 1,
+          time: 1000,
+        })
+      } catch (err) {
+        layer.msg((err as Error).message, { icon: 2 })
+      } finally {
+        setLoading(false)
+      }
+  });
 }
 
 onMounted(() => {
@@ -71,14 +84,14 @@ onMounted(() => {
   useLottie({
     name: 'banner',
     containerId: '#banner',
-    animationData: loginBanner,
+    path: 'https://image.bestgcc.online/lottie/lf20_uv2O8HvO2x.json',
   })
 
   // 渲染logo
   useLottie({
     name: 'logo',
     containerId: '#logo',
-    animationData: loginAnime,
+    path: 'https://image.bestgcc.online/lottie/lf20_sfiiilbf.json',
   })
 
   // 获取验证码
@@ -100,12 +113,8 @@ onMounted(() => {
             {{ PROJECT_NAME }}
           </h2>
 
-          <lay-form :model="loginForm" size="large" @submit="handleSubmit">
-            <lay-form-item
-              prop="account"
-              label-width="0"
-              :rules="[{ required: true, message: '账号不能为空' }]"
-            >
+          <lay-form ref="refForm" :model="loginForm" :rules="rules" size="large" required>
+            <lay-form-item prop="account" label-width="0" required>
               <lay-input v-model="loginForm.account" placeholder="请输入账号" allow-clear>
                 <template #prefix>
                   <lay-icon type="layui-icon-username" />
@@ -113,11 +122,7 @@ onMounted(() => {
               </lay-input>
             </lay-form-item>
 
-            <lay-form-item
-              prop="password"
-              label-width="0"
-              :rules="[{ required: true, message: '密码不能为空' }]"
-            >
+            <lay-form-item prop="password" label-width="0" required>
               <lay-input
                 v-model="loginForm.password"
                 type="password"
@@ -131,12 +136,8 @@ onMounted(() => {
               </lay-input>
             </lay-form-item>
 
-            <lay-form-item
-              prop="code"
-              label-width="0"
-              :rules="[{ required: true, message: '验证码不能为空' }]"
-            >
-              <lay-input v-model="loginForm.code" placeholder="请输入验证码" :max-length="verifyCodeMaxLength" allow-clear>
+            <lay-form-item prop="code" label-width="0" required>
+              <lay-input v-model="loginForm.code" placeholder="请输入验证码" :maxlength="verifyCodeMaxLength" allow-clear>
                 <template #prefix>
                   <lay-icon type="layui-icon-vercode" />
                 </template>
