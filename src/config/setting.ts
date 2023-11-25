@@ -21,3 +21,6 @@ export const DEFAULT_THEME_MODE = 'light'
 
 /** 默认主色调 */
 export const DEFAULT_PERMARY_COLOR = '#009688'
+
+/** 默认圆角度 */
+export const DEFAULT_BORDER_RADIUS = 6

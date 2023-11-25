@@ -66,6 +66,10 @@ function changeGreyMode(val: boolean) {
           开启黑暗模式
           <lay-switch v-model="settings.themeMode" onswitch-value="dark" unswitch-value="light" />
         </div>
+        <div class="setting-item">
+          圆角度
+          <lay-input-number v-model="settings.borderRadius" style="width: 120px;" />
+        </div>
       </lay-field>
 
       <!-- 主题色 -->
@@ -110,6 +114,18 @@ function changeGreyMode(val: boolean) {
         <div class="setting-item">
           是否显示多页签
           <lay-switch v-model="settings.showTabs" />
+        </div>
+        <div class="setting-item">
+          样式
+          <lay-select
+            v-model="settings.tabTheme"
+            :disabled="!settings.showTabs"
+            style="width: 120px"
+          >
+            <lay-select-option value="" label="样式一" />
+            <lay-select-option value="underpainting" label="样式二" />
+            <lay-select-option value="designer" label="样式三" />
+          </lay-select>
         </div>
         <div class="setting-item">
           <span>

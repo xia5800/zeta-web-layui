@@ -23,12 +23,17 @@ export interface ThemeSettings {
   showAnimation: boolean
   /** 页面切换动画类型 */
   animationMode: 'fade-slide' | 'fade' | 'fade-bottom' | 'fade-scale' | 'zoom-fade' | 'zoom-out'
+  /** 多页签样式 */
+  tabTheme: '' | 'underpainting' | 'designer'
 
   /** 系统主色调 */
   primaryColor: string
 
   /** 页面主题的亮暗模式 */
   themeMode: 'light' | 'dark'
+
+  /** 圆角度 */
+  borderRadius: number
 }
 
 /**

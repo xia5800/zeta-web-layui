@@ -5,6 +5,7 @@ import type { Tab } from '~/types'
 const route = useRoute()
 const router = useRouter()
 const currentPath = computed(() => route.path)
+const themeStore = useThemeStore()
 const tabStore = useTabStore()
 tabStore.createTabs()
 
@@ -112,7 +113,7 @@ function closeOther() {
 </script>
 
 <template>
-  <div class="the-tab">
+  <div class="the-tab" :class="themeStore.settings.tabTheme">
     <lay-tab
       :model-value="currentPath"
       :allow-close="true"
@@ -129,7 +130,7 @@ function closeOther() {
       </template>
     </lay-tab>
     <lay-dropdown>
-      <lay-icon type="layui-icon-down" />
+      <lay-icon type="layui-icon-down" :class="themeStore.settings.tabTheme == 'designer' ? 'designer-last-icon' : ''" />
       <template #content>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeLeft">
@@ -159,7 +160,7 @@ function closeOther() {
 <style scoped>
 .the-tab > i {
   width: 40px;
-  background: white;
+  background-color: white;
   height: 100%;
   line-height: var(--layout-tab-height);
   text-align: center;

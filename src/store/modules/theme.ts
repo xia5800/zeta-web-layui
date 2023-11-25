@@ -1,6 +1,6 @@
 import { layer } from '@layui/layer-vue'
 import { cloneDeep } from 'lodash-es'
-import { DEFAULT_PERMARY_COLOR, DEFAULT_THEME_MODE } from '~/config/setting'
+import { DEFAULT_PERMARY_COLOR, DEFAULT_THEME_MODE, DEFAULT_BORDER_RADIUS } from '~/config/setting'
 import type { ThemeSettings, ThemeState } from '~/types'
 import { CacheKey } from '~/types'
 import { storageLocal, storageSession } from '~/utils/cache'
@@ -30,10 +30,14 @@ export const useThemeStore = defineStore({
       showAnimation: true,
       /** 页面切换动画类型 */
       animationMode: 'fade-slide',
+      /** 多页签样式 */
+      tabTheme: '',
       /** 页面主题的亮暗模式 */
       themeMode: DEFAULT_THEME_MODE,
       /** 主题色 */
       primaryColor: DEFAULT_PERMARY_COLOR,
+      /** 圆角度 */
+      borderRadius: DEFAULT_BORDER_RADIUS,
     },
     /** 展开收起菜单 */
     collaspeSide: storageSession(false).getItem(CacheKey.MENU_COLLASPE_CACHE_KEY) ?? false,
@@ -59,6 +63,7 @@ export const useThemeStore = defineStore({
       // 初始化主题色
       this.themeVariable['--global-primary-color'] = this.settings.primaryColor
       this.themeVariable['--global-checked-color'] = this.settings.primaryColor
+      this.themeVariable['--global-border-radius'] = this.settings.borderRadius + 'px'
     },
     /** 保存设置 */
     saveSettins({
@@ -71,6 +76,7 @@ export const useThemeStore = defineStore({
       // 修改主题色
       this.themeVariable['--global-primary-color'] = this.settings.primaryColor
       this.themeVariable['--global-checked-color'] = this.settings.primaryColor
+      this.themeVariable['--global-border-radius'] = this.settings.borderRadius + 'px'
 
       if (!showTips) {
         storageLocal().setItem<ThemeSettings>(CacheKey.THEME_SETTING_CACHE_KEY, cloneDeep(this.settings))
@@ -95,8 +101,10 @@ export const useThemeStore = defineStore({
         sideThemeInverse: false,
         showAnimation: true,
         animationMode: 'fade-slide',
+        tabTheme: '',
         themeMode: DEFAULT_THEME_MODE,
         primaryColor: DEFAULT_PERMARY_COLOR,
+        borderRadius: DEFAULT_BORDER_RADIUS,
       }
     },
   },

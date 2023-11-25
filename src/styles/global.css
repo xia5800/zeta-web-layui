@@ -9,7 +9,6 @@ body {
 iframe {
   border: 0;
   display: block;
-  vertical-align: middle;
 }
 
 /** 灰色模式 */
