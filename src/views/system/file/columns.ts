@@ -67,7 +67,6 @@ export const columns = [
   {
     key: 'size',
     title: '文件大小',
-    hide: true,
     sort: true,
     align: 'center',
     customSlot: 'size',

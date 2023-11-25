@@ -29,7 +29,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  showRefresh: true,
+  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
 })
 // 默认分页查询参数
 const pageParam: PageParam<SysLoginLog> = { page: 1, limit: 10, sort: 'id', order: 'desc' }
@@ -132,7 +132,18 @@ function handleSearch(formModel: SysLoginLog) {
         @sort-change="changeSort"
       >
         <template #state="{ row }">
-          {{ stateOptions.find(state => state.value === row.state)?.label }}
+          <lay-tag v-if="row.state === 'SUCCESS'" type="normal" variant="light">
+            登录成功
+          </lay-tag>
+          <lay-tag v-else-if="row.state === 'LOGOUT'" variant="light">
+            注销登录
+          </lay-tag>
+          <lay-tag v-else-if="row.state === 'ERROR_PWD'" type="warm" variant="light">
+            密码不正确
+          </lay-tag>
+          <lay-tag v-else-if="row.state === 'FAIL'" type="danger" variant="light">
+            登录失败
+          </lay-tag>
         </template>
       </lay-table>
     </div>

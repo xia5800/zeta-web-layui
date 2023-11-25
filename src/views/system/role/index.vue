@@ -23,7 +23,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  showRefresh: true,
+  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)
@@ -237,7 +237,7 @@ async function handleBatchDelete() {
             type="primary"
             @click="openEditModal(row)"
           >
-            修改
+            编辑
           </lay-button>
           <lay-button
             v-permission="'sys:role:delete'"

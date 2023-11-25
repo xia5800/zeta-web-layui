@@ -35,6 +35,7 @@ export const columns = [
   {
     key: 'comments',
     title: '备注',
+    minWidth: '200px',
   },
   {
     key: 'os',
@@ -53,10 +54,12 @@ export const columns = [
     key: 'browser',
     title: '浏览器类型',
     align: 'center',
+    minWidht: '120px',
   },
   {
     key: 'ip',
     title: 'ip地址',
     align: 'center',
+    minWidht: '120px',
   },
 ]

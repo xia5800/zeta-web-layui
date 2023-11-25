@@ -24,7 +24,7 @@ const useStore = useUserStore()
             新增
           </lay-button>
           <lay-button v-permission="['sys:user:update']" type="normal">
-            修改
+            编辑
           </lay-button>
           <lay-button v-permission="['sys:user:delete']" type="danger">
             删除

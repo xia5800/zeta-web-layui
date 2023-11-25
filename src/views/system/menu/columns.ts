@@ -18,6 +18,7 @@ export const columns = [
   {
     key: 'authority',
     title: '权限标识',
+    ellipsisTooltip: true,
   },
   {
     key: 'sortValue',

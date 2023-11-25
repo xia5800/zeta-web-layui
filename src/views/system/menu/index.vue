@@ -163,7 +163,7 @@ async function handleExpand() {
             size="xs"
             @click="openEditModal(row)"
           >
-            修改
+            编辑
           </lay-button>
           <lay-button
             v-permission="'sys:user:delete'"
@@ -204,3 +204,10 @@ async function handleExpand() {
     <MenuEdit v-model:visible="showEdit" :pid="pid" :p-path="parentPath" :data="current" @done="fetchTableData" />
   </lay-container>
 </template>
+
+<style scoped>
+.z-table-box {
+  height: 720px;
+  margin-top: 0;
+}
+</style>

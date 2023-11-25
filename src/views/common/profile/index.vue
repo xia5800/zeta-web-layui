@@ -126,8 +126,8 @@ function handleSubmit() {
                     style="width: 100%"
                   />
                 </lay-form-item>
-                <lay-form-item>
-                  <lay-button type="primary" @click="handleSubmit">
+                <lay-form-item class="z-text-center">
+                  <lay-button type="primary"  @click="handleSubmit">
                     保存修改
                   </lay-button>
                 </lay-form-item>

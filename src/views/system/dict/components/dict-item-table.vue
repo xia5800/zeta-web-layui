@@ -23,8 +23,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  showSkip: false,
-  showLimit: false,
+  layout: ['count', 'prev', 'page', 'next'],
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)
@@ -215,7 +214,6 @@ watch(
         <lay-input v-model="searchForm.name" size="sm" placeholder="输入关键字搜索" allow-clear style="width: 200px; margin-right: 10px; background: #fff" />
         <lay-button
           size="sm"
-          type="primary"
           @click="handleSearch"
         >
           <lay-icon class="layui-icon-search" />
@@ -250,7 +248,7 @@ watch(
           type="primary"
           @click="openEditModal(row)"
         >
-          修改
+          编辑
         </lay-button>
         <lay-button
           v-permission="'sys:dictItem:delete'"

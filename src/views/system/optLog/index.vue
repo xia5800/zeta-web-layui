@@ -28,7 +28,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  showRefresh: true,
+  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)
@@ -157,7 +157,12 @@ function openViewModal(id: string) {
 
         <!-- 操作类型列 -->
         <template #type="{ row }">
-          {{ typeOptions.find(type => type.value === row.type)?.label }}
+          <lay-tag v-if="row.type === 'OPERATION'" type="normal" variant="light">
+            操作
+          </lay-tag>
+          <lay-tag v-else type="warm" variant="light">
+            异常
+          </lay-tag>
         </template>
 
         <!-- 消耗时间列 -->

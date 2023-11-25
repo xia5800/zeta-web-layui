@@ -24,7 +24,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  showRefresh: true,
+  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
 })
 // 是否显示"文件上传"弹窗
 const showUpload = ref(false)

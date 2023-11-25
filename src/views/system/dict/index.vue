@@ -21,8 +21,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  showSkip: false,
-  showLimit: false,
+  layout: ["prev", "page", "next"]
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)
@@ -92,7 +91,7 @@ function openEditModal(isUpdate = false) {
   if (!isUpdate) {
     // fix bug 解决“点击编辑字典，关闭弹窗后点击再次新增字典会有默认值”问题  --by gcc
     // 清空当前需要编辑的字典
-    current.value = {};
+    current.value = undefined;
     showEdit.value = true
     return
   }
@@ -175,7 +174,7 @@ async function handleDelete() {
                 @click="openEditModal(true)"
               >
                 <lay-icon class="layui-icon-edit" />
-                修改
+                编辑
               </lay-button>
               <lay-button
                 v-permission="'sys:dict:delete'"
@@ -199,3 +198,11 @@ async function handleDelete() {
     <DictEditModel v-model:visible="showEdit" :data="current" @done="fetchTableData" />
   </lay-container>
 </template>
+
+<style scoped>
+.z-table-box {
+  height: 700px;
+  min-width: 160px;
+  margin-top: 0;
+}
+</style>
