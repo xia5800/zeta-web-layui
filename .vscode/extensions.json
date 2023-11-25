@@ -5,6 +5,8 @@
     "unional.vscode-sort-package-json",
     "dbaeumer.vscode-eslint",
     "antfu.iconify",
-    "naumovs.color-highlight"
+    "naumovs.color-highlight",
+    "vue.volar",
+    "vue.vscode-typescript-vue-plugin"
   ]
 }
