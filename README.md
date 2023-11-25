@@ -12,6 +12,10 @@ zeta-web-layui是一个基于Vue3、Vite5、Pinia、TypeScript、layui-vue开发
 
 ```bash
 yarn install
+yarn run serve
+
+# 通过VITE_CJS_TRACE=true标志排查cjs 
+# https://cn.vitejs.dev/guide/troubleshooting#vite-cjs-node-api-deprecated
 yarn run dev
 ```
 
@@ -22,7 +26,7 @@ yarn run dev
 | vue3       | 核心框架                                      |
 | typescript | 开发语言                                      |
 | layui-vue  | [ui框架](https://gitee.com/layui/layui-vue) |
-| nodejs     | `>=18.0.0`                                  |`
+| nodejs     | `>=18.0.0`                                  |
 
 
 ## 后端
@@ -43,9 +47,14 @@ yarn run dev
 - 数据字典
 - 文件管理
 
+## 常见问题
+
+[常见问题及解决方法.md](./_docs/常见问题及解决方法.md)
+
 ## 友情链接 & 特别鸣谢
 
 - layui-vue：[https://gitee.com/layui/layui-vue](https://gitee.com/layui/layui-vue)
+- layui-vue-admin: [https://gitee.com/layui-vue/layui-vue-admin](https://gitee.com/layui-vue/layui-vue-admin)
 - parfait [https://github.com/cosmoscatts/parfait](https://github.com/cosmoscatts/parfait)
 - zeta-kotlin：[https://gitee.com/xia5800/zeta-kotlin](https://gitee.com/xia5800/zeta-kotlin)
 
