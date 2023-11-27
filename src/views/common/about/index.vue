@@ -8,18 +8,22 @@ defineOptions({
   name: 'about',
 })
 
+const themeStore = useThemeStore()
 const { dependencies, devDependencies, name, version } = pkgJson
 
+/** 生成环境依赖 */
 const schema: SchemaItem[] = dependencies?.map(item => ({
   label: item.name,
   value: item.version,
 })) || []
 
+/** 开发环境依赖 */
 const devSchema: SchemaItem[] = devDependencies?.map(item => ({
   label: item.name,
   value: item.version,
 })) || []
 
+/** 项目信息 */
 const infoSchema: SchemaItem[] = [
   {
     label: '版本',
@@ -54,7 +58,11 @@ const infoSchema: SchemaItem[] = [
 
 <template>
   <div>
-    <lay-card>
+    <!-- 如果多页签主题为“样式三”，为了美观添加了margin-top: 5px样式 -->
+    <lay-card
+      style="border-radius: 0;"
+      :style="themeStore.settings.tabTheme == 'designer' ? 'margin-top: 5px' : ''"
+    >
       <p class="header-title">
         关于
       </p>
