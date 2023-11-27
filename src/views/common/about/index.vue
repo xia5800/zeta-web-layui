@@ -10,16 +10,19 @@ defineOptions({
 
 const { dependencies, devDependencies, name, version } = pkgJson
 
+/** 生成环境依赖 */
 const schema: SchemaItem[] = dependencies?.map(item => ({
   label: item.name,
   value: item.version,
 })) || []
 
+/** 开发环境依赖 */
 const devSchema: SchemaItem[] = devDependencies?.map(item => ({
   label: item.name,
   value: item.version,
 })) || []
 
+/** 项目信息 */
 const infoSchema: SchemaItem[] = [
   {
     label: '版本',
@@ -53,8 +56,8 @@ const infoSchema: SchemaItem[] = [
 </script>
 
 <template>
-  <div>
-    <lay-card>
+  <lay-container fluid="true" class="z-container">
+    <lay-card style="border-radius: 0;">
       <p class="header-title">
         关于
       </p>
@@ -63,21 +66,18 @@ const infoSchema: SchemaItem[] = [
         本项目只提供了一个最基础的RBAC用户角色权限功能。不像其它开源项目那样大而全，本项目相当精简
       </p>
     </lay-card>
+    <lay-card title="项目信息">
+      <Descriptions :schema-item="infoSchema" :column="4" />
+    </lay-card>
 
-    <lay-container fluid="true" class="z-container">
-      <lay-card title="项目信息">
-        <Descriptions :schema-item="infoSchema" :column="4" />
-      </lay-card>
+    <lay-card title="生产环境依赖">
+      <Descriptions :schema-item="schema" :column="4" />
+    </lay-card>
 
-      <lay-card title="生产环境依赖">
-        <Descriptions :schema-item="schema" :column="4" />
-      </lay-card>
-
-      <lay-card title="开发环境依赖">
-        <Descriptions :schema-item="devSchema" :column="4" />
-      </lay-card>
-    </lay-container>
-  </div>
+    <lay-card title="开发环境依赖">
+      <Descriptions :schema-item="devSchema" :column="4" />
+    </lay-card>
+  </lay-container>
 </template>
 
 <style scoped>
