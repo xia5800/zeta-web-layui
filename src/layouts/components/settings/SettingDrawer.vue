@@ -68,7 +68,7 @@ function changeGreyMode(val: boolean) {
         </div>
         <div class="setting-item">
           圆角度
-          <lay-input-number v-model="settings.borderRadius" style="width: 120px;" />
+          <lay-input-number v-model="settings.borderRadius" :min="0" :max="50" style="width: 120px;" />
         </div>
       </lay-field>
 
