@@ -161,7 +161,6 @@ function closeOther() {
 .the-tab > i {
   width: 40px;
   background-color: white;
-  height: 100%;
   line-height: var(--layout-tab-height);
   text-align: center;
   border-left: 1px solid whitesmoke;

@@ -79,11 +79,19 @@
 .layui-header .the-tab .layui-tab .layui-tab-content {
   padding: 0px;
 }
+.layui-header .the-tab .layui-tab .layui-tab-title {
+  border-bottom-width: 0;
+  border-bottom-style: none;
+}
 .layui-header .the-tab .layui-tab .layui-tab-title .layui-this:after {
   border: none;
 }
 
 /** 顶部-选项卡-样式二 */
+.layui-header .underpainting .layui-tab .layui-tab-title {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
 .layui-header .underpainting .layui-tab .layui-tab-title .layui-this {
   color: var(--global-primary-color) !important;
   border-bottom: 2px solid var(--global-primary-color) !important;
@@ -95,48 +103,43 @@
 
 /** 顶部-选项卡-样式三 */
 .layui-header .designer {
-  display: flex;
   width: calc(100% - 15px);
-  height: var(--layout-tab-height);
-  position: relative;
-  font-size: 14px;
-  color: dimgray;
-  cursor: pointer;
   padding-left: 5px;
-  box-sizing: border-box;
   box-shadow: unset;
   border-bottom: 0;
   background-color: whitesmoke;
 }
 .layui-header .designer .layui-tab-bar {
-  height: var(--layout-tab-height);
-  line-height: var(--layout-tab-height);
+  height: 40px;
+  line-height: 40px;
   margin-top: 5px;
 }
 .layui-header .designer .layui-tab-bar.prev {
   border-left: none;
-  height: var(--layout-tab-height);;
-  line-height: var(--layout-tab-height);;
+  height: 40px;
+  line-height: 40px;
   margin-top: 5px;
 }
 .layui-header .designer .designer-last-icon {
-  width: 32px !important;
-  height: 32px !important;
+  margin: 5px 0 0 5px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
   background: white;
-  margin-top: 1px;
-  line-height: 32px !important;
   text-align: center;
   border-radius: 4px;
 }
 .layui-header .designer .layui-tab-title {
+  border-bottom-width: 0;
+  border-bottom-style: none;
   border: none;
 }
 .layui-header .designer .layui-tab-title > li {
-  background-color: #fff;
   margin: 5px 0 0 5px;
+  height: 35px;
+  line-height: 35px;
+  background-color: #fff;
   border-radius: 4px;
-  height: 32px !important;
-  line-height: 32px !important;
 }
 
 /** logo */
