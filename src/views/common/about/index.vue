@@ -57,7 +57,7 @@ const infoSchema: SchemaItem[] = [
 
 <template>
   <lay-container fluid="true" class="z-container">
-    <lay-card style="border-radius: 0;">
+    <lay-card>
       <p class="header-title">
         关于
       </p>
