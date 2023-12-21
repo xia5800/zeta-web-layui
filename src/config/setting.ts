@@ -1,5 +1,6 @@
 /** 接口地址 */
 export const API_BASE_URL: string = import.meta.env.VITE_API_URL as string
+export const API_JOB_URL: string = import.meta.env.VITE_API_JOB_URL as string
 
 /** 项目名称 */
 export const PROJECT_NAME: string = import.meta.env.VITE_APP_NAME as string

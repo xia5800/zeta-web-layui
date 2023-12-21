@@ -17,6 +17,8 @@ declare interface ViteEnv {
   VITE_USE_MOCK: string
   /** 后端接口地址 */
   VITE_API_URL: string
+  /** 定时任务后端接口地址 */
+  VITE_API_JOB_URL: string
   /** 是否清除console */
   VITE_DROP_CONSOLE: string
   /** 是否开启打包文件大小结果分析 */

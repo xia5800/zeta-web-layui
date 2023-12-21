@@ -4,7 +4,7 @@ import { layer } from '@layui/layer-vue'
 import { getToken, removeToken } from './token'
 import { storageSession } from './cache'
 import { CacheKey, LOGIN_ROUTE } from '~/types'
-import { API_BASE_URL } from '~/config/setting'
+import { API_BASE_URL, API_JOB_URL } from '~/config/setting'
 
 /**
  * 扩展AxiosRequestConfig配置
@@ -40,10 +40,11 @@ const defaultConfig: AxiosRequestConfig = {
 
 class BaseRequest {
   /** axios实例 */
-  private static axiosInstance: AxiosInstance = axios.create(defaultConfig)
+  private axiosInstance: AxiosInstance
 
   /** 构造方法 */
-  constructor() {
+  constructor(config: AxiosRequestConfig = defaultConfig) {
+    this.axiosInstance = axios.create(config)
     this.interceptorsRequestConfig()
     this.interceptorsResponseConfig()
   }
@@ -146,7 +147,7 @@ class BaseRequest {
    * 请求拦截器配置
    */
   private interceptorsRequestConfig() {
-    BaseRequest.axiosInstance.interceptors.request.use(
+    this.axiosInstance.interceptors.request.use(
       async (config) => {
         const requestConfig = config as RequestConfig
         // 添加token到header
@@ -167,7 +168,7 @@ class BaseRequest {
    * 响应拦截器配置
    */
   private interceptorsResponseConfig() {
-    BaseRequest.axiosInstance.interceptors.response.use(
+    this.axiosInstance.interceptors.response.use(
       (response) => {
         return response
       },
@@ -203,7 +204,7 @@ class BaseRequest {
   public request<T>(method: Method, url: string, param?: RequestConfig): Promise<T> {
     const config = { method, url, ...param } as RequestConfig
     return new Promise((resolve, reject) => {
-      BaseRequest.axiosInstance
+      this.axiosInstance
         .request(config)
         .then((resp) => {
           resolve(resp.data)
@@ -261,3 +262,9 @@ class BaseRequest {
 }
 
 export const request = new BaseRequest()
+
+export const jobRequest = new BaseRequest({
+  baseURL: API_JOB_URL,
+  // 请求超时时间
+  timeout: 10000,
+})
