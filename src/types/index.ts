@@ -17,3 +17,6 @@ export * from './system/optLog'
 export * from './system/loginLog'
 export * from './system/file'
 export * from './system/menu'
+
+export * from './job/job'
+export * from './job/taskLog'

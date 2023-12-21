@@ -33,6 +33,11 @@ export const loginUserInfo = {
     'sys:dictItem:save',
     'sys:dictItem:update',
     'sys:dictItem:delete',
+    'task:view',
+    'task:save',
+    'task:update',
+    'task:delete',
+    'task:log:view',
   ],
   roles: [
     'SUPER_ADMIN',
@@ -124,6 +129,48 @@ export const loginUserMenu = [
     redirect: '/system/user',
     parentId: '0',
     component: '',
+  },
+  {
+    id: '1737334253697368064',
+    parentId: '0',
+    children: [
+      {
+        id: '1737334253697368065',
+        parentId: '1737334253697368064',
+        name: 'job_index',
+        path: '/job/index',
+        component: 'job/job',
+        meta: {
+          title: '任务列表',
+          icon: '',
+          hide: false,
+          keepAlive: false
+        }
+      },
+      {
+        id: '1737334253697368070',
+        parentId: '1737334253697368064',
+        name: 'job_log',
+        path: '/job/log',
+        component: 'job/log',
+        meta: {
+          title: '调度日志',
+          icon: '',
+          hide: false,
+          'keepAlive': false
+        }
+      }
+    ],
+    name: 'job',
+    path: '/job',
+    component: '',
+    redirect: '/job/index',
+    meta: {
+      title: '任务管理',
+      icon: 'layui-icon-time',
+      hide: false,
+      keepAlive: false
+    }
   },
   {
     id: '90000',

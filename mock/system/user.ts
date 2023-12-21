@@ -260,5 +260,4 @@ export default [
   changePwdApi(),
   resetPwdApi(),
   updateStateApi(),
-  existenceApi(),
 ] as MockMethod[]
