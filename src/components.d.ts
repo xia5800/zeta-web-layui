@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     FileUpload: typeof import('./components/FileUpload.vue')['default']
+    KvTable: typeof import('./components/KvTable.vue')['default']
     LayAvatar: typeof import('@layui/layui-vue')['LayAvatar']
     LayBacktop: typeof import('@layui/layui-vue')['LayBacktop']
     LayBody: typeof import('@layui/layui-vue')['LayBody']

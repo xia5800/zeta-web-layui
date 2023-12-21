@@ -17,6 +17,7 @@ declare global {
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addDictApi: typeof import('./api/system/dict')['addDictApi']
   const addDictItemApi: typeof import('./api/system/dictItem')['addDictItemApi']
+  const addJobApi: typeof import('./api/job/job')['addJobApi']
   const addMenuApi: typeof import('./api/system/menu')['addMenuApi']
   const addRoleApi: typeof import('./api/system/role')['addRoleApi']
   const addUserApi: typeof import('./api/system/user')['addUserApi']
@@ -59,6 +60,7 @@ declare global {
   const deleteDictApi: typeof import('./api/system/dict')['deleteDictApi']
   const deleteDictItemApi: typeof import('./api/system/dictItem')['deleteDictItemApi']
   const deleteFileApi: typeof import('./api/system/file')['deleteFileApi']
+  const deleteJobApi: typeof import('./api/job/job')['deleteJobApi']
   const deleteMenuApi: typeof import('./api/system/menu')['deleteMenuApi']
   const deleteRoleApi: typeof import('./api/system/role')['deleteRoleApi']
   const deleteUserApi: typeof import('./api/system/user')['deleteUserApi']
@@ -72,6 +74,8 @@ declare global {
   const getDictApi: typeof import('./api/system/dict')['getDictApi']
   const getDictItemApi: typeof import('./api/system/dictItem')['getDictItemApi']
   const getFileApi: typeof import('./api/system/file')['getFileApi']
+  const getJobClassList: typeof import('./api/job/job')['getJobClassList']
+  const getJobClassListApi: typeof import('./api/job/job')['getJobClassListApi']
   const getLoginLogApi: typeof import('./api/system/loginLog')['getLoginLogApi']
   const getOptLogApi: typeof import('./api/system/optLog')['getOptLogApi']
   const getRoleApi: typeof import('./api/system/role')['getRoleApi']
@@ -128,17 +132,22 @@ declare global {
   const pageDictApi: typeof import('./api/system/dict')['pageDictApi']
   const pageDictItemApi: typeof import('./api/system/dictItem')['pageDictItemApi']
   const pageFileApi: typeof import('./api/system/file')['pageFileApi']
+  const pageJobApi: typeof import('./api/job/job')['pageJobApi']
   const pageLoginLogApi: typeof import('./api/system/loginLog')['pageLoginLogApi']
   const pageOptLogApi: typeof import('./api/system/optLog')['pageOptLogApi']
   const pageRoleApi: typeof import('./api/system/role')['pageRoleApi']
+  const pageTaskLogApi: typeof import('./api/job/taskLog')['pageTaskLogApi']
   const pageUserApi: typeof import('./api/system/user')['pageUserApi']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const pauseJobApi: typeof import('./api/job/job')['pauseJobApi']
   const primaryColor: typeof import('./hooks/ui')['primaryColor']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
   const queryDictApi: typeof import('./api/system/dict')['queryDictApi']
   const queryDictItemApi: typeof import('./api/system/dictItem')['queryDictItemApi']
   const queryFileApi: typeof import('./api/system/file')['queryFileApi']
+  const queryJobApi: typeof import('./api/job/job')['queryJobApi']
+  const queryJobClassListApi: typeof import('./api/job/job')['queryJobClassListApi']
   const queryRoleApi: typeof import('./api/system/role')['queryRoleApi']
   const queryUserApi: typeof import('./api/system/user')['queryUserApi']
   const reactify: typeof import('@vueuse/core')['reactify']
@@ -158,6 +167,8 @@ declare global {
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
+  const resumeJobApi: typeof import('./api/job/job')['resumeJobApi']
+  const runOnceJobApi: typeof import('./api/job/job')['runOnceJobApi']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const setupStore: typeof import('./store/index')['setupStore']
@@ -188,6 +199,7 @@ declare global {
   const until: typeof import('@vueuse/core')['until']
   const updateDictApi: typeof import('./api/system/dict')['updateDictApi']
   const updateDictItemApi: typeof import('./api/system/dictItem')['updateDictItemApi']
+  const updateJobApi: typeof import('./api/job/job')['updateJobApi']
   const updateMenuApi: typeof import('./api/system/menu')['updateMenuApi']
   const updateRoleApi: typeof import('./api/system/role')['updateRoleApi']
   const updateRoleMenuApi: typeof import('./api/system/roleMenu')['updateRoleMenuApi']
@@ -404,6 +416,7 @@ declare module 'vue' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addDictApi: UnwrapRef<typeof import('./api/system/dict')['addDictApi']>
     readonly addDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['addDictItemApi']>
+    readonly addJobApi: UnwrapRef<typeof import('./api/job/job')['addJobApi']>
     readonly addMenuApi: UnwrapRef<typeof import('./api/system/menu')['addMenuApi']>
     readonly addRoleApi: UnwrapRef<typeof import('./api/system/role')['addRoleApi']>
     readonly addUserApi: UnwrapRef<typeof import('./api/system/user')['addUserApi']>
@@ -446,6 +459,7 @@ declare module 'vue' {
     readonly deleteDictApi: UnwrapRef<typeof import('./api/system/dict')['deleteDictApi']>
     readonly deleteDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['deleteDictItemApi']>
     readonly deleteFileApi: UnwrapRef<typeof import('./api/system/file')['deleteFileApi']>
+    readonly deleteJobApi: UnwrapRef<typeof import('./api/job/job')['deleteJobApi']>
     readonly deleteMenuApi: UnwrapRef<typeof import('./api/system/menu')['deleteMenuApi']>
     readonly deleteRoleApi: UnwrapRef<typeof import('./api/system/role')['deleteRoleApi']>
     readonly deleteUserApi: UnwrapRef<typeof import('./api/system/user')['deleteUserApi']>
@@ -515,17 +529,22 @@ declare module 'vue' {
     readonly pageDictApi: UnwrapRef<typeof import('./api/system/dict')['pageDictApi']>
     readonly pageDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['pageDictItemApi']>
     readonly pageFileApi: UnwrapRef<typeof import('./api/system/file')['pageFileApi']>
+    readonly pageJobApi: UnwrapRef<typeof import('./api/job/job')['pageJobApi']>
     readonly pageLoginLogApi: UnwrapRef<typeof import('./api/system/loginLog')['pageLoginLogApi']>
     readonly pageOptLogApi: UnwrapRef<typeof import('./api/system/optLog')['pageOptLogApi']>
     readonly pageRoleApi: UnwrapRef<typeof import('./api/system/role')['pageRoleApi']>
+    readonly pageTaskLogApi: UnwrapRef<typeof import('./api/job/taskLog')['pageTaskLogApi']>
     readonly pageUserApi: UnwrapRef<typeof import('./api/system/user')['pageUserApi']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly pauseJobApi: UnwrapRef<typeof import('./api/job/job')['pauseJobApi']>
     readonly primaryColor: UnwrapRef<typeof import('./hooks/ui')['primaryColor']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
     readonly queryFileApi: UnwrapRef<typeof import('./api/system/file')['queryFileApi']>
+    readonly queryJobApi: UnwrapRef<typeof import('./api/job/job')['queryJobApi']>
+    readonly queryJobClassListApi: UnwrapRef<typeof import('./api/job/job')['queryJobClassListApi']>
     readonly queryRoleApi: UnwrapRef<typeof import('./api/system/role')['queryRoleApi']>
     readonly queryUserApi: UnwrapRef<typeof import('./api/system/user')['queryUserApi']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -545,6 +564,8 @@ declare module 'vue' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
+    readonly resumeJobApi: UnwrapRef<typeof import('./api/job/job')['resumeJobApi']>
+    readonly runOnceJobApi: UnwrapRef<typeof import('./api/job/job')['runOnceJobApi']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly setupStore: UnwrapRef<typeof import('./store/index')['setupStore']>
@@ -575,6 +596,7 @@ declare module 'vue' {
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
     readonly updateDictApi: UnwrapRef<typeof import('./api/system/dict')['updateDictApi']>
     readonly updateDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['updateDictItemApi']>
+    readonly updateJobApi: UnwrapRef<typeof import('./api/job/job')['updateJobApi']>
     readonly updateMenuApi: UnwrapRef<typeof import('./api/system/menu')['updateMenuApi']>
     readonly updateRoleApi: UnwrapRef<typeof import('./api/system/role')['updateRoleApi']>
     readonly updateRoleMenuApi: UnwrapRef<typeof import('./api/system/roleMenu')['updateRoleMenuApi']>
@@ -784,6 +806,7 @@ declare module '@vue/runtime-core' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addDictApi: UnwrapRef<typeof import('./api/system/dict')['addDictApi']>
     readonly addDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['addDictItemApi']>
+    readonly addJobApi: UnwrapRef<typeof import('./api/job/job')['addJobApi']>
     readonly addMenuApi: UnwrapRef<typeof import('./api/system/menu')['addMenuApi']>
     readonly addRoleApi: UnwrapRef<typeof import('./api/system/role')['addRoleApi']>
     readonly addUserApi: UnwrapRef<typeof import('./api/system/user')['addUserApi']>
@@ -826,6 +849,7 @@ declare module '@vue/runtime-core' {
     readonly deleteDictApi: UnwrapRef<typeof import('./api/system/dict')['deleteDictApi']>
     readonly deleteDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['deleteDictItemApi']>
     readonly deleteFileApi: UnwrapRef<typeof import('./api/system/file')['deleteFileApi']>
+    readonly deleteJobApi: UnwrapRef<typeof import('./api/job/job')['deleteJobApi']>
     readonly deleteMenuApi: UnwrapRef<typeof import('./api/system/menu')['deleteMenuApi']>
     readonly deleteRoleApi: UnwrapRef<typeof import('./api/system/role')['deleteRoleApi']>
     readonly deleteUserApi: UnwrapRef<typeof import('./api/system/user')['deleteUserApi']>
@@ -895,17 +919,22 @@ declare module '@vue/runtime-core' {
     readonly pageDictApi: UnwrapRef<typeof import('./api/system/dict')['pageDictApi']>
     readonly pageDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['pageDictItemApi']>
     readonly pageFileApi: UnwrapRef<typeof import('./api/system/file')['pageFileApi']>
+    readonly pageJobApi: UnwrapRef<typeof import('./api/job/job')['pageJobApi']>
     readonly pageLoginLogApi: UnwrapRef<typeof import('./api/system/loginLog')['pageLoginLogApi']>
     readonly pageOptLogApi: UnwrapRef<typeof import('./api/system/optLog')['pageOptLogApi']>
     readonly pageRoleApi: UnwrapRef<typeof import('./api/system/role')['pageRoleApi']>
+    readonly pageTaskLogApi: UnwrapRef<typeof import('./api/job/taskLog')['pageTaskLogApi']>
     readonly pageUserApi: UnwrapRef<typeof import('./api/system/user')['pageUserApi']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly pauseJobApi: UnwrapRef<typeof import('./api/job/job')['pauseJobApi']>
     readonly primaryColor: UnwrapRef<typeof import('./hooks/ui')['primaryColor']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
     readonly queryFileApi: UnwrapRef<typeof import('./api/system/file')['queryFileApi']>
+    readonly queryJobApi: UnwrapRef<typeof import('./api/job/job')['queryJobApi']>
+    readonly queryJobClassListApi: UnwrapRef<typeof import('./api/job/job')['queryJobClassListApi']>
     readonly queryRoleApi: UnwrapRef<typeof import('./api/system/role')['queryRoleApi']>
     readonly queryUserApi: UnwrapRef<typeof import('./api/system/user')['queryUserApi']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -925,6 +954,8 @@ declare module '@vue/runtime-core' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
+    readonly resumeJobApi: UnwrapRef<typeof import('./api/job/job')['resumeJobApi']>
+    readonly runOnceJobApi: UnwrapRef<typeof import('./api/job/job')['runOnceJobApi']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly setupStore: UnwrapRef<typeof import('./store/index')['setupStore']>
@@ -955,6 +986,7 @@ declare module '@vue/runtime-core' {
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
     readonly updateDictApi: UnwrapRef<typeof import('./api/system/dict')['updateDictApi']>
     readonly updateDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['updateDictItemApi']>
+    readonly updateJobApi: UnwrapRef<typeof import('./api/job/job')['updateJobApi']>
     readonly updateMenuApi: UnwrapRef<typeof import('./api/system/menu')['updateMenuApi']>
     readonly updateRoleApi: UnwrapRef<typeof import('./api/system/role')['updateRoleApi']>
     readonly updateRoleMenuApi: UnwrapRef<typeof import('./api/system/roleMenu')['updateRoleMenuApi']>
