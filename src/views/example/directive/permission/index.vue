@@ -3,7 +3,7 @@ const useStore = useUserStore()
 </script>
 
 <template>
-  <div>
+  <lay-container fluid="true" class="z-container">
     <lay-card>
       <p class="header-title">
         权限指令
@@ -13,32 +13,30 @@ const useStore = useUserStore()
       </p>
     </lay-card>
 
-    <lay-container fluid="true" class="z-container">
-      <lay-card title="我的权限">
-        {{ useStore.permissions }}
-      </lay-card>
+    <lay-card title="我的权限">
+      {{ useStore.permissions }}
+    </lay-card>
 
-      <lay-card title="我的按钮">
-        <lay-button-container>
-          <lay-button v-permission="['sys:user:save']" type="primary">
-            新增
-          </lay-button>
-          <lay-button v-permission="['sys:user:update']" type="normal">
-            编辑
-          </lay-button>
-          <lay-button v-permission="['sys:user:delete']" type="danger">
-            删除
-          </lay-button>
-          <lay-button v-permission="['sys:user:import']">
-            导入
-          </lay-button>
-          <lay-button v-permission="['sys:user:export']">
-            导出
-          </lay-button>
-        </lay-button-container>
-      </lay-card>
-    </lay-container>
-  </div>
+    <lay-card title="我的按钮">
+      <lay-button-container>
+        <lay-button v-permission="['sys:user:save']" type="primary">
+          新增
+        </lay-button>
+        <lay-button v-permission="['sys:user:update']" type="normal">
+          编辑
+        </lay-button>
+        <lay-button v-permission="['sys:user:delete']" type="danger">
+          删除
+        </lay-button>
+        <lay-button v-permission="['sys:user:import']">
+          导入
+        </lay-button>
+        <lay-button v-permission="['sys:user:export']">
+          导出
+        </lay-button>
+      </lay-button-container>
+    </lay-card>
+  </lay-container>
 </template>
 
 <style scoped>

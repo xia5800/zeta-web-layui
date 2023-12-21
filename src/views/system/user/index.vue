@@ -214,7 +214,7 @@ async function changeState(val: number, row: SysUser) {
       <UserSearchForm ref="searchForm" @on-search="handleSearch" />
     </lay-card>
 
-      <!-- 数据表格 -->
+    <!-- 数据表格 -->
     <div class="z-table-box">
       <lay-table
         id="id"

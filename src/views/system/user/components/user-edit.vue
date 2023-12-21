@@ -200,10 +200,10 @@ watch(
   () => props.visible,
   (visible: boolean) => {
     if (visible) {
-      // 初始化弹窗数据
-      initData()
       // 获取角色列表
       getRoleOptions()
+      // 初始化弹窗数据
+      initData()
     }
   },
 )
