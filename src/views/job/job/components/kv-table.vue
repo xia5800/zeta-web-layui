@@ -1,3 +1,39 @@
+<!--
+组件名称：KV表格
+说明：用于展示和编辑键值对的表格，在需要展示键值对的地方使用
+用法：
+```vue
+<script setup lang="ts">
+import KvTable from './kv-table.vue'
+
+const kvTable = ref()
+const kvParam = ref<string>('{"name":"张三", "age":18}')
+
+
+function setData(param: string) {
+  kvTable.value.setTableData(param)
+}
+
+function getData() {
+  alert(kvTable.value.getTableData())
+}
+</script>
+
+<template>
+  <div>
+    <KvTable ref="kvTable" />
+    <button @click="setData(kvParam)">设置值</button>
+    <button @click="getData()">取值</button>
+  </div>
+</template>
+```
+属性：
+- height：表格高度  非必填   默认值：200px
+- addBtnName：新增按钮的文字  非必填   默认值：添加参数
+方法：
+- getTableData：获取表格数据
+- setTableData：设置表格数据
+-->
 <script setup lang="ts">
 // 自定义类型
 interface Kv {
@@ -93,7 +129,6 @@ function setTableData(data: string) {
   // 表格赋值
   dataSource.value = tableData
 }
-
 
 /** 处理添加 */
 function handleAdd() {

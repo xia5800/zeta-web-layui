@@ -2,7 +2,7 @@
 import type { Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { JobSaveParam, SelectOption } from '~/types'
-import KvTable from './KvTable.vue'
+import KvTable from './kv-table.vue'
 import CronSelect from './cron-select.vue'
 
 const props = withDefaults(defineProps<{
@@ -177,7 +177,7 @@ watch(
               <lay-icon type="layui-icon-about" />
             </lay-tooltip>
           </template>
-          <KvTable ref="kvTable" />
+          <kv-table ref="kvTable" />
         </lay-form-item>
       </lay-row>
     </lay-form>
