@@ -135,3 +135,13 @@ export interface JobOperationParam {
   /** 任务组名称 */
   jobGroup?: string
 }
+
+/**
+ * 获取下次触发时间参数
+ */
+export interface TriggerNextTimeParam {
+  /** cron表达式 */
+  cron: string
+  /** 触发次数 */
+  count?: number
+}

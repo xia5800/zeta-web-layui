@@ -26,7 +26,7 @@ yarn run dev
 | vue3       | 核心框架                                      |
 | typescript | 开发语言                                      |
 | layui-vue  | [ui框架](https://gitee.com/layui/layui-vue) |
-| nodejs     | `>=18.0.0`                                  |
+| nodejs     | `>=18.13.0`                                  |
 
 
 ## 后端

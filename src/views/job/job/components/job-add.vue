@@ -3,6 +3,7 @@ import type { Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { JobSaveParam, SelectOption } from '~/types'
 import KvTable from './KvTable.vue'
+import CronSelect from './cron-select.vue'
 
 const props = withDefaults(defineProps<{
   visible: boolean,
@@ -59,6 +60,11 @@ function handleClose() {
   refForm.value.reset()
   // 清空表单校验
   refForm.value?.clearValidate()
+}
+
+/** cron表达式Change事件处理 */
+function changeCronstr(value?: string) {
+  form.cron = value || ''
 }
 
 /** 保存数据 */
@@ -137,7 +143,7 @@ watch(
             <lay-textarea v-model="form.triggerDescription" placeholder="请填写" allow-clear />
           </lay-form-item>
           <lay-form-item label="cron表达式" prop="cron" required>
-            <lay-input v-model="form.cron" placeholder="请填写" allow-clear />
+            <cron-select v-model="form.cron" placeholder="请填写" allow-clear  />
           </lay-form-item>
         </lay-col>
         <!-- 右 -->

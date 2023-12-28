@@ -74,8 +74,6 @@ declare global {
   const getDictApi: typeof import('./api/system/dict')['getDictApi']
   const getDictItemApi: typeof import('./api/system/dictItem')['getDictItemApi']
   const getFileApi: typeof import('./api/system/file')['getFileApi']
-  const getJobClassList: typeof import('./api/job/job')['getJobClassList']
-  const getJobClassListApi: typeof import('./api/job/job')['getJobClassListApi']
   const getLoginLogApi: typeof import('./api/system/loginLog')['getLoginLogApi']
   const getOptLogApi: typeof import('./api/system/optLog')['getOptLogApi']
   const getRoleApi: typeof import('./api/system/role')['getRoleApi']
@@ -108,6 +106,7 @@ declare global {
   const markRaw: typeof import('vue')['markRaw']
   const menuTreeApi: typeof import('./api/system/menu')['menuTreeApi']
   const nextTick: typeof import('vue')['nextTick']
+  const nextTriggerTimeApi: typeof import('./api/job/job')['nextTriggerTimeApi']
   const noPermApi: typeof import('./api/example/exceptions')['noPermApi']
   const notLoginApi: typeof import('./api/example/exceptions')['notLoginApi']
   const onActivated: typeof import('vue')['onActivated']
@@ -505,6 +504,7 @@ declare module 'vue' {
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly menuTreeApi: UnwrapRef<typeof import('./api/system/menu')['menuTreeApi']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
+    readonly nextTriggerTimeApi: UnwrapRef<typeof import('./api/job/job')['nextTriggerTimeApi']>
     readonly noPermApi: UnwrapRef<typeof import('./api/example/exceptions')['noPermApi']>
     readonly notLoginApi: UnwrapRef<typeof import('./api/example/exceptions')['notLoginApi']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
@@ -895,6 +895,7 @@ declare module '@vue/runtime-core' {
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly menuTreeApi: UnwrapRef<typeof import('./api/system/menu')['menuTreeApi']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
+    readonly nextTriggerTimeApi: UnwrapRef<typeof import('./api/job/job')['nextTriggerTimeApi']>
     readonly noPermApi: UnwrapRef<typeof import('./api/example/exceptions')['noPermApi']>
     readonly notLoginApi: UnwrapRef<typeof import('./api/example/exceptions')['notLoginApi']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>

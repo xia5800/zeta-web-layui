@@ -1,4 +1,4 @@
-import type { ApiResult, PageParam, PageResult, JobQueryParam, QuartzJobDetailDTO, JobClassListResult, JobSaveParam, JobTriggerUpdateParam, JobOperationParam } from '~/types'
+import type { ApiResult, PageParam, PageResult, JobQueryParam, QuartzJobDetailDTO, JobClassListResult, JobSaveParam, JobTriggerUpdateParam, JobOperationParam, TriggerNextTimeParam } from '~/types'
 import { jobRequest as request } from '~/utils/request'
 
 enum Api {
@@ -8,6 +8,7 @@ enum Api {
   Resume = '/job/resume',
   RunOnce = '/job/runOnce',
   JobClassList = '/job/jobClassList',
+  NextTriggerTime = '/job/nextTriggerTime',
 }
 
 /**
@@ -86,4 +87,14 @@ export function resumeJobApi(param: JobOperationParam) {
  */
 export function runOnceJobApi(param: JobOperationParam) {
   return request.post<ApiResult<Boolean>>(Api.RunOnce, { data: param })
+}
+
+/**
+ * 获取下次触发时间
+ *
+ * @param param
+ * @returns
+ */
+export function nextTriggerTimeApi(param: TriggerNextTimeParam) {
+  return request.get<ApiResult<string[]>>(Api.NextTriggerTime, { params: param })
 }

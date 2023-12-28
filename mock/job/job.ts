@@ -173,6 +173,39 @@ function runOnceApi(): MockMethod {
   }
 }
 
+/** 获取下次触发时间 */
+function nextTriggerTime(): MockMethod {
+  return {
+    url: '/mock-api/job/nextTriggerTime',
+    method: 'get',
+    response: async (request: RequestParams) => {
+      const token = getRequestToken(request)
+      if (!token) {
+        return resultError('未能读取到有效Token', { code: 401 })
+      }
+
+      let cron = request.query.cron
+      if (!cron) return checkFailure('cron表达式不能为空')
+
+      // issue: https://github.com/vbenjs/vite-plugin-mock/issues/48
+      try {
+        // 使用fetch函数发送GET请求
+        const response = await fetch('https://www.pppet.net/preview?p='+ cron)
+        const data = await response.json()
+        return resultOk<string[]>(data as unknown as string[])
+      } catch (e) {
+        // 如果不支持fetch
+        console.log(e)
+        return resultOk<string[]>([
+          '2023-01-01 12:00:00','2023-01-01 12:00:00',
+          '2023-01-01 12:00:00','2023-01-01 12:00:00',
+          '2023-01-01 12:00:00','2023-01-01 12:00:00',
+        ])
+      }
+    }
+  }
+}
+
 export default [
   pageApi(),
   queryApi(),
@@ -183,4 +216,5 @@ export default [
   pauseApi(),
   resumeApi(),
   runOnceApi(),
+  nextTriggerTime(),
 ] as MockMethod[]

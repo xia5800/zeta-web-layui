@@ -123,7 +123,8 @@ async function requestMiddleware(opt) {
         const body = await parseJson(req);
         res.setHeader("Content-Type", "application/json");
         res.statusCode = statusCode || 200;
-        const mockResponse = isFunction(response) ? response.bind(self)({url: req.url, body, query, headers: req.headers}) : response;
+        // issue: https://github.com/vbenjs/vite-plugin-mock/issues/48
+        const mockResponse = isFunction(response) ? await response.bind(self)({url: req.url, body, query, headers: req.headers}) : response;
         res.end(JSON.stringify(Mock.mock(mockResponse)));
       }
       logger && loggerOutput("request invoke", req.url);

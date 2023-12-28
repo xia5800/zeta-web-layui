@@ -2,6 +2,7 @@
 import type { Rules } from 'async-validator'
 import { cloneDeep } from 'lodash-es'
 import type { JobTriggerUpdateParam, QuartzJobDetailDTO, SelectOption } from '~/types'
+import CronSelect from './cron-select.vue'
 
 const props = withDefaults(defineProps<{
   visible: boolean,
@@ -147,7 +148,7 @@ watch(
         <lay-textarea v-model="form.triggerDescription" placeholder="请填写" :rows="3" allow-clear />
       </lay-form-item>
       <lay-form-item label="cron表达式" prop="cron" required>
-        <lay-input v-model="form.cron" placeholder="请填写" allow-clear />
+        <cron-select v-model="form.cron" placeholder="请填写" allow-clear  />
       </lay-form-item>
       <lay-form-item label="触发器优先级" prop="priority">
         <lay-input-number v-model="form.priority" placeholder="请填写" allow-clear />
