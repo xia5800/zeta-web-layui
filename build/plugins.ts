@@ -1,12 +1,12 @@
 import type { PluginOption } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import { viteMockServe } from 'vite-plugin-mock'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import { LayuiVueResolver } from 'unplugin-vue-components/resolvers'
 import { visualizer } from 'rollup-plugin-visualizer'
 import RemoveConsole from 'vite-plugin-remove-console'
+import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 
 /**
  * 创建vite插件
@@ -78,15 +78,12 @@ function configComponents() {
 
 /** Mock服务 */
 function configMockServer(open: boolean) {
-  return viteMockServe({
-    ignore: /^\_/,
-    mockPath: 'mock',
-    localEnabled: open,
-    prodEnabled: open,
-    injectCode: `
-      import { setupProdMockServer } from '../mock/_mockProdServer';
-      setupProdMockServer();
-    `,
+  return vitePluginFakeServer({
+    enableProd: open,
+    enableDev: open,
+    include: 'mock',
+    build: false,
+    infixName: false,
     logger: false,
   })
 }

@@ -1,22 +1,21 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import type { SysMenu } from '../../src/types'
-import { roleMenuResult } from '../_data/roleMenu'
+import { roleMenuResult } from '../mock_data/roleMenu'
 
 /** 查询角色菜单Api */
-function listApi(): MockMethod {
+function listApi(): FakeRoute {
   return {
     url: '/mock-api/system/roleMenu/:roleId',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      // fix: 解决生产环境获取不到:id值的问题
-      const params = parseRequestParams(request.url, '/mock-api/system/roleMenu/:roleId')
+      const params = request.params
       if (!params.roleId) return checkFailure('角色id不能为空')
 
       const result = roleMenuResult.find(i => i.id === params.roleId)
@@ -26,11 +25,11 @@ function listApi(): MockMethod {
 }
 
 /** 新增或修改角色菜单api */
-function updateApi(): MockMethod {
+function updateApi(): FakeRoute {
   return {
     url: '/mock-api/system/roleMenu',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -47,7 +46,7 @@ function updateApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   listApi(),
   updateApi(),
-] as MockMethod[]
+])

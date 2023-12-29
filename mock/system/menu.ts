@@ -1,15 +1,15 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import type { SysMenu } from '../../src/types'
-import { menuTree, menuTreeNoButton } from '../_data/menu'
+import { menuTree, menuTreeNoButton } from '../mock_data/menu'
 
 /** 查询菜单树 */
-function queryMenuTreeApi(): MockMethod {
+function queryMenuTreeApi(): FakeRoute {
   return {
     url: '/mock-api/system/menu/tree',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -28,11 +28,11 @@ function queryMenuTreeApi(): MockMethod {
 }
 
 /** 新增api */
-function addApi(): MockMethod {
+function addApi(): FakeRoute {
   return {
     url: '/mock-api/system/menu',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -52,11 +52,11 @@ function addApi(): MockMethod {
 }
 
 /** 修改api */
-function updateApi(): MockMethod {
+function updateApi(): FakeRoute {
   return {
     url: '/mock-api/system/menu',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -76,11 +76,11 @@ function updateApi(): MockMethod {
 }
 
 /** 删除api */
-function deleteApi(): MockMethod {
+function deleteApi(): FakeRoute {
   return {
     url: '/mock-api/system/menu/:id',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -92,11 +92,11 @@ function deleteApi(): MockMethod {
 }
 
 /** 批量删除api */
-function batchDeleteApi(): MockMethod {
+function batchDeleteApi(): FakeRoute {
   return {
     url: '/mock-api/system/menu/batch',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -106,10 +106,10 @@ function batchDeleteApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   queryMenuTreeApi(),
   addApi(),
   updateApi(),
   deleteApi(),
   batchDeleteApi(),
-] as MockMethod[]
+])

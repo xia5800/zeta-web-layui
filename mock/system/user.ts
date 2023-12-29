@@ -1,15 +1,15 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import type { PageResult, SysUser } from '../../src/types'
-import { pageResult, queryResult } from '../_data/user'
+import { pageResult, queryResult } from '../mock_data/user'
 
 /** 分页查询api */
-function pageApi(): MockMethod {
+function pageApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/page',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -23,11 +23,11 @@ function pageApi(): MockMethod {
 }
 
 /** 批量查询api */
-function queryApi(): MockMethod {
+function queryApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/query',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -39,18 +39,17 @@ function queryApi(): MockMethod {
 }
 
 /** 单体查询api */
-function getApi(): MockMethod {
+function getApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/:id',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      // fix: 解决生产环境获取不到:id值的问题
-      const params = parseRequestParams(request.url, '/mock-api/system/user/:id')
+      const params = request.params
       if (!params.id) return checkFailure('用户id不能为空')
 
       const user = queryResult.data?.find(i => i.id === params.id!)
@@ -60,11 +59,11 @@ function getApi(): MockMethod {
 }
 
 /** 新增api */
-function addApi(): MockMethod {
+function addApi(): FakeRoute {
   return {
     url: '/mock-api/system/user',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -85,11 +84,11 @@ function addApi(): MockMethod {
 }
 
 /** 修改api */
-function updateApi(): MockMethod {
+function updateApi(): FakeRoute {
   return {
     url: '/mock-api/system/user',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -110,18 +109,17 @@ function updateApi(): MockMethod {
 }
 
 /** 删除api */
-function deleteApi(): MockMethod {
+function deleteApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/:id',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      // fix: 解决生产环境获取不到:id值的问题
-      const params = parseRequestParams(request.url, '/mock-api/system/user/:id')
+      const params = request.params
       if (params.id === '1610517191113834496') {
         return resultError('用户[zeta管理员]禁止删除')
       }
@@ -132,11 +130,11 @@ function deleteApi(): MockMethod {
 }
 
 /** 批量删除api */
-function batchDeleteApi(): MockMethod {
+function batchDeleteApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/batch',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -153,11 +151,11 @@ function batchDeleteApi(): MockMethod {
 }
 
 /** 修改自己的密码 */
-function changePwdApi(): MockMethod {
+function changePwdApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/changePwd',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -173,11 +171,11 @@ function changePwdApi(): MockMethod {
 }
 
 /** 重置用户密码 */
-function resetPwdApi(): MockMethod {
+function resetPwdApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/restPwd',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -197,11 +195,11 @@ function resetPwdApi(): MockMethod {
 }
 
 /** 修改用户状态 */
-function updateStateApi(): MockMethod {
+function updateStateApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/state',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -221,11 +219,11 @@ function updateStateApi(): MockMethod {
 }
 
 /** 验证字段是否存在 */
-function existenceApi(): MockMethod {
+function existenceApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/existence',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -248,7 +246,7 @@ function existenceApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   existenceApi(),
   getApi(),
   pageApi(),
@@ -260,4 +258,4 @@ export default [
   changePwdApi(),
   resetPwdApi(),
   updateStateApi(),
-] as MockMethod[]
+])

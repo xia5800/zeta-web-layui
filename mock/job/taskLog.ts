@@ -1,15 +1,15 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { getRequestToken, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { getRequestToken, resultError, resultOk } from '../util'
 import type { PageResult, TaskLogDTO } from '../../src/types'
-import { pageResult } from '../_data/taskLog'
+import { pageResult } from '../mock_data/taskLog'
 
 /** 分页查询api */
-function pageApi(): MockMethod {
+function pageApi(): FakeRoute {
   return {
     url: '/mock-api/taskLog/page',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -22,6 +22,6 @@ function pageApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   pageApi(),
-] as MockMethod[]
+])

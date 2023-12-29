@@ -1,15 +1,15 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
 import type { PageResult, SysFile } from '../../src/types'
-import { pageResult, queryResult, uploadResult } from '../_data/file'
+import { pageResult, queryResult, uploadResult } from '../mock_data/file'
+import { checkFailure, getRequestToken, resultError, resultOk } from "../util"
 
 /** 分页查询api */
-function pageApi(): MockMethod {
+function pageApi(): FakeRoute {
   return {
     url: '/mock-api/system/file/page',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -23,11 +23,11 @@ function pageApi(): MockMethod {
 }
 
 /** 批量查询api */
-function queryApi(): MockMethod {
+function queryApi(): FakeRoute {
   return {
     url: '/mock-api/system/file/query',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -39,18 +39,17 @@ function queryApi(): MockMethod {
 }
 
 /** 单体查询api */
-function getApi(): MockMethod {
+function getApi(): FakeRoute {
   return {
     url: '/mock-api/system/file/:id',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      // fix: 解决生产环境获取不到:id值的问题
-      const params = parseRequestParams(request.url, '/mock-api/system/file/:id')
+      const params = request.params
       if (!params.id) return checkFailure('id不能为空')
 
       const data = queryResult.data?.find(i => i.id === params.id!)
@@ -60,11 +59,11 @@ function getApi(): MockMethod {
 }
 
 /** 上传api */
-function uploadApi(): MockMethod {
+function uploadApi(): FakeRoute {
   return {
     url: '/mock-api/system/file/upload',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -76,11 +75,11 @@ function uploadApi(): MockMethod {
 }
 
 /** 删除api */
-function deleteApi(): MockMethod {
+function deleteApi(): FakeRoute {
   return {
     url: '/mock-api/system/file/:id',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -92,11 +91,11 @@ function deleteApi(): MockMethod {
 }
 
 /** 批量删除api */
-function batchDeleteApi(): MockMethod {
+function batchDeleteApi(): FakeRoute {
   return {
     url: '/mock-api/system/file/batch',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -107,11 +106,11 @@ function batchDeleteApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   pageApi(),
   queryApi(),
   getApi(),
   uploadApi(),
   deleteApi(),
   batchDeleteApi(),
-] as MockMethod[]
+])

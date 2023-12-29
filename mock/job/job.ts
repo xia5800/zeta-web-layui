@@ -1,15 +1,15 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import type { PageResult, QuartzJobDetailDTO, JobClassListResult } from '../../src/types'
-import { pageResult, queryResult, jobClassListResult } from '../_data/job'
+import { pageResult, queryResult, jobClassListResult } from '../mock_data/job'
 
 /** 分页查询api */
-function pageApi(): MockMethod {
+function pageApi(): FakeRoute {
   return {
     url: '/mock-api/job/page',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -23,11 +23,11 @@ function pageApi(): MockMethod {
 }
 
 /** 列表查询api */
-function queryApi(): MockMethod {
+function queryApi(): FakeRoute {
   return {
     url: '/mock-api/job',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -39,11 +39,11 @@ function queryApi(): MockMethod {
 }
 
 /** 任务执行类列表api */
-function jobClassList(): MockMethod {
+function jobClassList(): FakeRoute {
   return {
     url: '/mock-api/job/jobClassList',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -55,11 +55,11 @@ function jobClassList(): MockMethod {
 }
 
 /** 新增api */
-function addApi(): MockMethod {
+function addApi(): FakeRoute {
   return {
     url: '/mock-api/job',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -77,11 +77,11 @@ function addApi(): MockMethod {
 }
 
 /** 修改api */
-function updateApi(): MockMethod {
+function updateApi(): FakeRoute {
   return {
     url: '/mock-api/job',
     method: 'put',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -98,11 +98,11 @@ function updateApi(): MockMethod {
 }
 
 /** 单体删除api */
-function deleteApi(): MockMethod {
+function deleteApi(): FakeRoute {
   return {
     url: '/mock-api/job',
     method: 'delete',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -117,11 +117,11 @@ function deleteApi(): MockMethod {
 }
 
 /** 暂停任务api */
-function pauseApi(): MockMethod {
+function pauseApi(): FakeRoute {
   return {
     url: '/mock-api/job/pause',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -136,11 +136,11 @@ function pauseApi(): MockMethod {
 }
 
 /** 恢复任务api */
-function resumeApi(): MockMethod {
+function resumeApi(): FakeRoute {
   return {
     url: '/mock-api/job/resume',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -155,11 +155,11 @@ function resumeApi(): MockMethod {
 }
 
 /** 立即运行一次api */
-function runOnceApi(): MockMethod {
+function runOnceApi(): FakeRoute {
   return {
     url: '/mock-api/job/runOnce',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -174,11 +174,11 @@ function runOnceApi(): MockMethod {
 }
 
 /** 获取下次触发时间 */
-function nextTriggerTime(): MockMethod {
+function nextTriggerTime(): FakeRoute {
   return {
     url: '/mock-api/job/nextTriggerTime',
     method: 'get',
-    response: async (request: RequestParams) => {
+    response: async (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -206,7 +206,7 @@ function nextTriggerTime(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   pageApi(),
   queryApi(),
   jobClassList(),
@@ -217,4 +217,4 @@ export default [
   resumeApi(),
   runOnceApi(),
   nextTriggerTime(),
-] as MockMethod[]
+])

@@ -7,7 +7,7 @@
     "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "useDefineForClassFields": true,

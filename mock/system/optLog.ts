@@ -1,15 +1,15 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { checkFailure, getRequestToken, parseRequestParams, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import type { PageResult, SysOptLog } from '../../src/types'
-import { pageResult, queryResult } from '../_data/optLog'
+import { pageResult, queryResult } from '../mock_data/optLog'
 
 /** 分页查询api */
-function pageApi(): MockMethod {
+function pageApi(): FakeRoute {
   return {
     url: '/mock-api/system/optLog/page',
     method: 'post',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -23,18 +23,17 @@ function pageApi(): MockMethod {
 }
 
 /** 单体查询api */
-function getApi(): MockMethod {
+function getApi(): FakeRoute {
   return {
     url: '/mock-api/system/optLog/:id',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      // fix: 解决生产环境获取不到:id值的问题
-      const params = parseRequestParams(request.url, '/mock-api/system/optLog/:id')
+      const params = request.params
       if (!params.id) return checkFailure('id不能为空')
 
       const data = queryResult.data?.find(i => i.id === params.id!)
@@ -43,7 +42,7 @@ function getApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   pageApi(),
   getApi(),
-] as MockMethod[]
+])

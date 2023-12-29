@@ -1,9 +1,9 @@
-import type { MockMethod, Recordable } from 'vite-plugin-mock'
-import { getRequestToken, resultError, resultOk } from '../_util'
-import type { RequestParams } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { getRequestToken, resultError, resultOk } from '../util'
 import type { CaptchaResult, UserInfo, UserMenu } from '../../src/types'
-import captcha from '../_data/captcha'
-import { loginUserInfo, loginUserMenu } from '../_data/login'
+import captcha from '../mock_data/captcha'
+import { loginUserInfo, loginUserMenu } from '../mock_data/login'
 
 /** 登录验证码 */
 const loginCaptcha: CaptchaResult[] = captcha
@@ -13,11 +13,11 @@ const userInfo: UserInfo = loginUserInfo
 const userMenu: UserMenu[] = loginUserMenu as unknown as UserMenu[]
 
 /** 登录api */
-function loginApi(): MockMethod {
+function loginApi(): FakeRoute {
   return {
     url: '/mock-api/login',
     method: 'post',
-    response: ({ body }: { body: Recordable }) => {
+    response: ({ body }) => {
       if (!loginCaptcha.map(i => i.text).includes(body.code)) {
         return resultError('验证码错误')
       }
@@ -38,7 +38,7 @@ function loginApi(): MockMethod {
 }
 
 /** 注销api */
-function logoutApi(): MockMethod {
+function logoutApi(): FakeRoute {
   return {
     url: '/mock-api/logout',
     method: 'get',
@@ -50,7 +50,7 @@ function logoutApi(): MockMethod {
 
 let index = 0
 /** 获取验证码api */
-function captchaApi(): MockMethod {
+function captchaApi(): FakeRoute {
   return {
     url: '/mock-api/captcha',
     method: 'get',
@@ -66,11 +66,11 @@ function captchaApi(): MockMethod {
 }
 
 /** 获取登录用户信息api */
-function userInfoApi(): MockMethod {
+function userInfoApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/info',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -82,11 +82,11 @@ function userInfoApi(): MockMethod {
 }
 
 /** 获取登录用户可访问菜单api */
-function userMenuApi(): MockMethod {
+function userMenuApi(): FakeRoute {
   return {
     url: '/mock-api/system/user/menu',
     method: 'get',
-    response: (request: RequestParams) => {
+    response: (request: ProcessedRequest) => {
       const token = getRequestToken(request)
       if (!token) {
         return resultError('未能读取到有效Token', { code: 401 })
@@ -97,10 +97,10 @@ function userMenuApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   loginApi(),
   logoutApi(),
   captchaApi(),
   userInfoApi(),
   userMenuApi(),
-] as MockMethod[]
+])

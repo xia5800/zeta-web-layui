@@ -28,5 +28,5 @@ report.html
 *.sw?
 .history/*
 
-# 不忽略fix目录下的dist目录
-!/fix/**/dist
+# vite-plugin-fake-server
+fakeServer

@@ -1,10 +1,11 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultError } from '../_util'
+import { defineFakeRoute } from "vite-plugin-fake-server/client"
+import { FakeRoute } from "vite-plugin-fake-server"
+import { resultError } from '../util'
 
 /** 没有登录api */
-function notLoginApi(): MockMethod {
+function notLoginApi(): FakeRoute {
   return {
-    url: '/exception/notLogin',
+    url: '/mock-api/exception/notLogin',
     method: 'get',
     statusCode: 401,
     response: () => {
@@ -14,9 +15,9 @@ function notLoginApi(): MockMethod {
 }
 
 /** 没有权限api */
-function noPermissionApi(): MockMethod {
+function noPermissionApi(): FakeRoute {
   return {
-    url: '/exception/noPermission',
+    url: '/mock-api/exception/noPermission',
     method: 'get',
     statusCode: 403,
     response: () => {
@@ -26,9 +27,9 @@ function noPermissionApi(): MockMethod {
 }
 
 /** 系统错误 */
-function systemBusyApi(): MockMethod {
+function systemBusyApi(): FakeRoute {
   return {
-    url: '/exception/systemBusy',
+    url: '/mock-api/exception/systemBusy',
     method: 'get',
     statusCode: 500,
     response: () => {
@@ -37,8 +38,8 @@ function systemBusyApi(): MockMethod {
   }
 }
 
-export default [
+export default defineFakeRoute([
   notLoginApi(),
   noPermissionApi(),
   systemBusyApi(),
-] as MockMethod[]
+])
