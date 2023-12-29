@@ -23,7 +23,6 @@ const cron = ref<string>('')
 - update:modelValue: 绑定值更新
 -->
 <script setup lang="ts">
-import { Recordable } from '@layui/layui-vue/types/types';
 import dayjs from 'dayjs'
 import { ApiResult } from '~/types';
 
@@ -136,17 +135,17 @@ const yearRadio = ref<string>('1')
 const weekRadio = ref<string>('1')
 
 // 复选框：秒
-const secondCheckBox = ref<Recordable[]>([])
+const secondCheckBox = ref<number[]>([])
 // 复选框：分钟
-const minuteCheckBox = ref<Recordable[]>([])
+const minuteCheckBox = ref<number[]>([])
 // 复选框：小时
-const hourCheckBox = ref<Recordable[]>([])
+const hourCheckBox = ref<number[]>([])
 // 复选框：日
-const dayCheckBox = ref<Recordable[]>([])
+const dayCheckBox = ref<number[]>([])
 // 复选框：月
-const monthCheckBox = ref<Recordable[]>([])
+const monthCheckBox = ref<number[]>([])
 // 复选框：周
-const weekCheckBox = ref<Recordable[]>([])
+const weekCheckBox = ref<number[]>([])
 
 // cron执行结果-错误描述
 const executeError = ref<string>('')
@@ -285,7 +284,7 @@ function minuteRadioChange(current: string) {
   if (cron.value.minute !== '*') {
     // 秒
     if (cron.value.second === '*') {
-      secondCheckBox.value = [0] as unknown as Recordable[]
+      secondCheckBox.value = [0]
       secondRadio.value = '4'
     }
   }
@@ -320,12 +319,12 @@ function hourRadioChange(current: string) {
   if (cron.value.hour !== '*') {
     // 秒
     if (cron.value.second === '*') {
-      secondCheckBox.value = [0] as unknown as Recordable[]
+      secondCheckBox.value = [0]
       secondRadio.value = '4'
     }
     // 分
     if (cron.value.minute === '*') {
-      minuteCheckBox.value = [0] as unknown as Recordable[]
+      minuteCheckBox.value = [0]
       minuteRadio.value = '4'
     }
   }
@@ -369,17 +368,17 @@ function dayRadioChange(current: string) {
   if (cron.value.day !== '*' && cron.value.day !== '?') {
     // 秒
     if (cron.value.second === '*') {
-      secondCheckBox.value = [0] as unknown as Recordable[]
+      secondCheckBox.value = [0]
       secondRadio.value = '4'
     }
     // 分
     if (cron.value.minute === '*') {
-      minuteCheckBox.value = [0] as unknown as Recordable[]
+      minuteCheckBox.value = [0]
       minuteRadio.value = '4'
     }
     // 时
     if (cron.value.hour === '*') {
-      hourCheckBox.value = [0] as unknown as Recordable[]
+      hourCheckBox.value = [0]
       hourRadio.value = '4'
     }
   }
@@ -397,7 +396,7 @@ function dayRadioChange(current: string) {
   }
   // 不指定日期，且不指定星期，将星期设置为1
   else if (cron.value.day === '?' && cron.value.week === '?') {
-    weekCheckBox.value = [1] as unknown as Recordable[]
+    weekCheckBox.value = [1]
     weekChange('7')
   }
 
@@ -431,22 +430,22 @@ function monthRadioChange(current: string) {
   if (cron.value.month !== '*') {
     // 秒
     if (cron.value.second === '*') {
-      secondCheckBox.value = [0] as unknown as Recordable[]
+      secondCheckBox.value = [0]
       secondRadio.value = '4'
     }
     // 分
     if (cron.value.minute === '*') {
-      minuteCheckBox.value = [0] as unknown as Recordable[]
+      minuteCheckBox.value = [0]
       minuteRadio.value = '4'
     }
     // 时
     if (cron.value.hour === '*') {
-      hourCheckBox.value = [0] as unknown as Recordable[]
+      hourCheckBox.value = [0]
       hourRadio.value = '4'
     }
     // 日
     if (cron.value.day === '*') {
-      dayCheckBox.value = [1] as unknown as Recordable[]
+      dayCheckBox.value = [1]
       dayRadio.value = '7'
     }
   }
@@ -464,7 +463,7 @@ function monthRadioChange(current: string) {
   }
   // 不指定日期，且不指定星期，将星期设置为1
   else if (cron.value.day === '?' && cron.value.week === '?') {
-    weekCheckBox.value = [1] as unknown as Recordable[]
+    weekCheckBox.value = [1]
     weekChange('7')
   }
 
@@ -507,17 +506,17 @@ function weekRadioChange(current: string) {
   if (cron.value.week !== '*' && cron.value.week !== '?') {
     // 秒
     if (cron.value.second === '*') {
-      secondCheckBox.value = [0] as unknown as Recordable[]
+      secondCheckBox.value = [0]
       secondRadio.value = '4'
     }
     // 分
     if (cron.value.minute === '*') {
-      minuteCheckBox.value = [0] as unknown as Recordable[]
+      minuteCheckBox.value = [0]
       minuteRadio.value = '4'
     }
     // 时
     if (cron.value.hour === '*') {
-      hourCheckBox.value = [0] as unknown as Recordable[]
+      hourCheckBox.value = [0]
       hourRadio.value = '4'
     }
   }
@@ -535,7 +534,7 @@ function weekRadioChange(current: string) {
   }
   // 不指定星期，且不指定日期，将日期设置为1
   else if (cron.value.day === '?' && cron.value.week === '?') {
-    dayCheckBox.value = [1] as unknown as Recordable[]
+    dayCheckBox.value = [1]
     dayChange('7')
   }
 
@@ -571,7 +570,7 @@ function yearRadioChange(current: string) {
   }
   // 不指定星期，且不指定日期，将日期设置为1
   else if (cron.value.day === '?' && cron.value.week === '?') {
-    dayCheckBox.value = [1] as unknown as Recordable[]
+    dayCheckBox.value = [1]
   }
 
   // input框赋值
@@ -678,7 +677,7 @@ function radioRender() {
 /** 渲染秒tab里的radio */
 function secondRadioRender() {
   let second = cron.value.second
-  secondCheckBox.value = [] as unknown as Recordable[]
+  secondCheckBox.value = []
 
   if (second === '*') {
     secondRadio.value = '1'
@@ -707,7 +706,7 @@ function secondRadioRender() {
     // 处理 0 or 0,1,2,3 的情况
     let secondArry = second.split(',')
     if (secondArry.length > 0) {
-      secondCheckBox.value = secondArry.map((item: string) => parseInt(item)) as unknown as Recordable[]
+      secondCheckBox.value = secondArry.map((item: string) => parseInt(item))
     }
     secondRadio.value = '4'
   }
@@ -715,7 +714,7 @@ function secondRadioRender() {
 /** 渲染分钟tab里的radio */
 function minuteRadioRender() {
   let minute = cron.value.minute
-  minuteCheckBox.value = [] as unknown as Recordable[]
+  minuteCheckBox.value = []
 
   if (minute === '*') {
     minuteRadio.value = '1'
@@ -744,7 +743,7 @@ function minuteRadioRender() {
     // 处理 0 or 0,1,2,3 的情况
     let minuteArry = minute.split(',')
     if (minuteArry.length > 0) {
-      minuteCheckBox.value = minuteArry.map((item: string) => parseInt(item)) as unknown as Recordable[]
+      minuteCheckBox.value = minuteArry.map((item: string) => parseInt(item))
     }
     minuteRadio.value = '4'
   }
@@ -752,7 +751,7 @@ function minuteRadioRender() {
 /** 渲染小时tab里的radio */
 function hourRadioRender() {
   let hour = cron.value.hour
-  hourCheckBox.value = [] as unknown as Recordable[]
+  hourCheckBox.value = []
 
   if (hour === '*') {
     hourRadio.value = '1'
@@ -781,7 +780,7 @@ function hourRadioRender() {
     // 处理 0 or 0,1,2,3 的情况
     let hourArry = hour.split(',')
     if (hourArry.length > 0) {
-      hourCheckBox.value = hourArry.map((item: string) => parseInt(item)) as unknown as Recordable[]
+      hourCheckBox.value = hourArry.map((item: string) => parseInt(item))
     }
     hourRadio.value = '4'
   }
@@ -789,7 +788,7 @@ function hourRadioRender() {
 /** 渲染天tab里的radio */
 function dayRadioRender() {
   let day = cron.value.day
-  dayCheckBox.value = [] as unknown as Recordable[]
+  dayCheckBox.value = []
   if (day === '*') {
     dayRadio.value = '1'
   }
@@ -831,7 +830,7 @@ function dayRadioRender() {
     // 处理 0 or 0,1,2,3 的情况
     let dayArry = day.split(',')
     if (dayArry.length > 0) {
-      dayCheckBox.value = dayArry.map((item: string) => parseInt(item)) as unknown as Recordable[]
+      dayCheckBox.value = dayArry.map((item: string) => parseInt(item))
     }
     dayRadio.value = '7'
   }
@@ -839,7 +838,7 @@ function dayRadioRender() {
 /** 渲染月tab里的radio */
 function monthRadioRender() {
   let month = cron.value.month
-  monthCheckBox.value = [] as unknown as Recordable[]
+  monthCheckBox.value = []
 
   if (month === '*') {
     monthRadio.value = '1'
@@ -874,7 +873,7 @@ function monthRadioRender() {
       let numberMonthArry = monthArry.map((item: string) => {
         return monthMap[item]? parseInt(monthMap[item]) : parseInt(item)
       })
-      monthCheckBox.value = numberMonthArry as unknown as Recordable[]
+      monthCheckBox.value = numberMonthArry
     }
     monthRadio.value = '4'
   }
@@ -882,7 +881,7 @@ function monthRadioRender() {
 /** 渲染周tab里的radio */
 function weekRadioRender() {
   let week = cron.value.week
-  weekCheckBox.value = [] as unknown as Recordable[]
+  weekCheckBox.value = []
 
   if (week === '*') {
     weekRadio.value = '1'
@@ -940,7 +939,7 @@ function weekRadioRender() {
       let numberWeekArry = weekArry.map((item: string) => {
         return weekMap[item]? parseInt(weekMap[item]) : parseInt(item)
       })
-      weekCheckBox.value = numberWeekArry as unknown as Recordable[]
+      weekCheckBox.value = numberWeekArry
     }
     weekRadio.value = '7'
   }
