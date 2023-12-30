@@ -28,7 +28,7 @@ import { ApiResult } from '~/types';
 
 const props = withDefaults(defineProps<{
   /** cron表达式 */
-  modelValue: string
+  modelValue?: string
   /** 占位符 */
   placeholder?: string
   /** 是否允许清空 */
@@ -1014,7 +1014,7 @@ watch(
 </script>
 
 <template>
-  <lay-dropdown  placement="bottom" :update-at-scroll="false" :auto-fit-position="false" @hide="cronInput = cronDataToString(cron)">
+  <lay-dropdown  placement="bottom" :auto-fit-width="true" :update-at-scroll="true" :auto-fit-position="true" @hide="cronInput = cronDataToString(cron)">
     <lay-input v-model="cronInput" :placeholder="placeholder" :allow-clear="allowClear"  @change="cronInputChange" @clear="() => cronInputChange('')" />
     <template #content>
       <div class="content">
@@ -1301,7 +1301,7 @@ watch(
 
 <style scoped>
 .content {
-  width: 500px;
+  /* width: 500px; */
   padding: 10px;
   overflow: auto;
 }

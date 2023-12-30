@@ -62,16 +62,6 @@ function reset() {
               </lay-form-item>
             </lay-col>
             <lay-col :md="8" :sm="12" :xs="24">
-              <lay-form-item label="触发器名称" prop="triggerName">
-                <lay-input v-model="formModel.triggerName" placeholder="请填写" allow-clear />
-              </lay-form-item>
-            </lay-col>
-            <lay-col :md="8" :sm="12" :xs="24">
-              <lay-form-item label="触发器组" prop="triggerGroup">
-                <lay-input v-model="formModel.triggerGroup" placeholder="请填写" allow-clear />
-              </lay-form-item>
-            </lay-col>
-            <lay-col :md="8" :sm="12" :xs="24">
               <lay-form-item label="任务名" prop="jobName">
                 <lay-input v-model="formModel.jobName" placeholder="请填写" allow-clear />
               </lay-form-item>

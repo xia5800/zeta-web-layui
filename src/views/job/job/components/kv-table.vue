@@ -106,9 +106,14 @@ function getTableData(): string {
 }
 
 /** 设置数据. 父组件调用 */
-function setTableData(data: string) {
+function setTableData(data?: string) {
+  if (!data) return
+
   // {"age": "123", "name": "tom"}
   let parse = JSON.parse(data) as any
+
+  // 处理 {} 的情况
+  if (Object.keys(parse).length == 0) return
 
   // 把 {"age": "123", "name": "tom"}
   // 转换为[

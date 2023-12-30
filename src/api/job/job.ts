@@ -1,4 +1,4 @@
-import type { ApiResult, PageParam, PageResult, JobQueryParam, QuartzJobDetailDTO, JobClassListResult, JobSaveParam, JobTriggerUpdateParam, JobOperationParam, TriggerNextTimeParam } from '~/types'
+import type { ApiResult, PageParam, PageResult, JobQueryParam, QuartzJobDetailDTO, JobClassListResult, JobOperationParam, TriggerNextTimeParam, JobSaveOrUpdateParam, JobRunOnceParam } from '~/types'
 import { jobRequest as request } from '~/utils/request'
 
 enum Api {
@@ -20,14 +20,6 @@ export function pageJobApi(param: PageParam<JobQueryParam>) {
 }
 
 /**
- * 查询所有
- * @returns
- */
-export function queryJobApi() {
-  return request.get<ApiResult<QuartzJobDetailDTO[]>>(Api.Common)
-}
-
-/**
  * 查询任务执行类列表
  * @returns
  */
@@ -40,7 +32,7 @@ export function queryJobClassListApi() {
  * @param param
  * @returns
  */
-export function addJobApi(param: JobSaveParam) {
+export function addJobApi(param: JobSaveOrUpdateParam) {
   return request.post<ApiResult<boolean>>(Api.Common, { data: param })
 }
 
@@ -49,7 +41,7 @@ export function addJobApi(param: JobSaveParam) {
  * @param param
  * @returns
  */
-export function updateJobApi(param: JobTriggerUpdateParam) {
+export function updateJobApi(param: JobSaveOrUpdateParam) {
   return request.put<ApiResult<boolean>>(Api.Common, { data: param })
 }
 
@@ -85,7 +77,7 @@ export function resumeJobApi(param: JobOperationParam) {
  * @param param
  * @returns
  */
-export function runOnceJobApi(param: JobOperationParam) {
+export function runOnceJobApi(param: JobRunOnceParam) {
   return request.post<ApiResult<Boolean>>(Api.RunOnce, { data: param })
 }
 

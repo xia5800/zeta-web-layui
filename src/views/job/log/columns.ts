@@ -34,14 +34,8 @@ export const columns = [
     title: '触发器名称',
     align: 'center',
     sort: true,
+    hide: true,
     width: '200px',
-  },
-  {
-    key: 'triggerGroup',
-    title: '触发器组',
-    align: 'center',
-    sort: true,
-    width: '120px',
   },
   {
     key: 'jobName',

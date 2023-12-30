@@ -2,7 +2,7 @@ import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import type { PageResult, QuartzJobDetailDTO, JobClassListResult } from '../../src/types'
-import { pageResult, queryResult, jobClassListResult } from '../mock_data/job'
+import { pageResult, jobClassListResult } from '../mock_data/job'
 
 /** 分页查询api */
 function pageApi(): FakeRoute {
@@ -18,22 +18,6 @@ function pageApi(): FakeRoute {
       let page = (request.body.page as number) - 1
       if (page < 0) page = 0
       return resultOk<PageResult<QuartzJobDetailDTO>>(pageResult[page].data as unknown as PageResult<QuartzJobDetailDTO>)
-    },
-  }
-}
-
-/** 列表查询api */
-function queryApi(): FakeRoute {
-  return {
-    url: '/mock-api/job',
-    method: 'get',
-    response: (request: ProcessedRequest) => {
-      const token = getRequestToken(request)
-      if (!token) {
-        return resultError('未能读取到有效Token', { code: 401 })
-      }
-
-      return resultOk<QuartzJobDetailDTO[]>(queryResult.data as unknown as QuartzJobDetailDTO[])
     },
   }
 }
@@ -68,8 +52,28 @@ function addApi(): FakeRoute {
       const body = request.body
       if (!body.jobClassName) return checkFailure('任务执行类不能为空')
       if (!body.jobName) return checkFailure('任务名称不能为空')
-      if (!body.triggerName) return checkFailure('触发器名称不能为空')
-      if (!body.cron) return checkFailure('cron表达式不能为空')
+      if (!body.scheduleType) return checkFailure('调度类型不能为空')
+      switch(body.scheduleType) {
+        case 'CRON':
+          if (!body.cron) return checkFailure('cron表达式不能为空')
+          break
+        case'CAL_INT':
+          if (!body.calendar) return checkFailure('Calendar类型调度器参数不能为空')
+          if (!body.calendar.timeInterval) return checkFailure('间隔时间不能为空')
+          if (!body.calendar.unit) return checkFailure('间隔单位不能为空')
+          break
+        case 'DAILY_I':
+          if (!body.dailyTime) return checkFailure('DailyTime类型调度器参数不能为空')
+          if (!body.dailyTime.type) return checkFailure('执行类型不能为空')
+          break
+        case 'SIMPLE':
+          if (!body.simple) return checkFailure('Simple类型调度器参数不能为空')
+          if (!body.simple.timeInterval) return checkFailure('间隔时间不能为空')
+          if (!body.simple.unit) return checkFailure('间隔单位不能为空')
+          break
+        default:
+          return checkFailure('调度类型不正确')
+      }
 
       return resultOk<boolean>(true)
     }
@@ -88,9 +92,30 @@ function updateApi(): FakeRoute {
       }
 
       const body = request.body
-      if (!body.oldName) return checkFailure('旧触发器名称不能为空')
-      if (!body.triggerName) return checkFailure('新触发器名称不能为空')
-      if (!body.cron) return checkFailure('cron表达式不能为空')
+      if (!body.jobClassName) return checkFailure('任务执行类不能为空')
+      if (!body.jobName) return checkFailure('任务名称不能为空')
+      if (!body.scheduleType) return checkFailure('调度类型不能为空')
+      switch(body.scheduleType) {
+        case 'CRON':
+          if (!body.cron) return checkFailure('cron表达式不能为空')
+          break
+        case'CAL_INT':
+          if (!body.calendar) return checkFailure('Calendar类型调度器参数不能为空')
+          if (!body.calendar.timeInterval) return checkFailure('间隔时间不能为空')
+          if (!body.calendar.uint) return checkFailure('间隔单位不能为空')
+          break
+        case 'DAILY_I':
+          if (!body.dailyTime) return checkFailure('DailyTime类型调度器参数不能为空')
+          if (!body.dailyTime.type) return checkFailure('执行类型不能为空')
+          break
+        case 'SIMPLE':
+          if (!body.simple) return checkFailure('Simple类型调度器参数不能为空')
+          if (!body.simple.timeInterval) return checkFailure('间隔时间不能为空')
+          if (!body.simple.unit) return checkFailure('间隔单位不能为空')
+          break
+        default:
+          return checkFailure('调度类型不正确')
+      }
 
       return resultOk<boolean>(true)
     }
@@ -187,7 +212,6 @@ function nextTriggerTime(): FakeRoute {
       let cron = request.query.cron
       if (!cron) return checkFailure('cron表达式不能为空')
 
-      // issue: https://github.com/vbenjs/vite-plugin-mock/issues/48
       try {
         // 使用fetch函数发送GET请求
         const response = await fetch('https://www.pppet.net/preview?p='+ cron)
@@ -208,7 +232,6 @@ function nextTriggerTime(): FakeRoute {
 
 export default defineFakeRoute([
   pageApi(),
-  queryApi(),
   jobClassList(),
   addApi(),
   updateApi(),

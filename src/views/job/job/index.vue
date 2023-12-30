@@ -1,24 +1,14 @@
 <script setup lang="ts">
 import { columns } from './columns'
 import JobSearchForm from './components/job-search.vue'
-import JobAdd from './components/job-add.vue'
 import JobEdit from './components/job-edit.vue'
 import type { PageParam, SelectOption, JobQueryParam, QuartzJobDetailDTO, JobClassListResult } from '~/types'
+import { convertIntervalUnit, convertCalendarWeek } from '~/utils/convert'
 
 defineOptions({
   // 跟路由name保持一致
   name: 'job_index',
 })
-
-// 触发器状态选项
-const stateOptions: SelectOption[] = [
-  { label: '运行', value: 'NORMAL' },
-  { label: '暂停', value: 'PAUSED' },
-  { label: '完成', value: 'COMPLETE' },
-  { label: '出错', value: 'ERROR' },
-  { label: '阻塞', value: 'BLOCKED' },
-  { label: '无效', value: 'NONE' },
-]
 
 const { loading, setLoading } = useLoading(true)
 const searchForm = ref()
@@ -35,8 +25,6 @@ const page = ref({
   current: 1,
   layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
 })
-// 是否显示新增弹窗
-const showAdd = ref(false)
 // 是否显示编辑弹窗
 const showEdit = ref(false)
 // 当前需要编辑的任务
@@ -137,22 +125,40 @@ function handleSearch(formModel: JobQueryParam) {
   fetchTableData(param)
 }
 
-function openAddModal() {
-  // 打开弹窗
-  showAdd.value = true
+/**
+ * 时间解析
+ *
+ * 说明：
+ * 将5,0,0,10,20,0 转换成 05:00:00-10:20:00
+ * @param strProp2
+ */
+function timeParse(strProp2: string) {
+  if (!strProp2) return ''
+
+  // 5,0,0,1,2,3 => [5,0,0,1,2,3]
+  let timeArr = strProp2.split(',')
+  if (timeArr.length != 6) return ''
+
+  let startHour = timeArr[0].length < 2? '0' + timeArr[0] : timeArr[0]
+  let startMinute = timeArr[1].length < 2? '0' + timeArr[1] : timeArr[1]
+  let startSecond = timeArr[2].length < 2? '0' + timeArr[2] : timeArr[2]
+  let endHour = timeArr[3].length < 2? '0' + timeArr[3] : timeArr[3]
+  let endMinute = timeArr[4].length < 2? '0' + timeArr[4] : timeArr[4]
+  let endSecond = timeArr[5].length < 2? '0' + timeArr[5] : timeArr[5]
+  return `${startHour}:${startMinute}:${startSecond}-${endHour}:${endMinute}:${endSecond}`
 }
 
 /**
  * 打开编辑弹窗
  * @param row 需要编辑的用户数据。
  */
- function openEditModal(row: QuartzJobDetailDTO) {
+ function openEditModal(row?: QuartzJobDetailDTO) {
   current.value = row
   showEdit.value = true
 }
 
 /** 处理：单体删除 */
-function handleDelete(jobName?: string, jobGroup?: string) {
+function handleDelete(jobName?: string) {
   if (!jobName) {
     layer.msg('任务名不能为空', { icon: 2 })
     return
@@ -161,7 +167,7 @@ function handleDelete(jobName?: string, jobGroup?: string) {
   useConfirm('确定要删除这条数据吗？', async (layerId: string) => {
     try {
       // 单体删除
-      const { success, message } = await deleteJobApi({jobName, jobGroup})
+      const { success, message } = await deleteJobApi({jobName})
       if (!success) {
         layer.msg(message || '操作失败', { icon: 2 })
         return
@@ -179,11 +185,11 @@ function handleDelete(jobName?: string, jobGroup?: string) {
 }
 
 /** 处理：暂停/恢复 */
-async function pauseOrResume(triggerState: string, jobName: string, jobGroup?: string) {
+async function pauseOrResume(triggerState: string, jobName: string) {
   if (triggerState == 'PAUSED') {
     try {
       // 恢复任务
-      const {success, message} = await resumeJobApi({jobName, jobGroup})
+      const {success, message} = await resumeJobApi({jobName})
       if (!success) {
         layer.msg(message || '操作失败', { icon: 2 })
         return
@@ -196,7 +202,7 @@ async function pauseOrResume(triggerState: string, jobName: string, jobGroup?: s
   } else {
     try {
       // 暂停任务
-      const {success, message} = await pauseJobApi({jobName, jobGroup})
+      const {success, message} = await pauseJobApi({jobName})
       if (!success) {
         layer.msg(message || '操作失败', { icon: 2 })
         return
@@ -210,9 +216,9 @@ async function pauseOrResume(triggerState: string, jobName: string, jobGroup?: s
 }
 
 /** 处理：立即运行一次 */
-async function handlerRunOnce(jobName: string, jobGroup?: string) {
+async function handlerRunOnce(jobName: string, jobParam?: string) {
   try {
-    const { success, message } = await runOnceJobApi({jobName, jobGroup})
+    const { success, message } = await runOnceJobApi({jobName, jobParam})
     if (!success) {
       layer.msg(message || '操作失败', { icon: 2 })
       return
@@ -238,7 +244,6 @@ onMounted(() => {
     <lay-card>
       <JobSearchForm
         ref="searchForm"
-        :state-options="stateOptions"
         :job-class-options="jobClassOptions"
         @on-search="handleSearch"
       />
@@ -266,7 +271,7 @@ onMounted(() => {
             v-any-permission="['task:add', 'task:save']"
             size="sm"
             type="primary"
-            @click="showAdd = true"
+            @click="openEditModal()"
           >
             <lay-icon class="layui-icon-addition" />
             新增
@@ -287,7 +292,7 @@ onMounted(() => {
             v-permission="'task:delete'"
             size="xs"
             type="danger"
-            @click="handleDelete(row.jobName, row.jobGroup)"
+            @click="handleDelete(row.jobName)"
           >
             删除
           </lay-button>
@@ -295,7 +300,7 @@ onMounted(() => {
           <lay-button
             v-any-permission="['task:edit', 'task:update']"
             size="xs"
-            @click="pauseOrResume(row.triggerState, row.jobName, row.jobGroup)"
+            @click="pauseOrResume(row.triggerState, row.jobName)"
           >
             <div v-if="row.triggerState == 'PAUSED'">恢复</div>
             <div v-else>暂停</div>
@@ -303,7 +308,7 @@ onMounted(() => {
           <lay-button
             v-any-permission="['task:edit', 'task:update']"
             size="xs"
-            @click="handlerRunOnce(row.jobName, row.jobGroup)"
+            @click="handlerRunOnce(row.jobName, row.jobParam)"
           >
             立即运行一次
           </lay-button>
@@ -332,17 +337,47 @@ onMounted(() => {
           </lay-tag>
         </template>
 
+        <!-- 触发器类型 -->
+        <template #triggerType="{ row }">
+          <div v-if="row.triggerType === 'CRON'">
+            <div class="trigger-type-title">Cron:</div>
+            <div class="trigger-type-content">{{ row.cron }}</div>
+          </div>
+          <div v-if="row.triggerType === 'CAL_INT'">
+            <div class="trigger-type-title">Calendar:</div>
+            <div class="trigger-type-content">每{{ convertIntervalUnit(row.strProp1) }}触发{{ row.intProp1 }}次</div>
+          </div>
+          <div v-if="row.triggerType === 'DAILY_I'">
+            <div class="trigger-type-title">DailyTime:</div>
+            <div class="trigger-type-content">每周{{ row.strProp2.split(',').map((item: string) => convertCalendarWeek(item)).join('、') }}，{{ timeParse(row.strProp3) || '00:00:00' }}执行，每{{ row.intProp1 }}{{ convertIntervalUnit(row.strProp1) }}触发一次</div>
+          </div>
+          <div v-if="row.triggerType === 'SIMPLE'">
+            <div class="trigger-type-title">Simple:</div>
+            <div class="trigger-type-content">每{{ row.simpleRepeatInterval }}毫秒触发{{ row.simpleRepeatCount == -1 ? '一' : row.simpleRepeatCount }}次<span v-if="row.simpleRepeatCount == -1">，一直重复</span></div>
+          </div>
+        </template>
+
         <!-- 任务执行类列 -->
         <template #jobClass="{ row }">
-          <lay-tag v-if="jobClassOptions">
-            {{ jobClassOptions?.find(state => state.value === row.jobClassName)?.label }}
-          </lay-tag>
+          {{ jobClassOptions?.find(state => state.value === row.jobClassName)?.label }}
         </template>
       </lay-table>
     </div>
 
     <!-- 弹窗 -->
-    <JobAdd v-model:visible="showAdd" :job-class-options="jobClassOptions" @done="fetchTableData" />
-    <JobEdit v-model:visible="showEdit" :job-detail="current" @done="fetchTableData" />
+    <JobEdit v-model:visible="showEdit" :data="current" :job-class-options="jobClassOptions" @done="fetchTableData" />
   </lay-container>
 </template>
+
+<style scoped>
+.trigger-type-title {
+  width: 70px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.trigger-type-content {
+  margin-left: 10px;
+  display: inline-block;
+}
+</style>

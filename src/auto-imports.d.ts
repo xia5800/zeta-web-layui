@@ -145,7 +145,6 @@ declare global {
   const queryDictApi: typeof import('./api/system/dict')['queryDictApi']
   const queryDictItemApi: typeof import('./api/system/dictItem')['queryDictItemApi']
   const queryFileApi: typeof import('./api/system/file')['queryFileApi']
-  const queryJobApi: typeof import('./api/job/job')['queryJobApi']
   const queryJobClassListApi: typeof import('./api/job/job')['queryJobClassListApi']
   const queryRoleApi: typeof import('./api/system/role')['queryRoleApi']
   const queryUserApi: typeof import('./api/system/user')['queryUserApi']
@@ -543,7 +542,6 @@ declare module 'vue' {
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
     readonly queryFileApi: UnwrapRef<typeof import('./api/system/file')['queryFileApi']>
-    readonly queryJobApi: UnwrapRef<typeof import('./api/job/job')['queryJobApi']>
     readonly queryJobClassListApi: UnwrapRef<typeof import('./api/job/job')['queryJobClassListApi']>
     readonly queryRoleApi: UnwrapRef<typeof import('./api/system/role')['queryRoleApi']>
     readonly queryUserApi: UnwrapRef<typeof import('./api/system/user')['queryUserApi']>
@@ -934,7 +932,6 @@ declare module '@vue/runtime-core' {
     readonly queryDictApi: UnwrapRef<typeof import('./api/system/dict')['queryDictApi']>
     readonly queryDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['queryDictItemApi']>
     readonly queryFileApi: UnwrapRef<typeof import('./api/system/file')['queryFileApi']>
-    readonly queryJobApi: UnwrapRef<typeof import('./api/job/job')['queryJobApi']>
     readonly queryJobClassListApi: UnwrapRef<typeof import('./api/job/job')['queryJobClassListApi']>
     readonly queryRoleApi: UnwrapRef<typeof import('./api/system/role')['queryRoleApi']>
     readonly queryUserApi: UnwrapRef<typeof import('./api/system/user')['queryUserApi']>
