@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { layer } from '@layui/layer-vue'
 import type { Tab } from '~/types'
+import 'iconify-icon'
 
 const route = useRoute()
 const router = useRouter()
@@ -10,6 +11,16 @@ const tabStore = useTabStore()
 tabStore.createTabs()
 
 const tabs = computed(() => tabStore.tabs)
+
+// 有多少个tab，就设置多少个false
+const dropdownValue = computed(() => tabs.value.map(() => false))
+// 下拉菜单的默认值。默认不显示
+const tabDropdownValue = ref<boolean[]>(dropdownValue.value)
+
+// 如果增加或者减少了tab，将计算之后的值赋值给下拉菜单
+watch(() => dropdownValue.value, (value) => {
+  tabDropdownValue.value = value
+})
 
 /** 添加tab */
 function addTab() {
@@ -62,8 +73,8 @@ function handleClose(id: string) {
 }
 
 /** 关闭左边 */
-function closeLeft() {
-  const index = tabs.value.findIndex(i => i.name === route.name) as number
+function closeLeft(idx?: number) {
+  const index = idx || tabs.value.findIndex(i => i.name === route.name) as number
   const hasLeftTabs = tabs.value.length > 1 && index > 0
   const currentTab = tabs.value[index]
   if (!currentTab || !hasLeftTabs) return
@@ -73,8 +84,8 @@ function closeLeft() {
 }
 
 /** 关闭右边 */
-function closeRight() {
-  const index = tabs.value.findIndex(i => i.name === route.name) as number
+function closeRight(idx?: number) {
+  const index = idx || tabs.value.findIndex(i => i.name === route.name) as number
   const hasRightTabs = tabs.value.length > 1 && index < tabs.value.length - 1
   const currentTab = tabs.value[index]
   if (!currentTab || !hasRightTabs) return
@@ -84,12 +95,12 @@ function closeRight() {
 }
 
 /** 关闭当前 */
-function closeCurrent() {
+function closeCurrent(tab?: Tab) {
   if (tabs.value.length === 1) {
     layer.msg('已经是最后一个标签了', { icon: 7 })
     return
   }
-  const currentTab = tabs.value.find(i => i.name === route.name) as unknown as Tab
+  const currentTab = tab || tabs.value.find(i => i.name === route.name) as unknown as Tab
   if (!currentTab) return
   tabStore
     .removeOneTab(currentTab)
@@ -103,12 +114,25 @@ function closeCurrent() {
 }
 
 /** 关闭其它 */
-function closeOther() {
-  const currentTab = tabs.value.find(i => i.name === route.name) as unknown as Tab
+function closeOther(tab?: Tab) {
+  const currentTab = tab || tabs.value.find(i => i.name === route.name) as unknown as Tab
   if (!currentTab) return
   tabStore
     .removeOtherTabs(currentTab)
     .then(() => router.push(currentTab.path))
+}
+
+/** tabDropdown显示事件 */
+function tabDropdownShow(index: number) {
+  // 将所有下拉菜单设置成隐藏
+  tabDropdownValue.value = tabDropdownValue.value.map((item: boolean) => item = false)
+  // 将当前下拉菜单设置成显示
+  tabDropdownValue.value[index] = true
+}
+
+/** tabDropdown隐藏事件 */
+function tabDropdownHide() {
+  tabDropdownValue.value.map((item: boolean) => item = false)
 }
 </script>
 
@@ -120,36 +144,69 @@ function closeOther() {
       @change="handleChange"
       @close="handleClose"
     >
-      <template v-for="tab in tabs" :key="tab">
-        <lay-tab-item :id="tab.path" :title="tab.title" :closable="!tab.affix">
-          <template #title>
-            <span class="dot" />
-            {{ tab.title }}
-          </template>
-        </lay-tab-item>
-      </template>
+      <lay-tab-item v-for="tab,index in tabs" :key="tab" :id="tab.path" :title="tab.title" :closable="!tab.affix">
+        <template #title>
+          <lay-dropdown trigger="contextMenu" :visible="tabDropdownValue[index]" @show="tabDropdownShow(index)" @hide="tabDropdownHide" updateAtScroll>
+            <div style="height: 100%; display: inline-block;">
+              <span class="dot" />
+              {{ tab.title }}
+            </div>
+            <template #content>
+              <lay-dropdown-menu>
+                <lay-dropdown-menu-item @click="closeLeft(index)">
+                  <template #prefix><iconify-icon icon="ph:arrow-left-bold" /></template>
+                  <template #default>关闭左边</template>
+                </lay-dropdown-menu-item>
+              </lay-dropdown-menu>
+              <lay-dropdown-menu>
+                <lay-dropdown-menu-item @click="closeRight(index)">
+                  <template #prefix><iconify-icon icon="ph:arrow-right-bold" /></template>
+                  <template #default>关闭右边</template>
+                </lay-dropdown-menu-item>
+              </lay-dropdown-menu>
+              <lay-dropdown-menu>
+                <lay-dropdown-menu-item @click="closeOther(tab)">
+                  <template #prefix><iconify-icon icon="ph:arrow-u-up-right-bold" /></template>
+                  <template #default>关闭其他</template>
+                </lay-dropdown-menu-item>
+              </lay-dropdown-menu>
+              <lay-dropdown-menu>
+                <lay-dropdown-menu-item @click="closeCurrent(tab)">
+                  <template #prefix><iconify-icon icon="ph:x-bold" /></template>
+                  <template #default>关闭当前</template>
+                </lay-dropdown-menu-item>
+              </lay-dropdown-menu>
+            </template>
+          </lay-dropdown>
+        </template>
+      </lay-tab-item>
     </lay-tab>
+
     <lay-dropdown>
       <lay-icon type="layui-icon-down" :class="themeStore.settings.tabTheme == 'designer' ? 'designer-last-icon' : ''" />
       <template #content>
         <lay-dropdown-menu>
-          <lay-dropdown-menu-item @click="closeLeft">
-            关闭左边
+          <lay-dropdown-menu-item @click="closeLeft()">
+            <template #prefix><iconify-icon icon="ph:arrow-left-bold" /></template>
+            <template #default>关闭左边</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
         <lay-dropdown-menu>
-          <lay-dropdown-menu-item @click="closeRight">
-            关闭右边
+          <lay-dropdown-menu-item @click="closeRight()">
+            <template #prefix><iconify-icon icon="ph:arrow-right-bold" /></template>
+            <template #default>关闭右边</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
         <lay-dropdown-menu>
-          <lay-dropdown-menu-item @click="closeOther">
-            关闭其他
+          <lay-dropdown-menu-item @click="closeOther()">
+            <template #prefix><iconify-icon icon="ph:arrow-u-up-right-bold" /></template>
+            <template #default>关闭其他</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
         <lay-dropdown-menu>
-          <lay-dropdown-menu-item @click="closeCurrent">
-            关闭当前
+          <lay-dropdown-menu-item @click="closeCurrent()">
+            <template #prefix><iconify-icon icon="ph:x-bold" /></template>
+            <template #default>关闭当前</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
       </template>

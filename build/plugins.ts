@@ -3,6 +3,8 @@ import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { LayuiVueResolver } from 'unplugin-vue-components/resolvers'
 import { visualizer } from 'rollup-plugin-visualizer'
 import RemoveConsole from 'vite-plugin-remove-console'
@@ -24,11 +26,14 @@ export function createVitePlugins(viteEnv: ViteEnv, _command: string) {
   // 自定义组件名字支持
   vitePlugins.push(DefineOptions())
 
-  // 自动导入
+  // 按需自动导入Api
   vitePlugins.push(configAutoImport())
 
-  // 按需加载
+  // 按需自动导入组件
   vitePlugins.push(configComponents())
+
+  // 按需自动导入图标
+  vitePlugins.push(configIcons())
 
   // mock服务
   vitePlugins.push(configMockServer(VITE_USE_MOCK === 'true'))
@@ -42,11 +47,14 @@ export function createVitePlugins(viteEnv: ViteEnv, _command: string) {
   return vitePlugins
 }
 
-/** 自动导入插件配置 */
+/** 按需自动导入Api 插件配置 */
 function configAutoImport() {
   return AutoImport({
     dts: 'src/auto-imports.d.ts',
-    resolvers: [LayuiVueResolver()],
+    resolvers: [
+      LayuiVueResolver(),
+      IconsResolver()
+    ],
     imports: [
       'vue',
       'vue-router',
@@ -63,16 +71,26 @@ function configAutoImport() {
   })
 }
 
-/** 按需加载插件配置 */
+/** 按需自动导入组件 插件配置 */
 function configComponents() {
   return Components({
     dts: 'src/components.d.ts',
     resolvers: [
       LayuiVueResolver({
         resolveIcons: true,
-        exclude: ['LightIcon', 'DarkIcon'],
+        // 不自动导入IconifyIcon组件，会和'iconify-icon'组件冲突
+        exclude: ['IconifyIcon'],
       }),
+      IconsResolver()
     ],
+  })
+}
+
+/** 按需自动导入图标 插件配置 */
+function configIcons() {
+  return Icons({
+    // 自动安装图标
+    autoInstall: true,
   })
 }
 
