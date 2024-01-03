@@ -178,7 +178,7 @@ export const loginUserMenu = [
     path: '/example',
     name: 'example',
     meta: {
-      icon: 'layui-icon-template',
+      icon: 'ph:book-open-text-light',
       title: '案例',
     },
     component: '',

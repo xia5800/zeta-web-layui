@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Meta, RouteItem } from '~/types'
+import 'iconify-icon'
 
 defineProps<{
   menuOptions: RouteItem[]
@@ -20,10 +21,18 @@ function clickMenuItem(path: string, meta?: Meta) {
     <template v-if="children?.length">
       <lay-sub-menu v-if="!(meta?.hide)" :id="name">
         <template #icon>
+          <!-- 如果icon不为空，且icon不包含":"则使用layui图标 -->
           <lay-icon
-            v-if="meta?.icon"
+            v-if="meta?.icon && meta?.icon.indexOf(':') == -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon' : 'nav-unfold-icon'"
             :type="meta.icon"
+          />
+          <!-- 如果icon不为空，且icon包含":"则使用iconify图标 -->
+          <iconify-icon
+            v-if="meta?.icon && meta?.icon.indexOf(':') != -1"
+            :class="themeStore.collaspeSide ? 'nav-fold-icon-svg' : 'nav-unfold-icon-svg'"
+            :icon="meta.icon"
+            inline
           />
         </template>
         <template #title>
@@ -42,10 +51,17 @@ function clickMenuItem(path: string, meta?: Meta) {
         @click="clickMenuItem(path, meta)"
       >
         <template #icon>
+          <!-- 如果icon不为空，且icon不包含":"则使用layui图标 -->
           <lay-icon
-            v-if="meta?.icon"
+            v-if="meta?.icon && meta?.icon.indexOf(':') == -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon' : 'nav-unfold-icon'"
             :type="meta.icon"
+          />
+          <!-- 如果icon不为空，且icon包含":"则使用iconify图标 -->
+          <iconify-icon
+            v-if="meta?.icon && meta?.icon.indexOf(':') != -1"
+            :class="themeStore.collaspeSide ? 'nav-fold-icon-svg' : 'nav-unfold-icon-svg'"
+            :icon="meta.icon"
           />
         </template>
         <template #title>

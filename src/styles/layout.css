@@ -193,11 +193,29 @@
   font-size: var(--layout-side-icon-unfold-size)
 }
 
+.layui-side .layui-nav .nav-unfold-icon-svg {
+  font-size: var(--layout-side-icon-unfold-size)
+}
+
 /** 侧边栏-菜单图标(收起) */
 .layui-side .layui-nav .nav-fold-icon {
   display: flex;
   justify-content: center;
   font-size: var(--layout-side-icon-fold-size)
+}
+
+.layui-side .layui-nav .nav-fold-icon-svg {
+  font-size: var(--layout-side-icon-fold-size)
+}
+
+/** 侧边栏收起时样式调整 */
+.layui-side .layui-nav-collapse .layui-nav-item {
+  display: flex;
+}
+.layui-side .layui-nav-collapse .layui-nav-item div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /** 弃用，改为v-if控制 */
