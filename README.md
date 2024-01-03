@@ -49,7 +49,8 @@ yarn run dev
 
 ## 常见问题
 
-[常见问题及解决方法.md](./_docs/常见问题及解决方法.md)
+- [常见问题及解决方法.md](./_docs/常见问题及解决方法.md)
+- 定时任务后端接口请参考[zeta-kotlin-module](https://gitee.com/xia5800/zeta-kotlin-module)项目
 
 ## 友情链接 & 特别鸣谢
 
