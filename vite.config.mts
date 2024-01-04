@@ -2,7 +2,7 @@ import { resolve } from 'node:path'
 import dayjs from 'dayjs'
 import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
-import { createVitePlugins } from './build/plugins'
+import { createVitePlugins } from './plugin'
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd()
