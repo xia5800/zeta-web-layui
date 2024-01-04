@@ -9,7 +9,7 @@
   },
   "scripts": {
     "serve": "vite",
-    "dev": "cross-env VITE_CJS_TRACE=true vite dev",
+    "dev": "cross-env DEBUG=\"vite:transform\" VITE_CJS_TRACE=true vite dev",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",

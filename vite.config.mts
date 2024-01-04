@@ -20,6 +20,17 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: '0.0.0.0',
       port: viteEnv.VITE_PORT,
+      // 预热文件以提前转换和缓存结果，降低启动期间的初始页面加载时长并防止转换瀑布
+      warmup: {
+        clientFiles: [
+          '/src/styles/index.css',
+          '/src/router/index.ts',
+          '/src/router/router-helper.ts',
+          '/src/store/index.ts',
+          '/src/directives/index.ts',
+          '/src/{views,components}/*',
+        ]
+      },
     },
     plugins: createVitePlugins(viteEnv, command),
     json: {
