@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { RouteLocationMatched } from 'vue-router'
-import type { Tab } from '~/types'
+import type { Tab } from '~/types/theme'
 
 const route = useRoute()
 const data = ref<Tab[]>([])

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { SelectOption, SysOptLog } from '~/types'
+import type { SelectOption } from '~/types/layui/select'
+import type { SysOptLog } from '~/types/system/optLog'
 
 const props = withDefaults(defineProps<{
   visible: boolean

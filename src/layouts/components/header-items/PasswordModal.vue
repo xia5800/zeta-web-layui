@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InternalRuleItem, Rules } from 'async-validator'
+import type { ChangePasswordParam } from '~/types/system/user'
 import { cloneDeep } from 'lodash-es'
-import type { ChangePasswordParam } from '~/types'
 
 const props = withDefaults(defineProps<{
   visible: boolean

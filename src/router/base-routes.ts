@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { HOME_ROUTE, LOGIN_ROUTE, REDIRECT_PATH, USER_PROFILE_ROUTE } from '~/types'
+import { HOME_ROUTE, LOGIN_ROUTE, REDIRECT_PATH, USER_PROFILE_ROUTE } from '~/types/router'
 import BaseLayout from '~/layouts/BaseLayout.vue'
 import Redirect from '~/layouts/RedirectView.vue'
 

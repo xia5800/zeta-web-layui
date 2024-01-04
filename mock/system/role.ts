@@ -1,7 +1,8 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import type { PageResult } from '../../src/types/global'
+import type { SysRole } from '../../src/types/system/role'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
-import type { PageResult, SysRole } from '../../src/types'
 import { pageResult, queryResult } from '../mock_data/role'
 
 /** 分页查询api */

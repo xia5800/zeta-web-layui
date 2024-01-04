@@ -1,7 +1,8 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
 import { getRequestToken, resultError, resultOk } from '../util'
-import type { PageResult, TaskLogDTO } from '../../src/types'
+import type { PageResult } from '../../src/types/global'
+import type { TaskLogDTO } from '../../src/types/job/taskLog'
 import { pageResult } from '../mock_data/taskLog'
 
 /** 分页查询api */

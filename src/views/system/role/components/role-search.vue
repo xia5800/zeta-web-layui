@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SysRole } from '~/types'
+import type { SysRole } from '~/types/system/role'
 
 const emit = defineEmits<{
   (e: 'onSearch', formModel: SysRole): void

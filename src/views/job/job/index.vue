@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { columns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SelectOption } from '~/types/layui/select'
+import type { JobQueryParam, QuartzJobDetailDTO, JobClassListResult } from '~/types/job/job'
+import { convertIntervalUnit, convertCalendarWeek } from '~/utils/convert'
 import JobSearchForm from './components/job-search.vue'
 import JobEdit from './components/job-edit.vue'
-import type { PageParam, SelectOption, JobQueryParam, QuartzJobDetailDTO, JobClassListResult } from '~/types'
-import { convertIntervalUnit, convertCalendarWeek } from '~/utils/convert'
 
 defineOptions({
   // 跟路由name保持一致

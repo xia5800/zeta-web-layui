@@ -1,7 +1,8 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import type { PageResult } from '../../src/types/global'
+import type { SysOptLog } from '../../src/types/system/optLog'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
-import type { PageResult, SysOptLog } from '../../src/types'
 import { pageResult, queryResult } from '../mock_data/optLog'
 
 /** 分页查询api */

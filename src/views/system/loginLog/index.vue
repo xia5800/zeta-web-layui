@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { columns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SelectOption } from '~/types/layui/select'
+import type { SysLoginLog } from '~/types/system/loginLog'
 import LoginLogSearchForm from './components/login-log-search.vue'
-import type { PageParam, SelectOption, SysLoginLog } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

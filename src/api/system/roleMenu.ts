@@ -1,4 +1,6 @@
-import type { ApiResult, SysMenu, SysRoleMenuHandleParam } from '~/types'
+import type { ApiResult } from '~/types/global'
+import type { SysMenu } from '~/types/system/menu'
+import type { SysRoleMenuHandleParam } from '~/types/system/role'
 import { request } from '~/utils/request'
 
 enum Api {

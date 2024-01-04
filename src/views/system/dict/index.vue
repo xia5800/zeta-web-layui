@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { dictColumns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SysDict } from '~/types/system/dict'
 import DictEditModel from './components/dict-edit.vue'
 import DictItemTable from './components/dict-item-table.vue'
-import type { PageParam, SysDict } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

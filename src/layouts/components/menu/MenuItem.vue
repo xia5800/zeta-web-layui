@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Meta, RouteItem } from '~/types'
+import type { Meta, RouteItem } from '~/types/router'
 import 'iconify-icon'
 
 defineProps<{

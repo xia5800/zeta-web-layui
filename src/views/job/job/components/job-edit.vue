@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import type { Rules } from 'async-validator'
+import type { SelectOption } from '~/types/layui/select'
+import type {
+  Calendar, DailyTime, DaysOfWeek,
+  JobSaveOrUpdateParam, QuartzJobDetailDTO, ScheduleType,
+  Simple,
+} from '~/types/job/job'
 import { cloneDeep } from 'lodash-es'
-import type { Calendar, DailyTime, DaysOfWeek, JobSaveOrUpdateParam, QuartzJobDetailDTO, ScheduleType, SelectOption, Simple } from '~/types'
 import { convertCalendarWeek } from '~/utils/convert'
 import KvTable from './kv-table.vue'
 import CronSelect from './cron-select.vue'

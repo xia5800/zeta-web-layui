@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SysUser } from '~/types'
+import type { SysUser } from '~/types/system/user'
 
 const emit = defineEmits<{
   (e: 'onSearch', formModel: SysUser): void

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import MenuItem from './MenuItem.vue'
+import type { RouteItem } from '~/types/router'
+import type { UserMenu } from '~/types/login'
 import { findMenuKeyParentName } from './util'
-import type { RouteItem, UserMenu } from '~/types'
+import MenuItem from './MenuItem.vue'
 
 withDefaults(defineProps<{
   /** 主题 */

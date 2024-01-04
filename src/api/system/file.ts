@@ -1,4 +1,5 @@
-import type { ApiResult, PageParam, PageResult, SysFile, SysFileUploadParam } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type { SysFile, SysFileUploadParam } from '~/types/system/file'
 import { request } from '~/utils/request'
 
 enum Api {

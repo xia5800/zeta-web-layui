@@ -1,7 +1,7 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import type { SysMenu } from '../../src/types/system/menu'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
-import type { SysMenu } from '../../src/types'
 import { menuTree, menuTreeNoButton } from '../mock_data/menu'
 
 /** 查询菜单树 */

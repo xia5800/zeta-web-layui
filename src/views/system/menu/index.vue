@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { layer } from '@layui/layer-vue'
 import { columns } from './columns'
+import type { SysMenu } from '~/types/system/menu'
 import MenuEdit from './components/menu-edit.vue'
-import type { SysMenu } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

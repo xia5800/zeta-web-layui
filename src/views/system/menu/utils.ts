@@ -1,4 +1,5 @@
-import type { SysMenu, TreeData } from '~/types'
+import type { TreeData } from '~/types/layui/tree'
+import type { SysMenu } from '~/types/system/menu'
 
 /**
  * zetaTree to layuiTree

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { SelectOption, JobQueryParam } from '~/types'
+import type { SelectOption } from '~/types/layui/select'
+import type { JobQueryParam } from '~/types/job/job'
 
 defineProps<{
   /** 任务执行类下拉框数据 */

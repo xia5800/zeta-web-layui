@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { columns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SysRole } from '~/types/system/role'
 import RoleSearchForm from './components/role-search.vue'
 import RoleEdit from './components/role-edit.vue'
 import roleMenuEdit from './components/role-menu-edit.vue'
-import type { PageParam, SysRole } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

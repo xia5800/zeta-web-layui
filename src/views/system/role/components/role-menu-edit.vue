@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import type { TreeData } from '~/types/layui/tree'
 import { filterCheckedMenuId, toTreeData } from '../../menu/utils'
-import type { TreeData } from '~/types'
 
 const props = withDefaults(defineProps<{
   visible: boolean

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Rules } from 'async-validator'
+import type { SysUser, SysUserUpdateParam } from '~/types/system/user'
 import { cloneDeep } from 'lodash'
-import defaultAvatar from '~/assets/default-avatar.jpg'
-import type { SysUser, SysUserUpdateParam } from '~/types'
 import { assignObj } from '~/utils'
+import defaultAvatar from '~/assets/default-avatar.jpg'
 
 const userStore = useUserStore()
 const avatar = computed(() => userStore.info?.avatar || defaultAvatar)
@@ -85,9 +85,6 @@ function handleSubmit() {
           </div>
           <lay-line />
           <div class="user-info-item">
-            <lay-form-item class="text-center" label="id：">
-              {{ sysUser.id }}
-            </lay-form-item>
             <lay-form-item class="text-center" label="账号：">
               {{ sysUser.account }}
             </lay-form-item>

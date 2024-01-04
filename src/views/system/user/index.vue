@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { columns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SysUser } from '~/types/system/user'
 import UserSearchForm from './components/user-search.vue'
 import UserEdit from './components/user-edit.vue'
-import type { PageParam, SysUser } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

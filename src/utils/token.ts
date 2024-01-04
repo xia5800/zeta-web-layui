@@ -1,6 +1,6 @@
 import { storageLocal, storageSession } from './cache'
-import type { TokenInfo } from '~/types'
-import { CacheKey } from '~/types'
+import type { TokenInfo } from '~/types/global'
+import { CacheKey } from '~/types/cache'
 
 /** token缓存名 */
 const tokenCacheName = CacheKey.TOKEN_NAME_CACHE_KEY

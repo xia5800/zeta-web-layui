@@ -1,4 +1,5 @@
-import type { ApiResult, PageParam, PageResult, SysRole, SysRoleSaveParam, SysRoleUpdateParam } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type { SysDict, SysDictSaveParam, SysDictUpdateParam } from '~/types/system/dict'
 import { request } from '~/utils/request'
 
 enum Api {
@@ -12,16 +13,16 @@ enum Api {
  * 分页查询
  * @returns
  */
-export function pageDictApi(param: PageParam<SysRole>) {
-  return request.post<ApiResult<PageResult<SysRole>>>(Api.Page, { data: param })
+export function pageDictApi(param: PageParam<SysDict>) {
+  return request.post<ApiResult<PageResult<SysDict>>>(Api.Page, { data: param })
 }
 
 /**
  * 查询所有
  * @returns
  */
-export function queryDictApi(param: SysRole = {}) {
-  return request.post<ApiResult<SysRole[]>>(Api.Query, { data: param })
+export function queryDictApi(param: SysDict = {}) {
+  return request.post<ApiResult<SysDict[]>>(Api.Query, { data: param })
 }
 
 /**
@@ -30,7 +31,7 @@ export function queryDictApi(param: SysRole = {}) {
  * @returns
  */
 export function getDictApi(id: string) {
-  return request.get<ApiResult<SysRole>>(`${Api.Common}/${id}`)
+  return request.get<ApiResult<SysDict>>(`${Api.Common}/${id}`)
 }
 
 /**
@@ -38,7 +39,7 @@ export function getDictApi(id: string) {
  * @param param
  * @returns
  */
-export function addDictApi(param: SysRoleSaveParam) {
+export function addDictApi(param: SysDictSaveParam) {
   return request.post<ApiResult<boolean>>(Api.Common, { data: param })
 }
 
@@ -47,7 +48,7 @@ export function addDictApi(param: SysRoleSaveParam) {
  * @param param
  * @returns
  */
-export function updateDictApi(param: SysRoleUpdateParam) {
+export function updateDictApi(param: SysDictUpdateParam) {
   return request.put<ApiResult<boolean>>(Api.Common, { data: param })
 }
 

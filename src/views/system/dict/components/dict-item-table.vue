@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { dictItemColumns } from '../columns'
+import type { PageParam } from '~/types/global'
+import type { SysDictItem } from '~/types/system/dictItem'
 import DictItemEdit from './dict-item-edit.vue'
-import type { PageParam, SysDictItem } from '~/types'
 
 const props = defineProps<{
   /** 字典id */

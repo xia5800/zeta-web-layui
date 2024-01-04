@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { columns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SelectOption } from '~/types/layui/select'
+import type { TaskLogDTO, TaskLog } from '~/types/job/taskLog'
+import type { JobClassListResult } from '~/types/job/job'
 import JobLogSearchForm from './components/job-log-search.vue'
-import type { PageParam, SelectOption, TaskLogDTO, TaskLog, JobClassListResult } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

@@ -1,4 +1,5 @@
-import type { ApiResult, SysMenu, SysMenuSaveParam, SysMenuUpdateParam } from '~/types'
+import type { ApiResult } from '~/types/global'
+import type { SysMenu, SysMenuSaveParam, SysMenuUpdateParam } from '~/types/system/menu'
 import { request } from '~/utils/request'
 
 enum Api {

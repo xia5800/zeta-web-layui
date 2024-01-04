@@ -23,8 +23,8 @@ const cron = ref<string>('')
 - update:modelValue: 绑定值更新
 -->
 <script setup lang="ts">
+import { ApiResult } from '~/types/global'
 import dayjs from 'dayjs'
-import { ApiResult } from '~/types';
 
 const props = withDefaults(defineProps<{
   /** cron表达式 */

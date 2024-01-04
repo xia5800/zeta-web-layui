@@ -1,7 +1,8 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import type { PageResult } from '../../src/types/global'
+import type { SysDictItem } from "~/types/system/dictItem"
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
-import type { PageResult, SysDictItem } from '../../src/types'
 import { pageResult, queryResult } from '../mock_data/dictItem'
 
 /** 分页查询api */

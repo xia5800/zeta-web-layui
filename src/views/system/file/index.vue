@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { layer } from '@layui/layer-vue'
+import type { PageParam } from '~/types/global'
+import type { SysFile } from '~/types/system/file'
 import { columns } from './columns'
+import { bytesToMB } from '~/utils/convert'
 import FileSearchForm from './components/file-search.vue'
 import FileUploadModal from './components/file-upload.vue'
-import type { PageParam, SysFile } from '~/types'
-import { bytesToMB } from '~/utils/convert'
 
 defineOptions({
   // 跟路由name保持一致

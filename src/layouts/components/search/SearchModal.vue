@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { OptionsItem } from './interfaces'
+import type { UserMenu } from '~/types/login'
 import { cloneDeep } from 'lodash-es'
 import SearchResult from './SearchResult.vue'
-import type { OptionsItem } from './interfaces'
-import type { UserMenu } from '~/types'
 
 const props = withDefaults(defineProps<{
   /** 弹窗显隐 */

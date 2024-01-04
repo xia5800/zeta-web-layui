@@ -1,4 +1,5 @@
-import type { ApiResult, PageParam, PageResult, SysRole, SysRoleSaveParam, SysRoleUpdateParam } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type { SysRole, SysRoleSaveParam, SysRoleUpdateParam } from '~/types/system/role'
 import { request } from '~/utils/request'
 
 enum Api {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { layer } from '@layui/layer-vue'
-import type { Tab } from '~/types'
+import type { Tab } from '~/types/theme'
 import 'iconify-icon'
 
 const route = useRoute()

@@ -1,4 +1,8 @@
-import type { ApiResult, ChangePasswordParam, ExistParam, PageParam, PageResult, ResetPwdParam, SysUser, SysUserSaveParam, SysUserUpdateParam, UpdateStateParam } from '~/types'
+import type { ApiResult, PageParam, PageResult, UpdateStateParam, ExistParam } from '~/types/global'
+import type {
+  SysUser, SysUserSaveParam, SysUserUpdateParam,
+  ChangePasswordParam, ResetPwdParam,
+} from '~/types/system/user'
 import { request } from '~/utils/request'
 
 enum Api {

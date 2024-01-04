@@ -1,4 +1,5 @@
-import type { ApiResult, PageParam, PageResult, SysLoginLog } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type { SysLoginLog } from '~/types/system/loginLog'
 import { request } from '~/utils/request'
 
 enum Api {

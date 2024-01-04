@@ -1,4 +1,4 @@
-import type { RouteItem } from '~/types'
+import type { RouteItem } from '~/types/router'
 
 /**
  * 查找父节点

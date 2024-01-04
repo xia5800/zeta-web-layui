@@ -1,6 +1,7 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
-import type { PageResult, SysFile } from '../../src/types'
+import type { PageResult } from '../../src/types/global'
+import type { SysFile } from "~/types/system/file"
 import { pageResult, queryResult, uploadResult } from '../mock_data/file'
 import { checkFailure, getRequestToken, resultError, resultOk } from "../util"
 

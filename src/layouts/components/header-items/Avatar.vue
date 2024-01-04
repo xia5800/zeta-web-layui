@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { LOGIN_ROUTE, USER_PROFILE_ROUTE } from '~/types/router'
 import PasswordModal from './PasswordModal.vue'
 import defaultAvatar from '~/assets/default-avatar.jpg'
-import { LOGIN_ROUTE, USER_PROFILE_ROUTE } from '~/types'
 
 const router = useRouter()
 const userStore = useUserStore()

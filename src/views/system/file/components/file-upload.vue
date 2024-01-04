@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SysFileUploadParam } from '~/types'
+import type { SysFileUploadParam } from '~/types/system/file'
 
 const props = withDefaults(defineProps<{
   visible: boolean

@@ -1,4 +1,9 @@
-import type { ApiResult, PageParam, PageResult, JobQueryParam, QuartzJobDetailDTO, JobClassListResult, JobOperationParam, TriggerNextTimeParam, JobSaveOrUpdateParam, JobRunOnceParam } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type {
+  JobQueryParam, QuartzJobDetailDTO, JobClassListResult,
+  JobOperationParam, TriggerNextTimeParam, JobSaveOrUpdateParam,
+  JobRunOnceParam
+} from '~/types/job/job'
 import { jobRequest as request } from '~/utils/request'
 
 enum Api {

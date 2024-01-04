@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import type { UserMenu } from '~/types'
+import type { UserMenu } from '~/types/login'
 import BaseLayout from '~/layouts/BaseLayout.vue'
 import BlankLayout from '~/layouts/BlankLayout.vue'
 import Frame from '~/layouts/FrameView.vue'

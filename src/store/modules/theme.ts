@@ -1,8 +1,9 @@
 import { layer } from '@layui/layer-vue'
+import type { ThemeSettings } from '~/types/theme'
+import type { ThemeState } from '~/types/store'
+import { CacheKey } from '~/types/cache'
 import { cloneDeep } from 'lodash-es'
 import { DEFAULT_PERMARY_COLOR, DEFAULT_THEME_MODE, DEFAULT_BORDER_RADIUS } from '~/config/setting'
-import type { ThemeSettings, ThemeState } from '~/types'
-import { CacheKey } from '~/types'
 import { storageLocal, storageSession } from '~/utils/cache'
 
 export const useThemeStore = defineStore({

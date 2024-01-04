@@ -1,7 +1,8 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import type { PageResult } from '../../src/types/global'
+import type { QuartzJobDetailDTO, JobClassListResult } from '../../src/types/job/job'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
-import type { PageResult, QuartzJobDetailDTO, JobClassListResult } from '../../src/types'
 import { pageResult, jobClassListResult } from '../mock_data/job'
 
 /** 分页查询api */

@@ -1,4 +1,5 @@
-import type { ApiResult, PageParam, PageResult, SysDictItem, SysDictItemSaveParam, SysDictItemUpdateParam } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type { SysDictItem, SysDictItemSaveParam, SysDictItemUpdateParam } from '~/types/system/dictItem'
 import { request } from '~/utils/request'
 
 enum Api {

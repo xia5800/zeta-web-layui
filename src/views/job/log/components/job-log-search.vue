@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { SelectOption, TaskLog } from '~/types'
+import type { SelectOption } from '~/types/layui/select'
+import type { TaskLog } from '~/types/job/taskLog'
 
 defineProps<{
   /** 状态下拉框数据 */

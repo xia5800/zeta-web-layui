@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Rules } from 'async-validator'
+import type { SysDict, SysDictSaveParam, SysDictUpdateParam } from '~/types/system/dict'
 import { cloneDeep } from 'lodash-es'
-import type { SysDict, SysDictSaveParam, SysDictUpdateParam } from '~/types'
 
 const props = withDefaults(defineProps<{
   visible: boolean

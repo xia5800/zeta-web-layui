@@ -1,8 +1,9 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client"
 import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
-import { getRequestToken, resultError, resultOk } from '../util'
-import type { CaptchaResult, UserInfo, UserMenu } from '../../src/types'
+import type { CaptchaResult, UserMenu } from '../../src/types/login'
+import type { UserInfo } from '../../src/types/system/user'
 import captcha from '../mock_data/captcha'
+import { getRequestToken, resultError, resultOk } from '../util'
 import { loginUserInfo, loginUserMenu } from '../mock_data/login'
 
 /** 登录验证码 */

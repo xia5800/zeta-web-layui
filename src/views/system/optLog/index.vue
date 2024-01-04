@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { columns } from './columns'
+import type { PageParam } from '~/types/global'
+import type { SelectOption } from '~/types/layui/select'
+import type { SysOptLog } from '~/types/system/optLog'
 import OptLogSearchForm from './components/opt-log-search.vue'
 import OptLogViewModel from './components/opt-log-view.vue'
-import type { PageParam, SelectOption, SysOptLog } from '~/types'
 
 defineOptions({
   // 跟路由name保持一致

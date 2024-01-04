@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { layer } from '@layui/layer-vue'
-import type { ApiResult, SysFile } from '~/types'
+import type { ApiResult } from '~/types/global'
+import type { SysFile } from '~/types/system/file'
 import { getToken } from '~/utils/token'
 
 const props = withDefaults(defineProps<{

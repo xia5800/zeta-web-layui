@@ -1,4 +1,6 @@
-import type { ApiResult, CaptchaResult, LoginParam, LoginResult, UserInfo, UserMenu } from '~/types'
+import type { ApiResult } from '~/types/global'
+import type { CaptchaResult, LoginParam, LoginResult, UserMenu } from '~/types/login'
+import type { UserInfo } from '~/types/system/user'
 import { cryptoEncode } from '~/utils/crypto'
 import { request } from '~/utils/request'
 import { setToken } from '~/utils/token'

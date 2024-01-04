@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SysFile } from '~/types'
+import type { SysFile } from '~/types/system/file'
 
 const emit = defineEmits<{
   (e: 'onSearch', formModel: SysFile): void

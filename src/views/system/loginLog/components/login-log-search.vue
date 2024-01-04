@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { SelectOption, SysLoginLog } from '~/types'
+import type { SelectOption } from '~/types/layui/select'
+import type { SysLoginLog } from '~/types/system/loginLog'
 
 defineProps<{
   /** 状态下拉框数据 */

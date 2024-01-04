@@ -1,4 +1,5 @@
-import type { ApiResult, PageParam, PageResult, TaskLog, TaskLogDTO } from '~/types'
+import type { ApiResult, PageParam, PageResult } from '~/types/global'
+import type { TaskLog, TaskLogDTO } from '~/types/job/taskLog'
 import { jobRequest as request } from '~/utils/request'
 
 enum Api {

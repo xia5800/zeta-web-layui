@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { layer } from '@layui/layer-vue'
-import { cloneDeep } from 'lodash'
-import loginBg from '~/assets/images/login-bg.png'
-import type { LoginParam } from '~/types'
-import { HOME_ROUTE } from '~/types'
-import { PROJECT_NAME } from '~/config/setting'
+import type { LoginParam } from '~/types/login'
 import type { Rules } from 'async-validator'
+import { cloneDeep } from 'lodash'
+import { HOME_ROUTE } from '~/types/router'
+import { PROJECT_NAME } from '~/config/setting'
+import loginBg from '~/assets/images/login-bg.png'
 
 const { loading, setLoading } = useLoading(false)
 const router = useRouter()

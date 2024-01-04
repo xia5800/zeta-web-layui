@@ -3,7 +3,8 @@ import type { AxiosInstance, AxiosRequestConfig, Method } from 'axios'
 import { layer } from '@layui/layer-vue'
 import { getToken, removeToken } from './token'
 import { storageSession } from './cache'
-import { CacheKey, LOGIN_ROUTE } from '~/types'
+import { CacheKey } from '~/types/cache'
+import { LOGIN_ROUTE } from '~/types/router'
 import { API_BASE_URL, API_JOB_URL } from '~/config/setting'
 
 /**

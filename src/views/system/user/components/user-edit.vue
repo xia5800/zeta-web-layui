@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { InternalRuleItem, Rules } from 'async-validator'
+import type { ExistParam } from '~/types/global'
+import type { SelectOption } from '~/types/layui/select'
+import type { SysRole } from '~/types/system/role'
+import type { SysUser, SysUserSaveParam, SysUserUpdateParam } from '~/types/system/user'
 import { cloneDeep } from 'lodash-es'
-import type { ExistParam, SelectOption, SysRole, SysUser, SysUserSaveParam, SysUserUpdateParam } from '~/types'
 
 const props = withDefaults(defineProps<{
   visible: boolean,

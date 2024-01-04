@@ -1,6 +1,8 @@
+import type { LoginUserInfo, UserMenu } from '~/types/login'
+import type { UserState } from '~/types/store'
+import type { UserInfo } from '~/types/system/user'
+import { CacheKey } from '~/types/cache'
 import { storageLocal } from '~/utils/cache'
-import type { LoginUserInfo, UserInfo, UserMenu, UserState } from '~/types'
-import { CacheKey } from '~/types'
 import { removeToken } from '~/utils/token'
 
 /**

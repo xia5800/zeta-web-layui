@@ -1,8 +1,9 @@
 import type { RouteRecord } from 'vue-router'
+import type { Tab } from '~/types/theme'
+import type { TabState } from '~/types/store'
+import { CacheKey } from '~/types/cache'
 import { cloneDeep } from 'lodash-es'
 import { useThemeStore } from './theme'
-import type { Tab, TabState } from '~/types'
-import { CacheKey } from '~/types'
 import { getToken } from '~/utils/token'
 import { storageLocal } from '~/utils/cache'
 
