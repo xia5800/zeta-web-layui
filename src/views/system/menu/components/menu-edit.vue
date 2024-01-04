@@ -301,7 +301,7 @@ watch(
               :data="menuTreeData"
               :disabled="isUpdate || pid !== '0'"
               style="width: 100%;"
-              @change="(value) => treeChangeHandler(value as string)"
+              @change="(value: string) => treeChangeHandler(value)"
             />
           </lay-form-item>
           <lay-form-item label="菜单名称" prop="label" required>
@@ -399,7 +399,7 @@ watch(
               v-model="form.type"
               name="type"
               :disabled="isUpdate"
-              @change="(current) => handleMenuTypeChange(current as string)"
+              @change="(current: string) => handleMenuTypeChange(current)"
             >
               <lay-radio value="MENU" label="菜单" />
               <lay-radio value="RESOURCE" label="按钮" />
@@ -411,7 +411,7 @@ watch(
               v-model="openType"
               name="type"
               :disabled="form.type === 'RESOURCE'"
-              @change="(current) => handleOpenTypeChange(current as string)"
+              @change="(current: string) => handleOpenTypeChange(current)"
             >
               <lay-radio value="1" label="组件" />
               <lay-radio value="2" label="内链" />

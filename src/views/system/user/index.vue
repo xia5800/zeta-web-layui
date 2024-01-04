@@ -305,7 +305,7 @@ async function changeState(val: number, row: SysUser) {
             :onswitch-value="1"
             unswitch-text="停用"
             :unswitch-value="0"
-            @change="(val) => changeState(val as number, row)"
+            @change="(val: number) => changeState(val, row)"
           />
         </template>
       </lay-table>

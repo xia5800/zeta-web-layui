@@ -20,9 +20,8 @@
     "types": [
       "node",
       "vite/client",
-      "vue/ref-macros",
       "unplugin-vue-define-options/macros-global"
     ]
   },
-  "exclude": ["node_modules", "dist", "_docs"]
+  "exclude": ["node_modules", "dist", "_docs", "fakeServer"]
 }
