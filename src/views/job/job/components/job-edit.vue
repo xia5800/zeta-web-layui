@@ -118,6 +118,8 @@ function initData() {
       repeatCount: props.data.simpleRepeatCount,
       repeatForever: props.data.simpleRepeatCount == -1,
     }
+    // 设置调度类型为CRON时的参数
+    form.cron = props.data.cron || ''
 
     // 初始化时间范围
     if (form.dailyTime.startTime) {
@@ -128,9 +130,7 @@ function initData() {
     }
 
     // 设置任务参数
-    nextTick(() => {
-      kvTable.value.setTableData(props.data?.jobParam)
-    })
+    kvTable.value.setTableData(props.data.jobParam)
   } else {
     Object.assign(form, baseFormData)
     isUpdate.value = false
@@ -259,8 +259,10 @@ watch(
   () => props.visible,
   (visible: boolean) => {
     if (visible) {
-      // 初始化弹窗数据
-      initData()
+      nextTick(() => {
+        // 初始化弹窗数据
+        initData()
+      })
     }
   },
 )
