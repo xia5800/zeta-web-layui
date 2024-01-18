@@ -1002,6 +1002,8 @@ watch(
   (cronStr) => {
     if (cronStr) {
       cronInput.value = cronStr
+      // tab数据回显
+      setCron(cronStr)
     }
   },
 )
