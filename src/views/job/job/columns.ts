@@ -8,7 +8,8 @@ export const columns = [
   {
     key: 'triggerState',
     title: '状态',
-    width: '80px',
+    minWidth: '80px',
+    align: 'center',
     sort: true,
     fixed: 'left',
     customSlot: 'triggerState',
@@ -16,7 +17,7 @@ export const columns = [
   {
     key: 'priority',
     title: '触发器优先级',
-    width: '140px',
+    minWidth: '140px',
     align: 'center',
     fixed: 'left',
     sort: true,
@@ -25,7 +26,6 @@ export const columns = [
   {
     key: 'jobName',
     title: '任务名',
-    align: 'center',
     width: '200px',
     sort: true,
     ellipsisTooltip: true,
@@ -39,28 +39,25 @@ export const columns = [
   {
     key: 'triggerType',
     title: '触发器类型',
-    width: '360px',
+    minWidth: '360px',
     ellipsisTooltip: true,
     customSlot: 'triggerType',
   },
   {
     key: 'nextFireTime',
     title: '下次触发时间',
-    align: 'center',
     width: '160px',
     ellipsisTooltip: true,
   },
   {
     key: 'prevFireTime',
     title: '上次触发时间',
-    align: 'center',
     width: '160px',
     ellipsisTooltip: true,
   },
   {
     key: 'startTime',
     title: '开始时间',
-    align: 'center',
     width: '160px',
     sort: true,
     hide: true,
@@ -69,7 +66,6 @@ export const columns = [
   {
     key: 'endTime',
     title: '结束时间',
-    align: 'center',
     width: '160px',
     sort: true,
     hide: true,

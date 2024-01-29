@@ -19,14 +19,14 @@ export const columns = [
     title: '耗时',
     align: 'center',
     sort: true,
-    width: '80px',
+    minWidth: '80px',
     fixed: 'left',
     customSlot: 'spendTime',
   },
   {
     key: 'createTime',
     title: '创建时间',
-    width: '180px',
+    minWidth: '180px',
     align: 'center',
   },
   {
@@ -40,7 +40,6 @@ export const columns = [
   {
     key: 'jobName',
     title: '任务名',
-    align: 'center',
     sort: true,
     width: '180px',
     ellipsisTooltip: true,
