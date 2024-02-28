@@ -7,6 +7,9 @@ import {
   TheMenu,
   TheTabs,
 } from './components'
+// fix bug 手动引入LayBacktop组件以解决在linux环境下build报错问题 --by gcc
+import { LayBacktop } from '@layui/layui-vue'
+import '@layui/layui-vue/es/backTop/index.css'
 
 const themeStore = useThemeStore()
 const sideWidth = computed(() =>
@@ -33,14 +36,11 @@ const menuTheme = computed(() => {
           <TheLogo />
         </lay-logo>
         <!-- 菜单 -->
-        <lay-scroll
-          class="menu-scroll"
-          :style="{
-            height: themeStore.settings.showLogo
-              ? 'calc(100% - var(--layout-nav-height))'
-              : '100%',
-          }"
-        >
+        <lay-scroll class="menu-scroll" :style="{
+          height: themeStore.settings.showLogo
+            ? 'calc(100% - var(--layout-nav-height))'
+            : '100%',
+        }">
           <TheMenu :theme="menuTheme" />
         </lay-scroll>
       </lay-side>
