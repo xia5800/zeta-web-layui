@@ -64,7 +64,7 @@ function handleSubmit() {
           },
         })
         // 登录成功提示
-        layer.notifiy({
+        layer.notify({
           title: '登录成功',
           content: '欢迎回来~',
           area: '300px',
