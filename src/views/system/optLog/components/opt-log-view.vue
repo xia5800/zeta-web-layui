@@ -102,7 +102,7 @@ watch(
     v-model="show"
     area="780px"
     title="详情"
-    :shade-close="false"
+    :shade-close="true"
     :move="true"
     :maxmin="true"
     @close="handleClose"
