@@ -1,7 +1,7 @@
 {
-  "name": "Zeta-Web-Layui",
+  "name": "zeta-web-layui",
   "type": "module",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "packageManager": "yarn@1.22.19",
   "engines": {
