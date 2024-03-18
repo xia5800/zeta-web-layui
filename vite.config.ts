@@ -49,7 +49,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       chunkSizeWarningLimit: 4096,
       rollupOptions: {
         input: {
-          index: 'index.html',
+          // fix bug: 高版本vite打包之后，index.html文件没有引入css、js问题。见：https://github.com/vitejs/vite/issues/15992
+          index: resolve('index.html'),
         },
         // 静态资源分类打包
         output: {
