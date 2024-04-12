@@ -15,7 +15,7 @@ const dataSource = ref<SysMenu[]>([])
 // 表格选中数据的key
 const selectedKeys = ref([])
 // 表格树展开、收起
-const expand = ref<boolean>(true)
+const expand = ref<boolean>(false)
 // 表格工具栏配置
 const defaultToolbar = ref<boolean | string[]>(['filter'])
 // 是否显示"新增/编辑"弹窗
