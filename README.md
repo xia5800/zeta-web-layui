@@ -21,21 +21,22 @@ yarn run dev
 
 ## 技术选型
 
-| 技术         | 说明                                        |
-|------------|-------------------------------------------|
-| vue3       | 核心框架                                      |
-| typescript | 开发语言                                      |
+| 技术       | 说明                                        |
+| ---------- | ------------------------------------------- |
+| vue3       | 核心框架                                    |
+| typescript | 开发语言                                    |
 | layui-vue  | [ui框架](https://gitee.com/layui/layui-vue) |
-| nodejs     | `>=18.13.0`                                  |
+| nodejs     | `>=18.13.0`                                 |
 
 
 ## 后端
 
-| 名称                  | 说明                                  | 项目地址                                                     |
-| --------------------- | ------------------------------------- | ------------------------------------------------------------ |
-| zeta-kotlin | 本项目后端 | [gitee](https://gitee.com/xia5800/zeta-kotlin)  [github](https://github.com/xia5800/zeta-kotlin) |
+| 名称                  | 说明                                  | 项目地址                                                                                                             |
+| --------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| zeta-kotlin           | 本项目后端(kotlin语言开发)            | [gitee](https://gitee.com/xia5800/zeta-kotlin)  [github](https://github.com/xia5800/zeta-kotlin)                     |
+| zeta-java             | 本项目后端(java语言开发)              | [gitee](https://gitee.com/xia5800/zeta-java)  [github](https://github.com/xia5800/zeta-java)                         |
 | zeta-kotlin-generator | 专门为zeta-kotlin项目定做的代码生成器 | [gitee](https://gitee.com/xia5800/zeta-kotlin-generator)  [github](https://github.com/xia5800/zeta-kotlin-generator) |
-| zeta-kotlin-module    | zeta-kotlin项目多模块版              | [gitee](https://gitee.com/xia5800/zeta-kotlin-module) [github](https://github.com/xia5800/springboot-kotlin-module)|
+| zeta-kotlin-module    | zeta-kotlin项目多模块版               | [gitee](https://gitee.com/xia5800/zeta-kotlin-module) [github](https://github.com/xia5800/springboot-kotlin-module)  |
 
 ## 已有功能
 
@@ -46,6 +47,7 @@ yarn run dev
 - 登录日志
 - 数据字典
 - 文件管理
+- 定时任务管理（仅在[zeta-kotlin-module](https://gitee.com/xia5800/zeta-kotlin-module)项目实现）
 
 ## 常见问题
 
