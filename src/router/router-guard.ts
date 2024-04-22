@@ -69,7 +69,8 @@ export function createRouterGuard(router: Router) {
         // 用户菜单转换成vue-router的路由，并添加到vue-router中
         menuToRoute(menus as UserMenu[]).forEach((route) => {
           // 如果route是一级路由且没有子路由。添加到/路由下
-          if (!route.children) {
+          // fix bug: 一级路由没有子路由但是 children 存在的时候会出问题  --by minisailboat
+          if (!route.children || route.children.length === 0) {
             rootRouter.children = rootRouter.children.concat(route)
             router.addRoute(rootRouter)
           } else {
