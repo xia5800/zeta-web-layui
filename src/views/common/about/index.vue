@@ -34,7 +34,7 @@ const infoSchema: SchemaItem[] = [
   },
   {
     label: '预览地址',
-    value: '<a href="https://bestgcc.online" target="_blank" style="color:#409EFF">预览地址</a>',
+    value: '无',
   },
   {
     label: '文档地址',
