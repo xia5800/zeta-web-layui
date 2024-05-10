@@ -100,7 +100,7 @@ watch(
 <template>
   <lay-layer
     v-model="show"
-    area="780px"
+    :area="['50%', '90%']"
     title="详情"
     :shade-close="true"
     :move="true"
