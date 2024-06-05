@@ -3,6 +3,7 @@ import { layer } from '@layui/layer-vue'
 import type { ApiResult } from '~/types/global'
 import type { SysFile } from '~/types/system/file'
 import { getToken } from '~/utils/token'
+import { API_BASE_URL } from '~/config/setting'
 
 const props = withDefaults(defineProps<{
   /** 是否开启拖拽上传 */
@@ -70,7 +71,7 @@ function onError(res: any) {
 
 <template>
   <lay-upload
-    :url="UploadUrl"
+    :url="API_BASE_URL + UploadUrl"
     :data="{ bizType }"
     :headers="headers"
     :before-upload="beforeUpload"
