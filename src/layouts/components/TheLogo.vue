@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { PROJECT_NAME } from '~/config/setting'
 const themeStore = useThemeStore()
 
 function renderLottie() {
@@ -20,6 +21,6 @@ onUpdated(() => renderLottie())
 <template>
   <div class="the-logo">
     <div id="lottie-logo" class="logo" />
-    <span v-if="!themeStore.collaspeSide" class="logo-title">Zeta-Web</span>
+    <span v-if="!themeStore.collaspeSide" class="logo-title">{{ PROJECT_NAME }}</span>
   </div>
 </template>
