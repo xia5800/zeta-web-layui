@@ -41,13 +41,13 @@ export interface ThemeSettings {
  * 所有 Css3 变量请前往 [这里](https://gitee.com/layui/layui-vue/blob/master/package/component/src/theme/variable.less)。
  */
 type ThemeVariableKey =
-'--global-primary-color' |
-'--global-checked-color' |
-'--global-normal-color' |
-'--global-warm-color' |
-'--global-danger-color' |
-'--global-info-color' |
-'--global-border-radius'
+  '--global-primary-color'
+  | '--global-checked-color'
+  | '--global-normal-color'
+  | '--global-warm-color'
+  | '--global-danger-color'
+  | '--global-info-color'
+  | '--global-border-radius'
 
 /** 主题变量 */
 export interface ThemeVariable extends Partial<Record<ThemeVariableKey, string>> {}

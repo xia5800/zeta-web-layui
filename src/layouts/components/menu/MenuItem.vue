@@ -23,13 +23,13 @@ function clickMenuItem(path: string, meta?: Meta) {
         <template #icon>
           <!-- 如果icon不为空，且icon不包含":"则使用layui图标 -->
           <lay-icon
-            v-if="meta?.icon && meta?.icon.indexOf(':') == -1"
+            v-if="meta?.icon && meta?.icon.indexOf(':') === -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon' : 'nav-unfold-icon'"
             :type="meta.icon"
           />
           <!-- 如果icon不为空，且icon包含":"则使用iconify图标 -->
           <iconify-icon
-            v-if="meta?.icon && meta?.icon.indexOf(':') != -1"
+            v-if="meta?.icon && meta?.icon.indexOf(':') !== -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon-svg' : 'nav-unfold-icon-svg'"
             :icon="meta.icon"
             inline
@@ -53,13 +53,13 @@ function clickMenuItem(path: string, meta?: Meta) {
         <template #icon>
           <!-- 如果icon不为空，且icon不包含":"则使用layui图标 -->
           <lay-icon
-            v-if="meta?.icon && meta?.icon.indexOf(':') == -1"
+            v-if="meta?.icon && meta?.icon.indexOf(':') === -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon' : 'nav-unfold-icon'"
             :type="meta.icon"
           />
           <!-- 如果icon不为空，且icon包含":"则使用iconify图标 -->
           <iconify-icon
-            v-if="meta?.icon && meta?.icon.indexOf(':') != -1"
+            v-if="meta?.icon && meta?.icon.indexOf(':') !== -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon-svg' : 'nav-unfold-icon-svg'"
             :icon="meta.icon"
           />

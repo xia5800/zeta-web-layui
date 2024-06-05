@@ -170,7 +170,7 @@ function handlerSubmitData(model: SysMenu) {
 async function saveData(model: SysMenu, layerId: string) {
   try {
     // 计算path
-    if (parentPath.value && model.type == 'MENU') model.path = parentPath.value + (model.path || '')
+    if (parentPath.value && model.type === 'MENU') model.path = parentPath.value + (model.path || '')
 
     // 新增菜单
     const { success, message } = await addMenuApi({

@@ -7,7 +7,7 @@ import type { SysUser, SysUserSaveParam, SysUserUpdateParam } from '~/types/syst
 import { cloneDeep } from 'lodash-es'
 
 const props = withDefaults(defineProps<{
-  visible: boolean,
+  visible: boolean
   /** 修改时必传，用户基本数据 */
   data?: SysUser
 }>(), {

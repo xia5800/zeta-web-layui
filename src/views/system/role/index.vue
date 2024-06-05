@@ -24,7 +24,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
+  layout: ['count', 'prev', 'page', 'next', 'limits', 'refresh', 'skip'],
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { PROJECT_NAME } from '~/config/setting'
+
 const themeStore = useThemeStore()
 
 function renderLottie() {

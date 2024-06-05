@@ -1,5 +1,5 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute, ProcessedRequest } from 'vite-plugin-fake-server'
 import { getRequestToken, resultError, resultOk } from '../util'
 import type { PageResult } from '../../src/types/global'
 import type { TaskLogDTO } from '../../src/types/job/taskLog'

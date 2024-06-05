@@ -1,5 +1,5 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import { FakeRoute } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute } from 'vite-plugin-fake-server'
 import { resultError } from '../util'
 
 /** 没有登录api */

@@ -22,7 +22,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  layout: ["prev", "page", "next"]
+  layout: ['prev', 'page', 'next'],
 })
 // 是否显示"新增/编辑"弹窗
 const showEdit = ref(false)
@@ -92,7 +92,7 @@ function openEditModal(isUpdate = false) {
   if (!isUpdate) {
     // fix bug 解决“点击编辑字典，关闭弹窗后点击再次新增字典会有默认值”问题  --by gcc
     // 清空当前需要编辑的字典
-    current.value = undefined;
+    current.value = undefined
     showEdit.value = true
     return
   }

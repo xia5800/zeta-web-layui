@@ -1,5 +1,5 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute, ProcessedRequest } from 'vite-plugin-fake-server'
 import type { CaptchaResult, UserMenu } from '../../src/types/login'
 import type { UserInfo } from '../../src/types/system/user'
 import captcha from '../mock_data/captcha'

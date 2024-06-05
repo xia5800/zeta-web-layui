@@ -29,7 +29,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           '/src/store/index.ts',
           '/src/directives/index.ts',
           '/src/{views,components}/*',
-        ]
+        ],
       },
     },
     plugins: createVitePlugins(viteEnv, command),

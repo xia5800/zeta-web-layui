@@ -26,7 +26,7 @@ export function toTreeData(menuTrees?: SysMenu[], spread = false): TreeData[] {
  *
  * 说明：用于全部展开、全部收起
  * @param treeDatas
- * @returns
+ * @return string[]
  */
 export function filterId(treeDatas: TreeData[]): string[] {
   let result: Array<string> = []
@@ -46,7 +46,7 @@ export function filterId(treeDatas: TreeData[]): string[] {
  * 通过id查询指定菜单
  * @param treeDatas 菜单数组
  * @param id 菜单id
- * @returns 查到的菜单
+ * @return 查到的菜单
  */
 export function filterMenu(treeDatas: SysMenu[], id: string): SysMenu {
   if (!treeDatas.length) return {}
@@ -67,7 +67,7 @@ export function filterMenu(treeDatas: SysMenu[], id: string): SysMenu {
  * 筛选所有被选中的菜单的id
  *
  * 说明：角色-分配权限用
- * @param sysMeny
+ * @param menuTrees
  */
 export function filterCheckedMenuId(menuTrees?: SysMenu[]): string[] {
   if (!menuTrees) return []

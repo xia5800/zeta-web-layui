@@ -30,7 +30,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
+  layout: ['count', 'prev', 'page', 'next', 'limits', 'refresh', 'skip'],
 })
 // 默认分页查询参数
 const pageParam: PageParam<TaskLog> = { page: 1, limit: 10, sort: 'id', order: 'desc' }
@@ -165,7 +165,7 @@ onMounted(() => {
       >
         <!-- 日志类型列 -->
         <template #type="{ row }">
-          <lay-tag v-if="row.type=== 'SUCCESS'" type="normal" variant="light">
+          <lay-tag v-if="row.type === 'SUCCESS'" type="normal" variant="light">
             执行成功
           </lay-tag>
           <lay-tag v-else-if="row.type === 'EXCEPTION'" type="danger" variant="light">
@@ -191,6 +191,5 @@ onMounted(() => {
         </template>"
       </lay-table>
     </div>
-
   </lay-container>
 </template>

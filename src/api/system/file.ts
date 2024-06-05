@@ -14,7 +14,7 @@ export const UploadUrl = Api.Upload
 
 /**
  * 分页查询
- * @returns
+ * @return
  */
 export function pageFileApi(param: PageParam<SysFile>) {
   return request.post<ApiResult<PageResult<SysFile>>>(Api.Page, { data: param })
@@ -22,7 +22,7 @@ export function pageFileApi(param: PageParam<SysFile>) {
 
 /**
  * 查询所有
- * @returns
+ * @return
  */
 export function queryFileApi(param: SysFile = {}) {
   return request.post<ApiResult<SysFile[]>>(Api.Query, { data: param })
@@ -31,7 +31,7 @@ export function queryFileApi(param: SysFile = {}) {
 /**
  * 单体查询
  * @param id
- * @returns
+ * @return
  */
 export function getFileApi(id: string) {
   return request.get<ApiResult<SysFile>>(`${Api.Common}/${id}`)
@@ -40,7 +40,7 @@ export function getFileApi(id: string) {
 /**
  * 文件上传
  * @param param
- * @returns
+ * @return
  */
 export function uploadFileApi(param: SysFileUploadParam) {
   const data = new FormData()
@@ -55,7 +55,7 @@ export function uploadFileApi(param: SysFileUploadParam) {
 /**
  * 删除
  * @param id
- * @returns
+ * @return
  */
 export function deleteFileApi(id: string) {
   return request.delete<ApiResult<boolean>>(`${Api.Common}/${id}`)
@@ -64,8 +64,8 @@ export function deleteFileApi(id: string) {
 /**
  * 批量删除
  * @param ids
- * @returns
+ * @return
  */
 export function batchDeleteFileApi(ids: string[]) {
-  return request.delete<ApiResult<Boolean>>(Api.Batch, { data: ids })
+  return request.delete<ApiResult<boolean>>(Api.Batch, { data: ids })
 }

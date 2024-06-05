@@ -12,13 +12,13 @@ import KvTable from './kv-table.vue'
 import CronSelect from './cron-select.vue'
 
 const props = withDefaults(defineProps<{
-  visible: boolean,
+  visible: boolean
   /** 任务执行类 */
-  jobClassOptions?: SelectOption[],
+  jobClassOptions?: SelectOption[]
   /** 修改时必传，任务信息 */
   data?: QuartzJobDetailDTO
 }>(), {
-  visible: false
+  visible: false,
 })
 
 const emit = defineEmits<{
@@ -40,7 +40,7 @@ const kvTable = ref()
 // 是否修改弹窗
 const isUpdate = ref(false)
 // 时间范围
-const timeRange = ref<string[]>(['00:00:00','12:00:00'])
+const timeRange = ref<string[]>(['00:00:00', '12:00:00'])
 // 表单数据
 const baseFormData = {
   jobName: '',
@@ -60,7 +60,7 @@ const baseFormData = {
     timeInterval: 1,
     unit: undefined,
     startTime: undefined,
-    endTime: undefined
+    endTime: undefined,
   } as DailyTime,
   simple: {
     unit: 'SECONDS',
@@ -81,7 +81,7 @@ const rules = ref<Rules>({
 function initData() {
   if (props.data) {
     isUpdate.value = true
-    let timeRangeArr = timeParse(props.data.strProp3)
+    const timeRangeArr = timeParse(props.data.strProp3)
     let weekArr = weekParse(props.data.strProp2)
     let dailyTimeUnit = props.data.strProp1
 
@@ -100,7 +100,7 @@ function initData() {
     // 设置调度类型为CAL_INT时的参数
     form.calendar = {
       timeInterval: props.data.intProp1 || 1,
-      unit: props.data.strProp1 || 'SECOND' as any
+      unit: props.data.strProp1 || 'SECOND' as any,
     }
     // 设置调度类型为DAILY_TIME时的参数
     form.dailyTime = {
@@ -116,7 +116,7 @@ function initData() {
       unit: 'MILLISECONDS',
       timeInterval: props.data.simpleRepeatInterval || 1,
       repeatCount: props.data.simpleRepeatCount,
-      repeatForever: props.data.simpleRepeatCount == -1,
+      repeatForever: props.data.simpleRepeatCount === -1,
     }
     // 设置调度类型为CRON时的参数
     form.cron = props.data.cron || ''
@@ -148,15 +148,15 @@ function timeParse(strProp2?: string) {
   if (!strProp2) return []
 
   // 5,0,0,1,2,3 => [5,0,0,1,2,3]
-  let timeArr = strProp2.split(',')
-  if (timeArr.length != 6) return []
+  const timeArr = strProp2.split(',')
+  if (timeArr.length !== 6) return []
 
-  let startHour = timeArr[0].length < 2? '0' + timeArr[0] : timeArr[0]
-  let startMinute = timeArr[1].length < 2? '0' + timeArr[1] : timeArr[1]
-  let startSecond = timeArr[2].length < 2? '0' + timeArr[2] : timeArr[2]
-  let endHour = timeArr[3].length < 2? '0' + timeArr[3] : timeArr[3]
-  let endMinute = timeArr[4].length < 2? '0' + timeArr[4] : timeArr[4]
-  let endSecond = timeArr[5].length < 2? '0' + timeArr[5] : timeArr[5]
+  const startHour = timeArr[0].length < 2 ? `0${timeArr[0]}` : timeArr[0]
+  const startMinute = timeArr[1].length < 2 ? `0${timeArr[1]}` : timeArr[1]
+  const startSecond = timeArr[2].length < 2 ? `0${timeArr[2]}` : timeArr[2]
+  const endHour = timeArr[3].length < 2 ? `0${timeArr[3]}` : timeArr[3]
+  const endMinute = timeArr[4].length < 2 ? `0${timeArr[4]}` : timeArr[4]
+  const endSecond = timeArr[5].length < 2 ? `0${timeArr[5]}` : timeArr[5]
   return [`${startHour}:${startMinute}:${startSecond}`, `${endHour}:${endMinute}:${endSecond}`]
 }
 
@@ -169,8 +169,8 @@ function timeParse(strProp2?: string) {
 function weekParse(strProp1?: string) {
   if (!strProp1) return []
 
-  let weekArr = strProp1.split(',')
-  return weekArr.map(item => {
+  const weekArr = strProp1.split(',')
+  return weekArr.map((item) => {
     return convertCalendarWeek(item, false)
   })
 }
@@ -272,7 +272,7 @@ watch(
   <lay-layer
     v-model="show"
     :title="isUpdate ? '编辑' : '新增'"
-    :area="['40%','90%']"
+    :area="['50%', '90%']"
     :shade-close="false"
     :maxmin="true"
     :btn="[
@@ -283,7 +283,7 @@ watch(
   >
     <lay-form ref="refForm" :model="form" :rules="rules" label-width="100" style="padding: 10px; padding-right: 30px;">
       <lay-field title="基本配置" />
-      <lay-row>
+      <lay-row :space="15">
         <!-- 左 -->
         <lay-col :md="12">
           <lay-form-item label="任务名称" prop="jobName" required>
@@ -296,9 +296,12 @@ watch(
             <lay-input-number v-model="form.priority" placeholder="请填写" allow-clear />
           </lay-form-item>
         </lay-col>
-        <lay-form-item label="任务描述" prop="jobDescription">
-          <lay-textarea v-model="form.jobDescription" placeholder="请填写" :span="2" allow-clear />
-        </lay-form-item>
+        <!-- 下 -->
+        <lay-col :md="24">
+          <lay-form-item label="任务描述" prop="jobDescription">
+            <lay-textarea v-model="form.jobDescription" placeholder="请填写" allow-clear />
+          </lay-form-item>
+        </lay-col>
       </lay-row>
 
       <lay-field title="调度配置" />
@@ -311,7 +314,7 @@ watch(
         </lay-select>
       </lay-form-item>
       <lay-form-item v-if="form.scheduleType === 'CRON'" label="cron表达式" prop="cron" :required="form.scheduleType === 'CRON'">
-        <cron-select v-model="form.cron" placeholder="请填写" allow-clear  />
+        <CronSelect v-model="form.cron" placeholder="请填写" allow-clear />
       </lay-form-item>
 
       <lay-form-item v-if="form.scheduleType === 'CAL_INT'" label="间隔单位" prop="calendar.unit" :required="form.scheduleType === 'CAL_INT'">
@@ -349,8 +352,8 @@ watch(
         <lay-input-number v-model="form.dailyTime.timeInterval" :min="1" placeholder="请填写" allow-clear />
       </lay-form-item>
       <lay-form-item
-        label="周" prop="dailyTime.daysOfWeek"
         v-if="form.scheduleType === 'DAILY_I' && form.dailyTime.type === 'DaysOfTheWeek'"
+        label="周" prop="dailyTime.daysOfWeek"
         :required="form.scheduleType === 'DAILY_I' && form.dailyTime.type === 'DaysOfTheWeek'"
       >
         <lay-select v-model="form.dailyTime.daysOfWeek" placeholder="请选择" multiple allow-clear style="width: 100%">
@@ -364,9 +367,8 @@ watch(
         </lay-select>
       </lay-form-item>
       <lay-form-item v-if="form.scheduleType === 'DAILY_I'" label="时间" prop="dailyTime.startTime">
-        <lay-date-picker v-model="timeRange" range type="time" :placeholder="['开始日期','结束日期']" @change="timeRangeChange" />
+        <lay-date-picker v-model="timeRange" range type="time" :placeholder="['开始日期', '结束日期']" @change="timeRangeChange" />
       </lay-form-item>
-
 
       <lay-form-item v-if="form.scheduleType === 'SIMPLE'" label="间隔单位" prop="simple.unit" :required="form.scheduleType === 'SIMPLE'">
         <lay-select v-model="form.simple.unit" placeholder="请选择" allow-clear style="width: 100%">
@@ -383,8 +385,8 @@ watch(
         <lay-input-number v-model="form.simple.repeatCount" placeholder="请填写" allow-clear />
       </lay-form-item>
       <lay-form-item v-if="form.scheduleType === 'SIMPLE'" label="是否重复执行" prop="simple.repeatForever">
-        <lay-radio v-model="form.simple.repeatForever" name="repeatForever" :value="true" label="是" @change="form.simple.repeatCount = -1"></lay-radio>
-        <lay-radio v-model="form.simple.repeatForever" name="repeatForever" :value="false" label="否"></lay-radio>
+        <lay-radio v-model="form.simple.repeatForever" name="repeatForever" :value="true" label="是" @change="form.simple.repeatCount = -1" />
+        <lay-radio v-model="form.simple.repeatForever" name="repeatForever" :value="false" label="否" />
       </lay-form-item>
 
       <lay-field title="任务配置" />
@@ -402,7 +404,7 @@ watch(
             <lay-icon type="layui-icon-about" />
           </lay-tooltip>
         </template>
-        <kv-table ref="kvTable" />
+        <KvTable ref="kvTable" />
       </lay-form-item>
     </lay-form>
   </lay-layer>

@@ -8,7 +8,7 @@ enum Api {
 
 /**
  * 分页查询
- * @returns
+ * @return
  */
 export function pageTaskLogApi(param: PageParam<TaskLog>) {
   return request.post<ApiResult<PageResult<TaskLogDTO>>>(Api.Page, { data: param })

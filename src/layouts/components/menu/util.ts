@@ -5,7 +5,7 @@ import type { RouteItem } from '~/types/router'
  * @param node 子节点
  * @param parentNames 父级菜单name数组
  * @param name 当前菜单的名称
- * @returns
+ * @return
  */
 function findParentNode(node: RouteItem, parentNames: string[], name: string) {
   if (node.name === name) {
@@ -33,7 +33,7 @@ function findParentNode(node: RouteItem, parentNames: string[], name: string) {
  * 查询当前菜单的父级菜单名
  * @param dataSource 菜单数据
  * @param name 当前菜单的name
- * @returns 包含当前菜单以及所有父菜单name的数组
+ * @return 包含当前菜单以及所有父菜单name的数组
  */
 export function findMenuKeyParentName(dataSource: RouteItem[], name: string) {
   // 父级菜单name数组

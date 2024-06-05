@@ -1,9 +1,9 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute, ProcessedRequest } from 'vite-plugin-fake-server'
 import type { PageResult } from '../../src/types/global'
-import type { SysFile } from "~/types/system/file"
+import type { SysFile } from '~/types/system/file'
 import { pageResult, queryResult, uploadResult } from '../mock_data/file'
-import { checkFailure, getRequestToken, resultError, resultOk } from "../util"
+import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 
 /** 分页查询api */
 function pageApi(): FakeRoute {

@@ -2,8 +2,8 @@
 import { columns } from './columns'
 import type { PageParam } from '~/types/global'
 import type { SelectOption } from '~/types/layui/select'
-import type { JobQueryParam, QuartzJobDetailDTO, JobClassListResult } from '~/types/job/job'
-import { convertIntervalUnit, convertCalendarWeek } from '~/utils/convert'
+import type { JobQueryParam, JobClassListResult, QuartzJobDetailDTO } from '~/types/job/job'
+import { convertCalendarWeek, convertIntervalUnit } from '~/utils/convert'
 import JobSearchForm from './components/job-search.vue'
 import JobEdit from './components/job-edit.vue'
 
@@ -25,7 +25,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
+  layout: ['count', 'prev', 'page', 'next', 'limits', 'refresh', 'skip'],
 })
 // 是否显示编辑弹窗
 const showEdit = ref(false)
@@ -138,15 +138,15 @@ function timeParse(strProp2: string) {
   if (!strProp2) return ''
 
   // 5,0,0,1,2,3 => [5,0,0,1,2,3]
-  let timeArr = strProp2.split(',')
-  if (timeArr.length != 6) return ''
+  const timeArr = strProp2.split(',')
+  if (timeArr.length !== 6) return ''
 
-  let startHour = timeArr[0].length < 2? '0' + timeArr[0] : timeArr[0]
-  let startMinute = timeArr[1].length < 2? '0' + timeArr[1] : timeArr[1]
-  let startSecond = timeArr[2].length < 2? '0' + timeArr[2] : timeArr[2]
-  let endHour = timeArr[3].length < 2? '0' + timeArr[3] : timeArr[3]
-  let endMinute = timeArr[4].length < 2? '0' + timeArr[4] : timeArr[4]
-  let endSecond = timeArr[5].length < 2? '0' + timeArr[5] : timeArr[5]
+  const startHour = timeArr[0].length < 2 ? `0${timeArr[0]}` : timeArr[0]
+  const startMinute = timeArr[1].length < 2 ? `0${timeArr[1]}` : timeArr[1]
+  const startSecond = timeArr[2].length < 2 ? `0${timeArr[2]}` : timeArr[2]
+  const endHour = timeArr[3].length < 2 ? `0${timeArr[3]}` : timeArr[3]
+  const endMinute = timeArr[4].length < 2 ? `0${timeArr[4]}` : timeArr[4]
+  const endSecond = timeArr[5].length < 2 ? `0${timeArr[5]}` : timeArr[5]
   return `${startHour}:${startMinute}:${startSecond}-${endHour}:${endMinute}:${endSecond}`
 }
 
@@ -154,7 +154,7 @@ function timeParse(strProp2: string) {
  * 打开编辑弹窗
  * @param row 需要编辑的用户数据。
  */
- function openEditModal(row?: QuartzJobDetailDTO) {
+function openEditModal(row?: QuartzJobDetailDTO) {
   current.value = row
   showEdit.value = true
 }
@@ -169,7 +169,7 @@ function handleDelete(jobName?: string) {
   useConfirm('确定要删除这条数据吗？', async (layerId: string) => {
     try {
       // 单体删除
-      const { success, message } = await deleteJobApi({jobName})
+      const { success, message } = await deleteJobApi({ jobName })
       if (!success) {
         layer.msg(message || '操作失败', { icon: 2 })
         return
@@ -188,10 +188,10 @@ function handleDelete(jobName?: string) {
 
 /** 处理：暂停/恢复 */
 async function pauseOrResume(triggerState: string, jobName: string) {
-  if (triggerState == 'PAUSED') {
+  if (triggerState === 'PAUSED') {
     try {
       // 恢复任务
-      const {success, message} = await resumeJobApi({jobName})
+      const { success, message } = await resumeJobApi({ jobName })
       if (!success) {
         layer.msg(message || '操作失败', { icon: 2 })
         return
@@ -200,11 +200,11 @@ async function pauseOrResume(triggerState: string, jobName: string) {
       layer.msg(message || '操作成功', { icon: 1 })
       // 重新获取表格数据
       fetchTableData()
-    }catch(err) {}
+    } catch (err) { }
   } else {
     try {
       // 暂停任务
-      const {success, message} = await pauseJobApi({jobName})
+      const { success, message } = await pauseJobApi({ jobName })
       if (!success) {
         layer.msg(message || '操作失败', { icon: 2 })
         return
@@ -213,14 +213,14 @@ async function pauseOrResume(triggerState: string, jobName: string) {
       layer.msg(message || '操作成功', { icon: 1 })
       // 重新获取表格数据
       fetchTableData()
-    } catch(err){}
+    } catch (err) { }
   }
 }
 
 /** 处理：立即运行一次 */
 async function handlerRunOnce(jobName: string, jobParam?: string) {
   try {
-    const { success, message } = await runOnceJobApi({jobName, jobParam})
+    const { success, message } = await runOnceJobApi({ jobName, jobParam })
     if (!success) {
       layer.msg(message || '操作失败', { icon: 2 })
       return
@@ -229,7 +229,7 @@ async function handlerRunOnce(jobName: string, jobParam?: string) {
     layer.msg(message || '操作成功', { icon: 1 })
     // 重新获取表格数据
     fetchTableData()
-  }catch(err){}
+  } catch (err) { }
 }
 
 onMounted(() => {
@@ -304,7 +304,7 @@ onMounted(() => {
             size="xs"
             @click="pauseOrResume(row.triggerState, row.jobName)"
           >
-            <div v-if="row.triggerState == 'PAUSED'">恢复</div>
+            <div v-if="row.triggerState === 'PAUSED'">恢复</div>
             <div v-else>暂停</div>
           </lay-button>
           <lay-button
@@ -315,7 +315,6 @@ onMounted(() => {
             立即运行一次
           </lay-button>
         </template>
-
 
         <!-- 触发器状态列 -->
         <template #triggerState="{ row }">
@@ -355,7 +354,10 @@ onMounted(() => {
           </div>
           <div v-if="row.triggerType === 'SIMPLE'">
             <div class="trigger-type-title">Simple:</div>
-            <div class="trigger-type-content">每{{ row.simpleRepeatInterval }}毫秒触发{{ row.simpleRepeatCount == -1 ? '一' : row.simpleRepeatCount }}次<span v-if="row.simpleRepeatCount == -1">，一直重复</span></div>
+            <div class="trigger-type-content">
+              每{{ row.simpleRepeatInterval }}毫秒触发{{ row.simpleRepeatCount === -1 ? '一' : row.simpleRepeatCount }}次
+              <span v-if="row.simpleRepeatCount === -1">，一直重复</span>
+            </div>
           </div>
         </template>
 

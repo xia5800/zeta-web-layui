@@ -49,34 +49,34 @@ function handleSubmit() {
 
   // 表单校验
   refForm.value.validate(async (isValidate: boolean, model: LoginParam, _errors: any) => {
-      if (!isValidate) return
+    if (!isValidate) return
 
-      setLoading(true)
-      try {
-        // 登录
-        await loginApi({...cloneDeep(model)})
-        // 路由跳转
-        const { from, ...othersQuery } = router.currentRoute.value.query
-        router.push({
-          path: (from as string) || HOME_ROUTE,
-          query: {
-            ...othersQuery,
-          },
-        })
-        // 登录成功提示
-        layer.notify({
-          title: '登录成功',
-          content: '欢迎回来~',
-          area: '300px',
-          icon: 1,
-          time: 1000,
-        })
-      } catch (err) {
-        layer.msg((err as Error).message, { icon: 2 })
-      } finally {
-        setLoading(false)
-      }
-  });
+    setLoading(true)
+    try {
+      // 登录
+      await loginApi({ ...cloneDeep(model) })
+      // 路由跳转
+      const { from, ...othersQuery } = router.currentRoute.value.query
+      router.push({
+        path: (from as string) || HOME_ROUTE,
+        query: {
+          ...othersQuery,
+        },
+      })
+      // 登录成功提示
+      layer.notify({
+        title: '登录成功',
+        content: '欢迎回来~',
+        area: '300px',
+        icon: 1,
+        time: 1000,
+      })
+    } catch (err) {
+      layer.msg((err as Error).message, { icon: 2 })
+    } finally {
+      setLoading(false)
+    }
+  })
 }
 
 onMounted(() => {

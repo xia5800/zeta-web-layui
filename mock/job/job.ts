@@ -1,5 +1,5 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute, ProcessedRequest } from 'vite-plugin-fake-server'
 import type { PageResult } from '../../src/types/global'
 import type { QuartzJobDetailDTO, JobClassListResult } from '../../src/types/job/job'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
@@ -54,11 +54,11 @@ function addApi(): FakeRoute {
       if (!body.jobClassName) return checkFailure('任务执行类不能为空')
       if (!body.jobName) return checkFailure('任务名称不能为空')
       if (!body.scheduleType) return checkFailure('调度类型不能为空')
-      switch(body.scheduleType) {
+      switch (body.scheduleType) {
         case 'CRON':
           if (!body.cron) return checkFailure('cron表达式不能为空')
           break
-        case'CAL_INT':
+        case 'CAL_INT':
           if (!body.calendar) return checkFailure('Calendar类型调度器参数不能为空')
           if (!body.calendar.timeInterval) return checkFailure('间隔时间不能为空')
           if (!body.calendar.unit) return checkFailure('间隔单位不能为空')
@@ -96,11 +96,11 @@ function updateApi(): FakeRoute {
       if (!body.jobClassName) return checkFailure('任务执行类不能为空')
       if (!body.jobName) return checkFailure('任务名称不能为空')
       if (!body.scheduleType) return checkFailure('调度类型不能为空')
-      switch(body.scheduleType) {
+      switch (body.scheduleType) {
         case 'CRON':
           if (!body.cron) return checkFailure('cron表达式不能为空')
           break
-        case'CAL_INT':
+        case 'CAL_INT':
           if (!body.calendar) return checkFailure('Calendar类型调度器参数不能为空')
           if (!body.calendar.timeInterval) return checkFailure('间隔时间不能为空')
           if (!body.calendar.uint) return checkFailure('间隔单位不能为空')
@@ -210,21 +210,21 @@ function nextTriggerTime(): FakeRoute {
         return resultError('未能读取到有效Token', { code: 401 })
       }
 
-      let cron = request.query.cron
+      const cron = request.query.cron
       if (!cron) return checkFailure('cron表达式不能为空')
 
       try {
         // 使用fetch函数发送GET请求
-        const response = await fetch('https://www.pppet.net/preview?p='+ cron)
+        const response = await fetch(`https://www.pppet.net/preview?p=${cron}`)
         const data = await response.json()
         return resultOk<string[]>(data as unknown as string[])
       } catch (e) {
         // 如果不支持fetch
         console.log(e)
         return resultOk<string[]>([
-          '2023-01-01 12:00:00','2023-01-01 12:00:00',
-          '2023-01-01 12:00:00','2023-01-01 12:00:00',
-          '2023-01-01 12:00:00','2023-01-01 12:00:00',
+          '2023-01-01 12:00:00', '2023-01-01 12:00:00',
+          '2023-01-01 12:00:00', '2023-01-01 12:00:00',
+          '2023-01-01 12:00:00', '2023-01-01 12:00:00',
         ])
       }
     }

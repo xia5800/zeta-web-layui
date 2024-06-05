@@ -11,7 +11,7 @@ enum Api {
  * 查询角色菜单
  *
  * @param roleId 角色id
- * @returns
+ * @return
  */
 export function listRoleMenuApi(roleId: string) {
   return request.get<ApiResult<SysMenu[]>>(`${Api.Common}/${roleId}`)
@@ -19,7 +19,7 @@ export function listRoleMenuApi(roleId: string) {
 
 /**
  * 新增或修改
- * @returns
+ * @return
  */
 export function updateRoleMenuApi(param?: SysRoleMenuHandleParam) {
   return request.put<ApiResult<boolean>>(Api.Common, { data: param })

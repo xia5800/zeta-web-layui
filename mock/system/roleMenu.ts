@@ -1,5 +1,5 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute, ProcessedRequest } from 'vite-plugin-fake-server'
 import type { SysMenu } from '../../src/types/system/menu'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import { roleMenuResult } from '../mock_data/roleMenu'

@@ -124,7 +124,7 @@ function handleSubmit() {
                   />
                 </lay-form-item>
                 <lay-form-item class="z-text-center">
-                  <lay-button type="primary"  @click="handleSubmit">
+                  <lay-button type="primary" @click="handleSubmit">
                     保存修改
                   </lay-button>
                 </lay-form-item>

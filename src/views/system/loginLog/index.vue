@@ -31,7 +31,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
+  layout: ['count', 'prev', 'page', 'next', 'limits', 'refresh', 'skip'],
 })
 // 默认分页查询参数
 const pageParam: PageParam<SysLoginLog> = { page: 1, limit: 10, sort: 'id', order: 'desc' }
@@ -149,6 +149,5 @@ function handleSearch(formModel: SysLoginLog) {
         </template>
       </lay-table>
     </div>
-
   </lay-container>
 </template>

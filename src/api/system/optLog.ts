@@ -9,7 +9,7 @@ enum Api {
 
 /**
  * 分页查询
- * @returns
+ * @return
  */
 export function pageOptLogApi(param: PageParam<SysOptLog>) {
   return request.post<ApiResult<PageResult<SysOptLog>>>(Api.Page, { data: param })
@@ -18,7 +18,7 @@ export function pageOptLogApi(param: PageParam<SysOptLog>) {
 /**
  * 单体查询
  * @param id
- * @returns
+ * @return
  */
 export function getOptLogApi(id: string) {
   return request.get<ApiResult<SysOptLog>>(`${Api.Common}/${id}`)

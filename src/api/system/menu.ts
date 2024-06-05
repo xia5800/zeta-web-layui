@@ -12,7 +12,7 @@ enum Api {
 
 /**
  * 查询菜单树
- * @returns
+ * @return
  */
 export function menuTreeApi(param: SysMenu = {}) {
   return request.post<ApiResult<SysMenu[]>>(Api.Tree, { data: param })
@@ -21,7 +21,7 @@ export function menuTreeApi(param: SysMenu = {}) {
 /**
  * 新增
  * @param param
- * @returns
+ * @return
  */
 export function addMenuApi(param: SysMenuSaveParam) {
   return request.post<ApiResult<boolean>>(Api.Common, { data: param })
@@ -30,7 +30,7 @@ export function addMenuApi(param: SysMenuSaveParam) {
 /**
  * 修改
  * @param param
- * @returns
+ * @return
  */
 export function updateMenuApi(param: SysMenuUpdateParam) {
   return request.put<ApiResult<boolean>>(Api.Common, { data: param })
@@ -39,7 +39,7 @@ export function updateMenuApi(param: SysMenuUpdateParam) {
 /**
  * 删除
  * @param id
- * @returns
+ * @return
  */
 export function deleteMenuApi(id: string) {
   return request.delete<ApiResult<boolean>>(`${Api.Common}/${id}`)
@@ -48,8 +48,8 @@ export function deleteMenuApi(id: string) {
 /**
  * 批量删除
  * @param ids
- * @returns
+ * @return
  */
 export function batchDeleteMenuApi(ids: string[]) {
-  return request.delete<ApiResult<Boolean>>(Api.Batch, { data: ids })
+  return request.delete<ApiResult<boolean>>(Api.Batch, { data: ids })
 }

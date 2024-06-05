@@ -7,7 +7,7 @@ const iv = CryptoJS.enc.Utf8.parse(CRYPTO_IV)
 /**
  * 加密字符串
  * @param cipherText
- * @returns
+ * @return
  */
 export function cryptoEncode(cipherText: string): string {
   const message = CryptoJS.enc.Utf8.parse(cipherText)
@@ -22,7 +22,7 @@ export function cryptoEncode(cipherText: string): string {
 /**
  * 解密字符串
  * @param cipherText
- * @returns
+ * @return
  */
 export function cryptoDecode(cipherText: string): string {
   // 解密base64类型的密文

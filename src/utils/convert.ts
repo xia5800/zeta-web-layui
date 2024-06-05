@@ -1,34 +1,32 @@
-
 /** bytes转kb */
 export function bytesToKB(bytes: number) {
-  return bytes / 1024;
+  return bytes / 1024
 }
 
 /** bytes转mb */
 export function bytesToMB(bytes: number) {
-  return bytes / (1024 * 1024);
+  return bytes / (1024 * 1024)
 }
 
 /** bytes转gb */
 export function bytesToGB(bytes: number) {
-  return bytes / (1024 * 1024 * 1024);
+  return bytes / (1024 * 1024 * 1024)
 }
 
 /** kb转bytes */
 export function KBToBytes(kb: number) {
-  return kb * 1024;
+  return kb * 1024
 }
 
 /** mb转bytes */
 export function MBToBytes(mb: number) {
-  return mb * 1024 * 1024;
+  return mb * 1024 * 1024
 }
 
 /** gb转bytes */
 export function GBToBytes(gb: number) {
-  return gb * 1024 * 1024 * 1024;
+  return gb * 1024 * 1024 * 1024
 }
-
 
 /**
  * 转换时间单位
@@ -36,7 +34,7 @@ export function GBToBytes(gb: number) {
  * @return "天"
  */
 export function convertIntervalUnit(time: string) {
-  switch(time) {
+  switch (time) {
     case 'MILLISECOND':
       return '毫秒'
     case 'SECOND':
@@ -65,7 +63,7 @@ export function convertIntervalUnit(time: string) {
  * @param isChinese 是否为中文
  */
 export function convertCalendarWeek(week: string, isChinese: boolean = true) {
-  switch(week) {
+  switch (week) {
     case '1':
       return isChinese ? '日' : 'SUNDAY'
     case '2':

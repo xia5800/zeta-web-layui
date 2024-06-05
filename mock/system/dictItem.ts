@@ -1,7 +1,7 @@
-import { defineFakeRoute } from "vite-plugin-fake-server/client"
-import type { FakeRoute, ProcessedRequest } from "vite-plugin-fake-server"
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import type { FakeRoute, ProcessedRequest } from 'vite-plugin-fake-server'
 import type { PageResult } from '../../src/types/global'
-import type { SysDictItem } from "~/types/system/dictItem"
+import type { SysDictItem } from '~/types/system/dictItem'
 import { checkFailure, getRequestToken, resultError, resultOk } from '../util'
 import { pageResult, queryResult } from '../mock_data/dictItem'
 

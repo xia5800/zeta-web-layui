@@ -9,7 +9,6 @@ import KvTable from './kv-table.vue'
 const kvTable = ref()
 const kvParam = ref<string>('{"name":"张三", "age":18}')
 
-
 function setData(param: string) {
   kvTable.value.setTableData(param)
 }
@@ -35,6 +34,16 @@ function getData() {
 - setTableData：设置表格数据
 -->
 <script setup lang="ts">
+withDefaults(defineProps<{
+  /** 表格高度 */
+  height?: string | number
+  /** 新增按钮的文字 */
+  addBtnName?: string
+}>(), {
+  height: '200px',
+  addBtnName: '添加参数',
+})
+
 // 自定义类型
 interface Kv {
   id: number
@@ -68,20 +77,10 @@ const columns = [
   },
 ]
 
-withDefaults(defineProps<{
-  /** 表格高度 */
-  height?: string | number,
-  /** 新增按钮的文字 */
-  addBtnName?: string,
-}>(), {
-  height: '200px',
-  addBtnName: '添加参数',
-})
-
 // 组件暴露的属性和方法
 defineExpose({
   getTableData,
-  setTableData
+  setTableData,
 })
 
 // 表格数据
@@ -89,17 +88,17 @@ const dataSource = ref<Kv[]>([])
 
 /** 获取数据. 父组件调用 */
 function getTableData(): string {
-  if (dataSource.value.length === 0) return ""
+  if (dataSource.value.length === 0) return ''
   let result = {}
 
   // 把 [{"key: "age", value: "123"}, {"key": "name", value: "tom"}]
   // 转换成 {"age": "123", "name": "tom"}
   dataSource.value
-    .filter((item: Kv) => item.key != '')
+    .filter((item: Kv) => item.key !== '')
     .forEach((item: Kv) => {
       result = {
         ...result,
-        ...{[item.key] : item.value }
+        ...{ [item.key]: item.value },
       }
     })
   return JSON.stringify(result)
@@ -110,24 +109,24 @@ function setTableData(data?: string) {
   if (!data) return
 
   // {"age": "123", "name": "tom"}
-  let parse = JSON.parse(data) as any
+  const parse = JSON.parse(data) as any
 
   // 处理 {} 的情况
-  if (Object.keys(parse).length == 0) return
+  if (Object.keys(parse).length === 0) return
 
   // 把 {"age": "123", "name": "tom"}
   // 转换为[
   //   {"id": 1, "key": "age", "value": "123", "valueType": "string"}
   //   {"id": 2, "key": "name", "value": "tom", "valueType": "string"}
   // ]
-  let tableData: Kv[] = new Array<Kv>()
-  Object.entries(parse).forEach(([key, value], index:number) => {
-    let valueType = typeof value === 'number' ? 'number' : 'string'
+  const tableData: Kv[] = new Array<Kv>()
+  Object.entries(parse).forEach(([key, value], index: number) => {
+    const valueType = typeof value === 'number' ? 'number' : 'string'
     tableData.push({
       id: index + 1,
       key,
       value,
-      valueType
+      valueType,
     } as Kv)
   })
 
@@ -147,7 +146,7 @@ function handleAdd() {
 
 /** 处理删除 */
 function handleDelete(row: Kv) {
-  dataSource.value = dataSource.value.filter((item) => item.id!== row.id)
+  dataSource.value = dataSource.value.filter(item => item.id !== row.id)
 }
 
 /** 修改值类型 */
@@ -169,7 +168,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <lay-table :columns="columns" :data-source="dataSource" :height="height" >
+    <lay-table :columns="columns" :data-source="dataSource" :height="height">
       <!-- key列 -->
       <template #key="{ row }">
         <lay-input
@@ -199,7 +198,7 @@ onMounted(() => {
       <!-- 操作列 -->
       <template #operator="{ row }">
         <lay-button type="primary" size="xs" @click="changeValueType(row)">
-          {{ row.valueType === 'string'? 'num' : 'str' }}
+          {{ row.valueType === 'string' ? 'num' : 'str' }}
         </lay-button>
         <lay-button type="danger" size="xs" @click="handleDelete(row)">
           删除
@@ -211,9 +210,9 @@ onMounted(() => {
     <lay-button
       border="green"
       border-style="dashed"
+      style="margin-top: 10px"
       :fluid="true"
       @click="handleAdd"
-      style="margin-top: 10px"
     >
       {{ addBtnName }}
     </lay-button>

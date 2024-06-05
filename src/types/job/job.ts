@@ -51,7 +51,7 @@ export interface QuartzJobDetailDTO {
    *   ERROR: 错误
    *   BLOCKED: 阻塞
    */
-  triggerState?: 'NONE' | 'NORMAL' | 'PAUSED' | 'COMPLETE' | 'ERROR' | 'BLOCKED',
+  triggerState?: 'NONE' | 'NORMAL' | 'PAUSED' | 'COMPLETE' | 'ERROR' | 'BLOCKED'
   /** 触发器类型 */
   triggerType?: ScheduleType
   /** cron表达式，仅当triggerType=CRON的时候才有值 */
@@ -79,7 +79,6 @@ export interface JobClassListResult {
   /** 任务执行类描述 */
   description: string
 }
-
 
 /**
  * 创建或编辑任务参数
@@ -152,7 +151,6 @@ export interface Simple {
   /** 是否永远重复执行下去 */
   repeatForever?: boolean
 }
-
 
 /**
  * 任务操作（暂停、恢复、删除）

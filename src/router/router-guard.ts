@@ -30,7 +30,7 @@ export function createRouterGuard(router: Router) {
    * @param to RouteLocationNormalized 即将要进入的目标
    * @param from RouteLocationNormalized 当前导航正要离开的路由
    * @param next NavigationGuardNext
-   * @returns 返回false取消当前导航
+   * @return 返回false取消当前导航
    */
   router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()

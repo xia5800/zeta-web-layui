@@ -29,7 +29,7 @@ const parentPath = ref<string>('')
 
 /**
  * 获取表格数据
- * @param param 自定义分页查询参数
+ * @param sysMenu 自定义分页查询参数
  */
 async function fetchTableData(sysMenu?: SysMenu) {
   setLoading(true)

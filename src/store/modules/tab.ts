@@ -10,7 +10,7 @@ import { storageLocal } from '~/utils/cache'
 /**
  * 缓存tab数据
  * @param tabs
- * @returns
+ * @return
  */
 export function cacheTabs(tabs: Tab[]) {
   if (!getToken()) return
@@ -33,7 +33,7 @@ export function clearCachedTabs() {
 
 /**
  * 使用缓存中的tab数据
- * @returns
+ * @return
  */
 function applyCachedTabs(): Tab[] {
   if (!getToken()) return []
@@ -49,7 +49,7 @@ function applyCachedTabs(): Tab[] {
 /**
  * router 转换为 tab
  * @param routes
- * @returns
+ * @return
  */
 function routesToTabs(routes: RouteRecord[]): Tab[] {
   return routes.map((route: RouteRecord) => {

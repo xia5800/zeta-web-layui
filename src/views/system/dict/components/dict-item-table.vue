@@ -4,14 +4,14 @@ import type { PageParam } from '~/types/global'
 import type { SysDictItem } from '~/types/system/dictItem'
 import DictItemEdit from './dict-item-edit.vue'
 
+defineOptions({
+  name: 'SysDictItem',
+})
+
 const props = defineProps<{
   /** 字典id */
   dictId?: string
 }>()
-
-defineOptions({
-  name: 'SysDictItem',
-})
 
 // 表格数据
 const dataSource = ref<SysDictItem[]>([])

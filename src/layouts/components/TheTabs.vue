@@ -144,9 +144,9 @@ function tabDropdownHide() {
       @change="handleChange"
       @close="handleClose"
     >
-      <lay-tab-item v-for="tab,index in tabs" :key="tab" :id="tab.path" :title="tab.title" :closable="!tab.affix">
+      <lay-tab-item v-for="tab, index in tabs" :id="tab.path" :key="index" :title="tab.title" :closable="!tab.affix">
         <template #title>
-          <lay-dropdown trigger="contextMenu" :visible="tabDropdownValue[index]" @show="tabDropdownShow(index)" @hide="tabDropdownHide" updateAtScroll>
+          <lay-dropdown trigger="contextMenu" :visible="tabDropdownValue[index]" updateAtScroll @show="tabDropdownShow(index)" @hide="tabDropdownHide">
             <div style="height: 100%; display: inline-block;">
               <span class="dot" />
               {{ tab.title }}
@@ -183,7 +183,7 @@ function tabDropdownHide() {
     </lay-tab>
 
     <lay-dropdown>
-      <lay-icon type="layui-icon-down" :class="themeStore.settings.tabTheme == 'designer' ? 'designer-last-icon' : ''" />
+      <lay-icon type="layui-icon-down" :class="themeStore.settings.tabTheme === 'designer' ? 'designer-last-icon' : ''" />
       <template #content>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeLeft()">

@@ -18,7 +18,7 @@ enum Api {
 
 /**
  * 分页查询
- * @returns
+ * @return
  */
 export function pageUserApi(param: PageParam<SysUser>) {
   return request.post<ApiResult<PageResult<SysUser>>>(Api.Page, {
@@ -28,7 +28,7 @@ export function pageUserApi(param: PageParam<SysUser>) {
 
 /**
  * 查询所有
- * @returns
+ * @return
  */
 export function queryUserApi(param: SysUser = {}) {
   return request.post<ApiResult<SysUser[]>>(Api.Query, { data: param })
@@ -37,7 +37,7 @@ export function queryUserApi(param: SysUser = {}) {
 /**
  * 获取指定用户信息
  * @param id
- * @returns
+ * @return
  */
 export function getUserApi(id: string) {
   return request.get<ApiResult<SysUser>>(`${Api.Common}/${id}`)
@@ -46,7 +46,7 @@ export function getUserApi(id: string) {
 /**
  * 新增
  * @param param
- * @returns
+ * @return
  */
 export function addUserApi(param: SysUserSaveParam) {
   return request.post<ApiResult<boolean>>(Api.Common, { data: param })
@@ -55,7 +55,7 @@ export function addUserApi(param: SysUserSaveParam) {
 /**
  * 修改
  * @param param
- * @returns
+ * @return
  */
 export function updateUserApi(param: SysUserUpdateParam) {
   return request.put<ApiResult<boolean>>(Api.Common, { data: param })
@@ -64,7 +64,7 @@ export function updateUserApi(param: SysUserUpdateParam) {
 /**
  * 删除
  * @param id
- * @returns
+ * @return
  */
 export function deleteUserApi(id: string) {
   return request.delete<ApiResult<boolean>>(`${Api.Common}/${id}`)
@@ -73,19 +73,19 @@ export function deleteUserApi(id: string) {
 /**
  * 批量删除
  * @param ids
- * @returns
+ * @return
  */
 export function batchDeleteUserApi(ids: string[]) {
-  return request.delete<ApiResult<Boolean>>(Api.Batch, { data: { ids } })
+  return request.delete<ApiResult<boolean>>(Api.Batch, { data: { ids } })
 }
 
 /**
  * 修改自己的密码
  * @param param
- * @returns
+ * @return
  */
 export function changeUserPasswordApi(param: ChangePasswordParam) {
-  return request.put<ApiResult<Boolean>>(Api.ChangePwd, {
+  return request.put<ApiResult<boolean>>(Api.ChangePwd, {
     data: param,
     repeatSubmit: false,
   })
@@ -94,10 +94,10 @@ export function changeUserPasswordApi(param: ChangePasswordParam) {
 /**
  * 重置用户密码
  * @param param
- * @returns
+ * @return
  */
 export function resetUserPasswordApi(param: ResetPwdParam) {
-  return request.put<ApiResult<Boolean>>(Api.RestPwd, {
+  return request.put<ApiResult<boolean>>(Api.RestPwd, {
     data: param,
     repeatSubmit: false,
   })
@@ -106,7 +106,7 @@ export function resetUserPasswordApi(param: ResetPwdParam) {
 /**
  * 修改状态
  * @param param
- * @returns
+ * @return
  */
 export function updateUserStateApi(param: UpdateStateParam<string, number>) {
   return request.put<ApiResult<boolean>>(Api.UpdateState, { data: param })
@@ -115,7 +115,7 @@ export function updateUserStateApi(param: UpdateStateParam<string, number>) {
 /**
  * 验证字段是否存在
  * @param param
- * @returns
+ * @return
  */
 export function existenceUserApi(param: ExistParam<string>) {
   return request.get<ApiResult<boolean>>(Api.Existence, { params: param })

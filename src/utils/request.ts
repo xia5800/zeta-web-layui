@@ -200,7 +200,7 @@ class BaseRequest {
    * @param method 请求方式 GET, POST, PUT, DELETE
    * @param url 请求url
    * @param param 请求参数 {params: {}, body: {}}
-   * @returns
+   * @return
    */
   public request<T>(method: Method, url: string, param?: RequestConfig): Promise<T> {
     const config = { method, url, ...param } as RequestConfig
@@ -225,7 +225,7 @@ class BaseRequest {
    * GET请求
    * @param url 请求url
    * @param param 请求参数 {params: {}}
-   * @returns
+   * @return
    */
   public get<T>(url: string, param?: RequestConfig): Promise<T> {
     return this.request<T>('GET', url, param)
@@ -235,7 +235,7 @@ class BaseRequest {
    * POST请求
    * @param url 请求url
    * @param param 请求参数 {params: {}, body: {}}
-   * @returns
+   * @return
    */
   public post<T>(url: string, param?: RequestConfig): Promise<T> {
     return this.request<T>('POST', url, param)
@@ -245,7 +245,7 @@ class BaseRequest {
    * PUT请求
    * @param url 请求url
    * @param param 请求参数 {params: {}, body: {}}
-   * @returns
+   * @return
    */
   public put<T>(url: string, param?: RequestConfig): Promise<T> {
     return this.request<T>('PUT', url, param)
@@ -255,7 +255,7 @@ class BaseRequest {
    * DELETE请求
    * @param url 请求url
    * @param param 请求参数 {params: {}}
-   * @returns
+   * @return
    */
   public delete<T>(url: string, param?: RequestConfig): Promise<T> {
     return this.request<T>('DELETE', url, param)

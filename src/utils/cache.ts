@@ -68,7 +68,7 @@ class Cache {
  * 自定义Storage缓存类
  * @param storage 缓存类型
  * @param hasEncrypt 数据是否加密
- * @returns
+ * @return
  */
 export function createStorage(storage: Storage, hasEncrypt = false) {
   return new Cache(storage, hasEncrypt)
@@ -77,7 +77,7 @@ export function createStorage(storage: Storage, hasEncrypt = false) {
 /**
  * SessionStorage缓存类
  * @param hasEncrypt 数据是否加密
- * @returns
+ * @return
  */
 export function storageSession(hasEncrypt = true) {
   return createStorage(sessionStorage, hasEncrypt)
@@ -86,7 +86,7 @@ export function storageSession(hasEncrypt = true) {
 /**
  * localStorage缓存类
  * @param hasEncrypt 数据是否加密
- * @returns
+ * @return
  */
 export function storageLocal(hasEncrypt = true) {
   return createStorage(localStorage, hasEncrypt)

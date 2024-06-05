@@ -36,11 +36,14 @@ const menuTheme = computed(() => {
           <TheLogo />
         </lay-logo>
         <!-- 菜单 -->
-        <lay-scroll class="menu-scroll" :style="{
-          height: themeStore.settings.showLogo
-            ? 'calc(100% - var(--layout-nav-height))'
-            : '100%',
-        }">
+        <lay-scroll
+          class="menu-scroll"
+          :style="{
+            height: themeStore.settings.showLogo
+              ? 'calc(100% - var(--layout-nav-height))'
+              : '100%',
+          }"
+        >
           <TheMenu :theme="menuTheme" />
         </lay-scroll>
       </lay-side>
@@ -58,7 +61,7 @@ const menuTheme = computed(() => {
         <lay-body>
           <TheContent />
           <!-- 回到顶部 -->
-          <lay-backtop :show-height="200" :bottom="60" :right="20" />
+          <LayBacktop :show-height="200" :bottom="60" :right="20" />
         </lay-body>
 
         <!-- 页脚 -->

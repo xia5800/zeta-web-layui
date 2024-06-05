@@ -64,7 +64,7 @@ export const useThemeStore = defineStore({
       // 初始化主题色
       this.themeVariable['--global-primary-color'] = this.settings.primaryColor
       this.themeVariable['--global-checked-color'] = this.settings.primaryColor
-      this.themeVariable['--global-border-radius'] = this.settings.borderRadius + 'px'
+      this.themeVariable['--global-border-radius'] = `${this.settings.borderRadius}px`
     },
     /** 保存设置 */
     saveSettins({
@@ -77,7 +77,7 @@ export const useThemeStore = defineStore({
       // 修改主题色
       this.themeVariable['--global-primary-color'] = this.settings.primaryColor
       this.themeVariable['--global-checked-color'] = this.settings.primaryColor
-      this.themeVariable['--global-border-radius'] = this.settings.borderRadius + 'px'
+      this.themeVariable['--global-border-radius'] = `${this.settings.borderRadius}px`
 
       if (!showTips) {
         storageLocal().setItem<ThemeSettings>(CacheKey.THEME_SETTING_CACHE_KEY, cloneDeep(this.settings))

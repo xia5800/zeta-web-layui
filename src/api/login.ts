@@ -15,8 +15,8 @@ enum Api {
 
 /**
  * 用户登录
- * @param data 登录参数
- * @returns
+ * @param param 登录参数
+ * @return
  */
 export async function loginApi(param: LoginParam) {
   // 密码加密
@@ -32,7 +32,7 @@ export async function loginApi(param: LoginParam) {
 
 /**
  * 注销登录
- * @returns
+ * @return
  */
 export function logoutApi() {
   return request.get<ApiResult<boolean>>(Api.Logout)
@@ -40,7 +40,7 @@ export function logoutApi() {
 
 /**
  * 获取验证码
- * @returns
+ * @return
  */
 export function captchaApi() {
   return request.get<ApiResult<CaptchaResult>>(Api.Captcha)
@@ -48,7 +48,7 @@ export function captchaApi() {
 
 /**
  * 获取当前用户基本信息
- * @returns
+ * @return
  */
 export function getUserInfoApi() {
   return request.get<ApiResult<UserInfo>>(Api.GetUserInfo)
@@ -56,7 +56,7 @@ export function getUserInfoApi() {
 
 /**
  * 获取当前用户菜单
- * @returns
+ * @return
  */
 export function getUserMenuApi() {
   return request.get<ApiResult<UserMenu[]>>(Api.GetUserMenu)

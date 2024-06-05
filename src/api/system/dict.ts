@@ -11,7 +11,7 @@ enum Api {
 
 /**
  * 分页查询
- * @returns
+ * @return
  */
 export function pageDictApi(param: PageParam<SysDict>) {
   return request.post<ApiResult<PageResult<SysDict>>>(Api.Page, { data: param })
@@ -19,7 +19,7 @@ export function pageDictApi(param: PageParam<SysDict>) {
 
 /**
  * 查询所有
- * @returns
+ * @return
  */
 export function queryDictApi(param: SysDict = {}) {
   return request.post<ApiResult<SysDict[]>>(Api.Query, { data: param })
@@ -28,7 +28,7 @@ export function queryDictApi(param: SysDict = {}) {
 /**
  * 单体查询
  * @param id
- * @returns
+ * @return
  */
 export function getDictApi(id: string) {
   return request.get<ApiResult<SysDict>>(`${Api.Common}/${id}`)
@@ -37,7 +37,7 @@ export function getDictApi(id: string) {
 /**
  * 新增
  * @param param
- * @returns
+ * @return
  */
 export function addDictApi(param: SysDictSaveParam) {
   return request.post<ApiResult<boolean>>(Api.Common, { data: param })
@@ -46,7 +46,7 @@ export function addDictApi(param: SysDictSaveParam) {
 /**
  * 修改
  * @param param
- * @returns
+ * @return
  */
 export function updateDictApi(param: SysDictUpdateParam) {
   return request.put<ApiResult<boolean>>(Api.Common, { data: param })
@@ -55,7 +55,7 @@ export function updateDictApi(param: SysDictUpdateParam) {
 /**
  * 删除
  * @param id
- * @returns
+ * @return
  */
 export function deleteDictApi(id: string) {
   return request.delete<ApiResult<boolean>>(`${Api.Common}/${id}`)
@@ -64,8 +64,8 @@ export function deleteDictApi(id: string) {
 /**
  * 批量删除
  * @param ids
- * @returns
+ * @return
  */
 export function batchDeleteDictApi(ids: string[]) {
-  return request.delete<ApiResult<Boolean>>(Api.Batch, { data: ids })
+  return request.delete<ApiResult<boolean>>(Api.Batch, { data: ids })
 }

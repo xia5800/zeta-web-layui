@@ -157,7 +157,7 @@ export const loginUserMenu = [
           title: '调度日志',
           icon: '',
           hide: false,
-          'keepAlive': false
+          keepAlive: false
         }
       }
     ],

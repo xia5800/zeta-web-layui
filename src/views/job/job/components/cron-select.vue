@@ -23,7 +23,7 @@ const cron = ref<string>('')
 - update:modelValue: 绑定值更新
 -->
 <script setup lang="ts">
-import { ApiResult } from '~/types/global'
+import type { ApiResult } from '~/types/global'
 import dayjs from 'dayjs'
 
 const props = withDefaults(defineProps<{
@@ -63,29 +63,29 @@ interface CronDescription {
 }
 
 const monthMap: Record<string, string> = {
-  'JAN' : '1',
-  'FEB' : '2',
-  'MAR' : '3',
-  'APR' : '4',
-  'MAY' : '5',
-  'JUN' : '6',
-  'JUL' : '7',
-  'AUG' : '8',
-  'SEP' : '9',
-  'OCT' : '10',
-  'NOV' : '11',
-  'DEC' : '12',
+  'JAN': '1',
+  'FEB': '2',
+  'MAR': '3',
+  'APR': '4',
+  'MAY': '5',
+  'JUN': '6',
+  'JUL': '7',
+  'AUG': '8',
+  'SEP': '9',
+  'OCT': '10',
+  'NOV': '11',
+  'DEC': '12',
 }
 
 // quartz: 1=星期日、2=星期一、3=星期二、4=星期三、5=星期四、6=星期五、7=星期六
 const weekMap: Record<string, string> = {
-  'SUN' : '1',
-  'MON' : '2',
-  'TUE' : '3',
-  'WED' : '4',
-  'THU' : '5',
-  'FRI' : '6',
-  'SAT' : '7',
+  'SUN': '1',
+  'MON': '2',
+  'TUE': '3',
+  'WED': '4',
+  'THU': '5',
+  'FRI': '6',
+  'SAT': '7',
 }
 
 // cron 默认值
@@ -102,17 +102,17 @@ const cron = ref<CronData>({
 const cronDescription = ref<CronDescription[]>([
   { cron: '0/2 * * * * ?', description: '每2秒触发一次' },
   { cron: '0 0/2 * * * ?', description: '每2分钟触发一次' },
-  { cron: '0 0 10,14,16 * * ?', description: '每天10点、14点、16点触发'},
-  { cron: '0 0/30 9-17 * * ?', description: '每天9点-17点，00分和30分触发'},
-  { cron: '0 0 2 1 * ?', description: '每月1号的凌晨2点触发'},
-  { cron: '0 0 2 1 1-2 ? *', description: '每年的1月1日和2月1日的凌晨2点触发'},
-  { cron: '0 10,44 14 ? 3 WED', description: '每年3月的星期3的下午2:10和2:44触发'},
-  { cron: '0 15 10 ? * MON-FRI', description: '周1至周5的上午10:15触发'},
-  { cron: '0 15 10 L * ?', description: '每月最后一日的上午10:15触发'},
-  { cron: '0 0 0 1 2/4 ?', description: '从2月1日开始，间隔4个月触发一次'},
-  { cron: '0 15 10 L JAN-MAR ?', description: '每年从1月开始到3月结束，每月最后一天10:15触发'},
-  { cron: '0 15 10 * * ? 2024', description: '2024年每天上午10:15触发'},
-  { cron: '0 15 10 * * ? 2023-2024', description: '2023和2024这两年，每天10:15分触发'},
+  { cron: '0 0 10,14,16 * * ?', description: '每天10点、14点、16点触发' },
+  { cron: '0 0/30 9-17 * * ?', description: '每天9点-17点，00分和30分触发' },
+  { cron: '0 0 2 1 * ?', description: '每月1号的凌晨2点触发' },
+  { cron: '0 0 2 1 1-2 ? *', description: '每年的1月1日和2月1日的凌晨2点触发' },
+  { cron: '0 10,44 14 ? 3 WED', description: '每年3月的星期3的下午2:10和2:44触发' },
+  { cron: '0 15 10 ? * MON-FRI', description: '周1至周5的上午10:15触发' },
+  { cron: '0 15 10 L * ?', description: '每月最后一日的上午10:15触发' },
+  { cron: '0 0 0 1 2/4 ?', description: '从2月1日开始，间隔4个月触发一次' },
+  { cron: '0 15 10 L JAN-MAR ?', description: '每年从1月开始到3月结束，每月最后一天10:15触发' },
+  { cron: '0 15 10 * * ? 2024', description: '2024年每天上午10:15触发' },
+  { cron: '0 15 10 * * ? 2023-2024', description: '2023和2024这两年，每天10:15分触发' },
 ])
 // tabId
 const tabId = ref<string>('1')
@@ -150,7 +150,7 @@ const weekCheckBox = ref<number[]>([])
 // cron执行结果-错误描述
 const executeError = ref<string>('')
 // cron执行结果-结果
-const executeResult = ref<string[]| undefined>([])
+const executeResult = ref<string[] | undefined>([])
 
 /** 秒和分钟 范围 [0, ..., 59]  */
 const secondAndMinuteRange = computed(() => {
@@ -162,15 +162,15 @@ const hourRange = computed(() => {
 })
 /** 日 范围 [1, ..., 31]  */
 const dayRange = computed(() => {
-  return Array.from(Array(31).keys()).map((item) => item + 1) as number[]
+  return Array.from(Array(31).keys()).map(item => item + 1) as number[]
 })
 /** 月 范围 [1, ..., 12]  */
 const monthRange = computed(() => {
-  return Array.from(Array(12).keys()).map((item) => item + 1) as number[]
+  return Array.from(Array(12).keys()).map(item => item + 1) as number[]
 })
 /** 周 范围 [1, ..., 12]  */
 const weekRange = computed(() => {
-  return  Array.from(Array(7).keys()).map((item) => item + 1) as number[]
+  return Array.from(Array(7).keys()).map(item => item + 1) as number[]
 })
 /** 今年 */
 const nowYear = computed(() => {
@@ -248,7 +248,7 @@ function secondRadioChange(current: string) {
         cron.value.second = '*'
         return
       }
-      cron.value.second = secondCheckBox.value.map((item) => item).join(',')
+      cron.value.second = secondCheckBox.value.map(item => item).join(',')
       break
     default:
       return
@@ -274,7 +274,7 @@ function minuteRadioChange(current: string) {
         cron.value.minute = '*'
         return
       }
-      cron.value.minute = minuteCheckBox.value.map((item) => item).join(',')
+      cron.value.minute = minuteCheckBox.value.map(item => item).join(',')
       break
     default:
       return
@@ -309,7 +309,7 @@ function hourRadioChange(current: string) {
         cron.value.hour = '*'
         return
       }
-      cron.value.hour = hourCheckBox.value.map((item) => item).join(',')
+      cron.value.hour = hourCheckBox.value.map(item => item).join(',')
       break
     default:
       return
@@ -358,7 +358,7 @@ function dayRadioChange(current: string) {
         cron.value.day = '*'
         return
       }
-      cron.value.day = dayCheckBox.value.map((item) => item).join(',')
+      cron.value.day = dayCheckBox.value.map(item => item).join(',')
       break
     default:
       return
@@ -420,7 +420,7 @@ function monthRadioChange(current: string) {
         cron.value.month = '*'
         return
       }
-      cron.value.month = monthCheckBox.value.map((item) => item).join(',')
+      cron.value.month = monthCheckBox.value.map(item => item).join(',')
       break
     default:
       return
@@ -496,7 +496,7 @@ function weekRadioChange(current: string) {
         cron.value.week = '?'
         return
       }
-      cron.value.week = weekCheckBox.value.map((item) => item).join(',')
+      cron.value.week = weekCheckBox.value.map(item => item).join(',')
       break
     default:
       return
@@ -640,7 +640,7 @@ function setCron(cronStr: string) {
       year: '',
     }
   } else {
-    let strarr = cronStr.split(' ')
+    const strarr = cronStr.split(' ')
     cron.value = {
       second: strarr[0] ? strarr[0] : '*',
       minute: strarr[1] ? strarr[1] : '*',
@@ -676,118 +676,118 @@ function radioRender() {
 
 /** 渲染秒tab里的radio */
 function secondRadioRender() {
-  let second = cron.value.second
+  const second = cron.value.second
   secondCheckBox.value = []
 
   if (second === '*') {
     secondRadio.value = '1'
   }
   else if (second.includes('-')) {
-    let secondArry = second.split('-')
+    const secondArry = second.split('-')
     if (secondArry.length === 2) {
-      let secondStart_num = parseInt(secondArry[0])
-      let secondEnd_num = parseInt(secondArry[1])
-      secondStart0.value = Number.isNaN(secondStart_num)? 1 : secondStart_num
-      secondEnd0.value = Number.isNaN(secondEnd_num)? 2 : secondEnd_num
+      const secondStart_num = Number.parseInt(secondArry[0])
+      const secondEnd_num = Number.parseInt(secondArry[1])
+      secondStart0.value = Number.isNaN(secondStart_num) ? 1 : secondStart_num
+      secondEnd0.value = Number.isNaN(secondEnd_num) ? 2 : secondEnd_num
     }
     secondRadio.value = '2'
   }
   else if (second.includes('/')) {
-    let secondArry = second.split('/')
+    const secondArry = second.split('/')
     if (secondArry.length === 2) {
-      let secondStart_num = parseInt(secondArry[0])
-      let secondEnd_num = parseInt(secondArry[1])
-      secondStart1.value = Number.isNaN(secondStart_num)? 0 : secondStart_num
-      secondEnd1.value = Number.isNaN(secondEnd_num)? 1 : secondEnd_num
+      const secondStart_num = Number.parseInt(secondArry[0])
+      const secondEnd_num = Number.parseInt(secondArry[1])
+      secondStart1.value = Number.isNaN(secondStart_num) ? 0 : secondStart_num
+      secondEnd1.value = Number.isNaN(secondEnd_num) ? 1 : secondEnd_num
     }
     secondRadio.value = '3'
   }
   else {
     // 处理 0 or 0,1,2,3 的情况
-    let secondArry = second.split(',')
+    const secondArry = second.split(',')
     if (secondArry.length > 0) {
-      secondCheckBox.value = secondArry.map((item: string) => parseInt(item))
+      secondCheckBox.value = secondArry.map((item: string) => Number.parseInt(item))
     }
     secondRadio.value = '4'
   }
 }
 /** 渲染分钟tab里的radio */
 function minuteRadioRender() {
-  let minute = cron.value.minute
+  const minute = cron.value.minute
   minuteCheckBox.value = []
 
   if (minute === '*') {
     minuteRadio.value = '1'
   }
   else if (minute.includes('-')) {
-    let minuteArry = minute.split('-')
+    const minuteArry = minute.split('-')
     if (minuteArry.length === 2) {
-      let minuteStart_num = parseInt(minuteArry[0])
-      let minuteEnd_num = parseInt(minuteArry[1])
-      minuteStart0.value = Number.isNaN(minuteStart_num)? 1 : minuteStart_num
-      minuteEnd0.value = Number.isNaN(minuteEnd_num)? 2 : minuteEnd_num
+      const minuteStart_num = Number.parseInt(minuteArry[0])
+      const minuteEnd_num = Number.parseInt(minuteArry[1])
+      minuteStart0.value = Number.isNaN(minuteStart_num) ? 1 : minuteStart_num
+      minuteEnd0.value = Number.isNaN(minuteEnd_num) ? 2 : minuteEnd_num
     }
     minuteRadio.value = '2'
   }
   else if (minute.includes('/')) {
-    let minuteArry = minute.split('/')
+    const minuteArry = minute.split('/')
     if (minuteArry.length === 2) {
-      let minuteStart_num = parseInt(minuteArry[0])
-      let minuteEnd_num = parseInt(minuteArry[1])
-      minuteStart1.value = Number.isNaN(minuteStart_num)? 0 : minuteStart_num
-      minuteEnd1.value = Number.isNaN(minuteEnd_num)? 1 : minuteEnd_num
+      const minuteStart_num = Number.parseInt(minuteArry[0])
+      const minuteEnd_num = Number.parseInt(minuteArry[1])
+      minuteStart1.value = Number.isNaN(minuteStart_num) ? 0 : minuteStart_num
+      minuteEnd1.value = Number.isNaN(minuteEnd_num) ? 1 : minuteEnd_num
     }
     minuteRadio.value = '3'
   }
   else {
     // 处理 0 or 0,1,2,3 的情况
-    let minuteArry = minute.split(',')
+    const minuteArry = minute.split(',')
     if (minuteArry.length > 0) {
-      minuteCheckBox.value = minuteArry.map((item: string) => parseInt(item))
+      minuteCheckBox.value = minuteArry.map((item: string) => Number.parseInt(item))
     }
     minuteRadio.value = '4'
   }
 }
 /** 渲染小时tab里的radio */
 function hourRadioRender() {
-  let hour = cron.value.hour
+  const hour = cron.value.hour
   hourCheckBox.value = []
 
   if (hour === '*') {
     hourRadio.value = '1'
   }
   else if (hour.includes('-')) {
-    let hourArry = hour.split('-')
+    const hourArry = hour.split('-')
     if (hourArry.length === 2) {
-      let hourStart_num = parseInt(hourArry[0])
-      let hourEnd_num = parseInt(hourArry[1])
-      hourStart0.value = Number.isNaN(hourStart_num)? 0 : hourStart_num
-      hourEnd0.value = Number.isNaN(hourEnd_num)? 2 : hourEnd_num
+      const hourStart_num = Number.parseInt(hourArry[0])
+      const hourEnd_num = Number.parseInt(hourArry[1])
+      hourStart0.value = Number.isNaN(hourStart_num) ? 0 : hourStart_num
+      hourEnd0.value = Number.isNaN(hourEnd_num) ? 2 : hourEnd_num
     }
     hourRadio.value = '2'
   }
   else if (hour.includes('/')) {
-    let hourArry = hour.split('/')
+    const hourArry = hour.split('/')
     if (hourArry.length === 2) {
-      let hourStart_num = parseInt(hourArry[0])
-      let hourEnd_num = parseInt(hourArry[1])
-      hourStart1.value = Number.isNaN(hourStart_num)? 0 : hourStart_num
-      hourEnd1.value = Number.isNaN(hourEnd_num)? 1 : hourEnd_num
+      const hourStart_num = Number.parseInt(hourArry[0])
+      const hourEnd_num = Number.parseInt(hourArry[1])
+      hourStart1.value = Number.isNaN(hourStart_num) ? 0 : hourStart_num
+      hourEnd1.value = Number.isNaN(hourEnd_num) ? 1 : hourEnd_num
     }
     hourRadio.value = '3'
   }
   else {
     // 处理 0 or 0,1,2,3 的情况
-    let hourArry = hour.split(',')
+    const hourArry = hour.split(',')
     if (hourArry.length > 0) {
-      hourCheckBox.value = hourArry.map((item: string) => parseInt(item))
+      hourCheckBox.value = hourArry.map((item: string) => Number.parseInt(item))
     }
     hourRadio.value = '4'
   }
 }
 /** 渲染天tab里的radio */
 function dayRadioRender() {
-  let day = cron.value.day
+  const day = cron.value.day
   dayCheckBox.value = []
   if (day === '*') {
     dayRadio.value = '1'
@@ -796,30 +796,30 @@ function dayRadioRender() {
     dayRadio.value = '2'
   }
   else if (day.includes('-')) {
-    let dayArry = day.split('-')
+    const dayArry = day.split('-')
     if (dayArry.length === 2) {
-      let dayStart_num = parseInt(dayArry[0])
-      let dayEnd_num = parseInt(dayArry[1])
-      dayStart0.value = Number.isNaN(dayStart_num)? 1 : dayStart_num
-      dayEnd0.value = Number.isNaN(dayEnd_num)? 2 : dayEnd_num
+      const dayStart_num = Number.parseInt(dayArry[0])
+      const dayEnd_num = Number.parseInt(dayArry[1])
+      dayStart0.value = Number.isNaN(dayStart_num) ? 1 : dayStart_num
+      dayEnd0.value = Number.isNaN(dayEnd_num) ? 2 : dayEnd_num
     }
     dayRadio.value = '3'
   }
   else if (day.includes('/')) {
-    let dayArry = day.split('/')
+    const dayArry = day.split('/')
     if (dayArry.length === 2) {
-      let dayStart_num = parseInt(dayArry[0])
-      let dayEnd_num = parseInt(dayArry[1])
-      dayStart1.value = Number.isNaN(dayStart_num)? 1 : dayStart_num
-      dayEnd1.value = Number.isNaN(dayEnd_num)? 1 : dayEnd_num
+      const dayStart_num = Number.parseInt(dayArry[0])
+      const dayEnd_num = Number.parseInt(dayArry[1])
+      dayStart1.value = Number.isNaN(dayStart_num) ? 1 : dayStart_num
+      dayEnd1.value = Number.isNaN(dayEnd_num) ? 1 : dayEnd_num
     }
     dayRadio.value = '4'
   }
   else if (day.includes('W')) {
-    let dayArry = day.split('W')
+    const dayArry = day.split('W')
     if (dayArry.length === 1) {
-      let dayStart_num = parseInt(dayArry[0])
-      dayStart2.value = Number.isNaN(dayStart_num)? 1 : dayStart_num
+      const dayStart_num = Number.parseInt(dayArry[0])
+      dayStart2.value = Number.isNaN(dayStart_num) ? 1 : dayStart_num
     }
     dayRadio.value = '5'
   }
@@ -828,50 +828,50 @@ function dayRadioRender() {
   }
   else {
     // 处理 0 or 0,1,2,3 的情况
-    let dayArry = day.split(',')
+    const dayArry = day.split(',')
     if (dayArry.length > 0) {
-      dayCheckBox.value = dayArry.map((item: string) => parseInt(item))
+      dayCheckBox.value = dayArry.map((item: string) => Number.parseInt(item))
     }
     dayRadio.value = '7'
   }
 }
 /** 渲染月tab里的radio */
 function monthRadioRender() {
-  let month = cron.value.month
+  const month = cron.value.month
   monthCheckBox.value = []
 
   if (month === '*') {
     monthRadio.value = '1'
   }
   else if (month.includes('-')) {
-    let monthArry = month.split('-')
+    const monthArry = month.split('-')
     if (monthArry.length === 2) {
       // 处理月份。 英文 -> 数字
-      let monthStart_num = monthMap[monthArry[0]] ? parseInt(monthMap[monthArry[0]]) : parseInt(monthArry[0])
-      let monthEnd_num = monthMap[monthArry[1]] ? parseInt(monthMap[monthArry[1]]) : parseInt(monthArry[1])
-      monthStart0.value = Number.isNaN(monthStart_num)? 1 : monthStart_num
-      monthEnd0.value = Number.isNaN(monthEnd_num)? 2 : monthEnd_num
+      const monthStart_num = monthMap[monthArry[0]] ? Number.parseInt(monthMap[monthArry[0]]) : Number.parseInt(monthArry[0])
+      const monthEnd_num = monthMap[monthArry[1]] ? Number.parseInt(monthMap[monthArry[1]]) : Number.parseInt(monthArry[1])
+      monthStart0.value = Number.isNaN(monthStart_num) ? 1 : monthStart_num
+      monthEnd0.value = Number.isNaN(monthEnd_num) ? 2 : monthEnd_num
     }
     monthRadio.value = '2'
   }
   else if (month.includes('/')) {
-    let monthArry = month.split('/')
+    const monthArry = month.split('/')
     if (monthArry.length === 2) {
       // 处理月份。 英文 -> 数字
-      let monthStart_num = monthMap[monthArry[0]] ? parseInt(monthMap[monthArry[0]]) : parseInt(monthArry[0])
-      let monthEnd_num = monthMap[monthArry[1]] ? parseInt(monthMap[monthArry[1]]) : parseInt(monthArry[1])
-      monthStart1.value = Number.isNaN(monthStart_num)? 1 : monthStart_num
-      monthEnd1.value = Number.isNaN(monthEnd_num)? 1 : monthEnd_num
+      const monthStart_num = monthMap[monthArry[0]] ? Number.parseInt(monthMap[monthArry[0]]) : Number.parseInt(monthArry[0])
+      const monthEnd_num = monthMap[monthArry[1]] ? Number.parseInt(monthMap[monthArry[1]]) : Number.parseInt(monthArry[1])
+      monthStart1.value = Number.isNaN(monthStart_num) ? 1 : monthStart_num
+      monthEnd1.value = Number.isNaN(monthEnd_num) ? 1 : monthEnd_num
     }
     monthRadio.value = '3'
   }
   else {
     // 处理 0 or 0,1,2,3 的情况
-    let monthArry = month.split(',')
+    const monthArry = month.split(',')
     if (monthArry.length > 0) {
       // 处理月份。 英文 -> 数字
-      let numberMonthArry = monthArry.map((item: string) => {
-        return monthMap[item]? parseInt(monthMap[item]) : parseInt(item)
+      const numberMonthArry = monthArry.map((item: string) => {
+        return monthMap[item] ? Number.parseInt(monthMap[item]) : Number.parseInt(item)
       })
       monthCheckBox.value = numberMonthArry
     }
@@ -880,7 +880,7 @@ function monthRadioRender() {
 }
 /** 渲染周tab里的radio */
 function weekRadioRender() {
-  let week = cron.value.week
+  const week = cron.value.week
   weekCheckBox.value = []
 
   if (week === '*') {
@@ -890,54 +890,54 @@ function weekRadioRender() {
     weekRadio.value = '2'
   }
   else if (week.includes('-')) {
-    let weekArry = week.split('-')
+    const weekArry = week.split('-')
     if (weekArry.length === 2) {
       // 处理周。 英文 -> 数字
-      let weekStart_num = weekMap[weekArry[0]] ? parseInt(weekMap[weekArry[0]]) : parseInt(weekArry[0])
-      let weekEnd_num = weekMap[weekArry[1]] ? parseInt(weekMap[weekArry[1]]) : parseInt(weekArry[1])
-      weekStart0.value = Number.isNaN(weekStart_num)? 1 : weekStart_num
-      weekEnd0.value = Number.isNaN(weekEnd_num)? 2 : weekEnd_num
+      const weekStart_num = weekMap[weekArry[0]] ? Number.parseInt(weekMap[weekArry[0]]) : Number.parseInt(weekArry[0])
+      const weekEnd_num = weekMap[weekArry[1]] ? Number.parseInt(weekMap[weekArry[1]]) : Number.parseInt(weekArry[1])
+      weekStart0.value = Number.isNaN(weekStart_num) ? 1 : weekStart_num
+      weekEnd0.value = Number.isNaN(weekEnd_num) ? 2 : weekEnd_num
     }
     weekRadio.value = '3'
   }
   else if (week.includes('/')) {
-    let weekArry = week.split('/')
+    const weekArry = week.split('/')
     if (weekArry.length === 2) {
       // 处理周。 英文 -> 数字
-      let weekStart_num = weekMap[weekArry[0]] ? parseInt(weekMap[weekArry[0]]) : parseInt(weekArry[0])
-      let weekEnd_num = parseInt(weekArry[1]) // 特殊判断：weekEnd1的取值范围是1-n天，而不是周几
-      weekStart1.value = Number.isNaN(weekStart_num)? 1 : weekStart_num
-      weekEnd1.value = Number.isNaN(weekEnd_num)? 1 : weekEnd_num
+      const weekStart_num = weekMap[weekArry[0]] ? Number.parseInt(weekMap[weekArry[0]]) : Number.parseInt(weekArry[0])
+      const weekEnd_num = Number.parseInt(weekArry[1]) // 特殊判断：weekEnd1的取值范围是1-n天，而不是周几
+      weekStart1.value = Number.isNaN(weekStart_num) ? 1 : weekStart_num
+      weekEnd1.value = Number.isNaN(weekEnd_num) ? 1 : weekEnd_num
     }
     weekRadio.value = '4'
   }
   else if (week.includes('#')) {
-    let weekArry = week.split('#')
+    const weekArry = week.split('#')
     if (weekArry.length === 2) {
       // 处理周。 英文 -> 数字
-      let weekStart_num = weekMap[weekArry[0]] ? parseInt(weekMap[weekArry[0]]) : parseInt(weekArry[0])
-      let weekEnd_num = parseInt(weekArry[1])  // 特殊判断：weekEnd2的取值范围是1-4周，而不是周几
-      weekStart2.value = Number.isNaN(weekStart_num)? 1 : weekStart_num
-      weekEnd2.value = Number.isNaN(weekEnd_num)? 1 : weekEnd_num
+      const weekStart_num = weekMap[weekArry[0]] ? Number.parseInt(weekMap[weekArry[0]]) : Number.parseInt(weekArry[0])
+      const weekEnd_num = Number.parseInt(weekArry[1]) // 特殊判断：weekEnd2的取值范围是1-4周，而不是周几
+      weekStart2.value = Number.isNaN(weekStart_num) ? 1 : weekStart_num
+      weekEnd2.value = Number.isNaN(weekEnd_num) ? 1 : weekEnd_num
     }
     weekRadio.value = '5'
   }
   else if (week.includes('L')) {
-    let weekArry = week.split('L')
+    const weekArry = week.split('L')
     if (weekArry.length === 1) {
       // 处理周。 英文 -> 数字
-      let weekStart_num = weekMap[weekArry[0]] ? parseInt(weekMap[weekArry[0]]) : parseInt(weekArry[0])
-      weekStart3.value = Number.isNaN(weekStart_num)? 1 : weekStart_num
+      const weekStart_num = weekMap[weekArry[0]] ? Number.parseInt(weekMap[weekArry[0]]) : Number.parseInt(weekArry[0])
+      weekStart3.value = Number.isNaN(weekStart_num) ? 1 : weekStart_num
     }
     weekRadio.value = '6'
   }
   else {
     // 处理 0 or 0,1,2,3 的情况
-    let weekArry = week.split(',')
+    const weekArry = week.split(',')
     if (weekArry.length > 0) {
       // 处理周。 英文 -> 数字
-      let numberWeekArry = weekArry.map((item: string) => {
-        return weekMap[item]? parseInt(weekMap[item]) : parseInt(item)
+      const numberWeekArry = weekArry.map((item: string) => {
+        return weekMap[item] ? Number.parseInt(weekMap[item]) : Number.parseInt(item)
       })
       weekCheckBox.value = numberWeekArry
     }
@@ -946,7 +946,7 @@ function weekRadioRender() {
 }
 /** 渲染年tab里的radio */
 function yearRadioRender() {
-  let year = cron.value.year
+  const year = cron.value.year
   if (!year) {
     yearRadio.value = '1'
   }
@@ -954,12 +954,12 @@ function yearRadioRender() {
     yearRadio.value = '2'
   }
   else if (year.includes('-')) {
-    let yearArry = year.split('-')
+    const yearArry = year.split('-')
     if (yearArry.length === 2) {
-      let yearStart_num = parseInt(yearArry[0])
-      let yearEnd_num = parseInt(yearArry[1])
-      yearStart0.value = Number.isNaN(yearStart_num)? nowYear.value : yearStart_num
-      yearEnd0.value = Number.isNaN(yearEnd_num)? nextYear.value : yearEnd_num
+      const yearStart_num = Number.parseInt(yearArry[0])
+      const yearEnd_num = Number.parseInt(yearArry[1])
+      yearStart0.value = Number.isNaN(yearStart_num) ? nowYear.value : yearStart_num
+      yearEnd0.value = Number.isNaN(yearEnd_num) ? nextYear.value : yearEnd_num
     }
     yearRadio.value = '3'
   }
@@ -983,8 +983,8 @@ function cronExecute(cron: string) {
   // 获取下次执行时间
   nextTriggerTimeApi({ cron })
     .then((res: ApiResult<string[]>) => {
-      let success = res.success
-      let data = res.data
+      const success = res.success
+      const data = res.data
       if (!success) {
         executeError.value = 'cron表达式错误'
         executeResult.value = []
@@ -993,7 +993,7 @@ function cronExecute(cron: string) {
 
       executeResult.value = data
     }).catch((e) => {
-      console.log(e)
+      console.error(e)
     })
 }
 
@@ -1016,8 +1016,8 @@ watch(
 </script>
 
 <template>
-  <lay-dropdown  placement="bottom" :auto-fit-width="true" :update-at-scroll="true" :auto-fit-position="true" @hide="cronInput = cronDataToString(cron)">
-    <lay-input v-model="cronInput" :placeholder="placeholder" :allow-clear="allowClear"  @change="cronInputChange" @clear="() => cronInputChange('')" />
+  <lay-dropdown placement="bottom" :auto-fit-width="true" :update-at-scroll="true" :auto-fit-position="true" @hide="cronInput = cronDataToString(cron)">
+    <lay-input v-model="cronInput" :placeholder="placeholder" :allow-clear="allowClear" @change="cronInputChange" @clear="() => cronInputChange('')" />
     <template #content>
       <div class="content">
         <lay-tab type="card" v-model="tabId">
@@ -1046,7 +1046,7 @@ watch(
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="secondCheckBox">
-                  <lay-checkbox name="second_num" skin="primary" :value="item" v-for="item in secondAndMinuteRange" :key="item">{{ item<10? '0' + item : item }}</lay-checkbox>
+                  <lay-checkbox name="second_num" skin="primary" :value="item" v-for="item in secondAndMinuteRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
@@ -1077,7 +1077,7 @@ watch(
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="minuteCheckBox">
-                  <lay-checkbox name="minute_num" skin="primary" :value="item" v-for="item in secondAndMinuteRange" :key="item">{{ item< 10? '0' + item : item }}</lay-checkbox>
+                  <lay-checkbox name="minute_num" skin="primary" :value="item" v-for="item in secondAndMinuteRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
@@ -1108,7 +1108,7 @@ watch(
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="hourCheckBox">
-                  <lay-checkbox name="hour_num" skin="primary" :value="item" v-for="item in hourRange" :key="item">{{ item < 10? '0' + item : item }}</lay-checkbox>
+                  <lay-checkbox name="hour_num" skin="primary" :value="item" v-for="item in hourRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
@@ -1131,7 +1131,7 @@ watch(
               <div>
                 <lay-radio value="4">
                   从
-                  <input type="number" v-model="dayStart1" :min="1" :max="31" @change="dayChange('4')"/>
+                  <input type="number" v-model="dayStart1" :min="1" :max="31" @change="dayChange('4')" />
                   日开始，每
                   <input type="number" v-model="dayEnd1" :min="1" :max="31" @change="dayChange('4')" />
                   日执行一次
@@ -1148,7 +1148,7 @@ watch(
               <div><lay-radio value="7">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="dayCheckBox">
-                  <lay-checkbox name="day_num" skin="primary" :value="item" v-for="item in dayRange" :key="item">{{ item < 10? '0' + item : item }}</lay-checkbox>
+                  <lay-checkbox name="day_num" skin="primary" :value="item" v-for="item in dayRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
@@ -1179,7 +1179,7 @@ watch(
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="monthCheckBox">
-                  <lay-checkbox name="month_num" skin="primary" :value="item" v-for="item in monthRange" :key="item">{{ item < 10? '0' + item : item }}</lay-checkbox>
+                  <lay-checkbox name="month_num" skin="primary" :value="item" v-for="item in monthRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
@@ -1210,7 +1210,7 @@ watch(
               </div>
               <div>
                 <lay-radio value="5">
-                  <!-- 6#3：表示第3周的星期5-->
+                  <!-- 6#3：表示第3周的星期5 -->
                   第
                   <input type="number" v-model="weekEnd2" :min="1" :max="4" @change="weekChange('5')" />
                   周 的星期
@@ -1259,7 +1259,7 @@ watch(
             </template>
             <div class="tab-item">
               <p class="title" style="margin-bottom: 5px;">常用cron表达式例子:</p>
-              <p class="container" v-for="item in cronDescription" :key="item.cron">
+              <p v-for="item in cronDescription" :key="item.cron" class="container">
                 <span @click="() => { setCron(item.cron); cronExecute(item.cron) }">{{ item.cron }}</span>
                 <span>{{ item.description }}</span>
               </p>
@@ -1288,8 +1288,13 @@ watch(
               <td>{{ cron.year }}</td>
             </tr>
           </table>
-          <p class="preview-title">最近几次运行时间: <lay-button @click="cronExecute(cronDataToString(cron))" type="primary" size="xs" style="margin-left: 5px;">获取</lay-button></p>
-          <div v-if="executeError != ''">
+          <p class="preview-title">
+            最近几次运行时间:
+            <lay-button type="primary" size="xs" style="margin-left: 5px;" @click="cronExecute(cronDataToString(cron))">
+              获取
+            </lay-button>
+          </p>
+          <div v-if="executeError !== ''">
             <span class="error">{{ executeError }}</span>
           </div>
           <div class="preview">

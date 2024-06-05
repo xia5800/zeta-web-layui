@@ -25,7 +25,7 @@ const page = ref({
   total: 0,
   limit: 10,
   current: 1,
-  layout: ['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'],
+  layout: ['count', 'prev', 'page', 'next', 'limits', 'refresh', 'skip'],
 })
 // 是否显示"文件上传"弹窗
 const showUpload = ref(false)
@@ -229,10 +229,10 @@ async function handleBatchDelete() {
 
         <template #path="{ row }">
           <a
-            style="color: #1677ff"
             :href="row.url ? row.url : 'javascript:void(0)'"
+            style="color: #1677ff"
             target="_blank"
-            >
+          >
             {{ row.path }}
           </a>
         </template>
