@@ -6,6 +6,8 @@ import { cloneDeep } from 'lodash'
 import { HOME_ROUTE } from '~/types/router'
 import { PROJECT_NAME } from '~/config/setting'
 import loginBg from '~/assets/images/login-bg.png'
+import LottieLogo from '~/assets/lottie/lf20_sfiiilbf.json'
+import LottieBanner from '~/assets/lottie/lf20_uv2O8HvO2x.json'
 
 const { loading, setLoading } = useLoading(false)
 const router = useRouter()
@@ -84,14 +86,14 @@ onMounted(() => {
   useLottie({
     name: 'banner',
     containerId: '#banner',
-    path: 'https://image.bestgcc.online/lottie/lf20_uv2O8HvO2x.json',
+    animationData: LottieBanner,
   })
 
   // 渲染logo
   useLottie({
     name: 'logo',
     containerId: '#logo',
-    path: 'https://image.bestgcc.online/lottie/lf20_sfiiilbf.json',
+    animationData: LottieLogo,
   })
 
   // 获取验证码

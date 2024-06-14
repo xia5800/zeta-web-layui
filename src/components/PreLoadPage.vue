@@ -4,6 +4,7 @@
 -->
 <script setup lang="ts">
 import { PROJECT_NAME } from '~/config/setting'
+import LottieLoading from '~/assets/lottie/lf20_z9ed2jna.json'
 
 const props = withDefaults(defineProps<{
   beforeLeavingMs: number
@@ -16,7 +17,7 @@ useTimeoutFn(endLoading, props.beforeLeavingMs)
 onMounted(() => useLottie({
   name: 'lottie-loading',
   containerId: '#lottie-loading',
-  path: 'https://image.bestgcc.online/lottie/lf20_z9ed2jna.json',
+  animationData: LottieLoading,
 }))
 </script>
 

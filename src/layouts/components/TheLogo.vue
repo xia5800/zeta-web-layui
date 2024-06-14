@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { PROJECT_NAME } from '~/config/setting'
+import LottieLogo from '~/assets/lottie/lf20_sfiiilbf.json'
 
 const themeStore = useThemeStore()
 
@@ -11,7 +12,7 @@ function renderLottie() {
   useLottie({
     name: 'lottie-logo',
     containerId: '#lottie-logo',
-    path: 'https://image.bestgcc.online/lottie/lf20_sfiiilbf.json',
+    animationData: LottieLogo,
   })
 }
 
