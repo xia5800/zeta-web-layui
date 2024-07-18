@@ -56,7 +56,6 @@ function configAutoImport() {
     imports: [
       'vue',
       'vue-router',
-      'vue/macros',
       '@vueuse/core',
       'pinia',
     ],

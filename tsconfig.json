@@ -19,8 +19,7 @@
     },
     "types": [
       "node",
-      "vite/client",
-      "unplugin-vue-define-options/macros-global"
+      "vite/client"
     ]
   },
   "exclude": ["node_modules", "dist", "_docs", "fakeServer"]
