@@ -63,29 +63,29 @@ interface CronDescription {
 }
 
 const monthMap: Record<string, string> = {
-  'JAN': '1',
-  'FEB': '2',
-  'MAR': '3',
-  'APR': '4',
-  'MAY': '5',
-  'JUN': '6',
-  'JUL': '7',
-  'AUG': '8',
-  'SEP': '9',
-  'OCT': '10',
-  'NOV': '11',
-  'DEC': '12',
+  JAN: '1',
+  FEB: '2',
+  MAR: '3',
+  APR: '4',
+  MAY: '5',
+  JUN: '6',
+  JUL: '7',
+  AUG: '8',
+  SEP: '9',
+  OCT: '10',
+  NOV: '11',
+  DEC: '12',
 }
 
 // quartz: 1=星期日、2=星期一、3=星期二、4=星期三、5=星期四、6=星期五、7=星期六
 const weekMap: Record<string, string> = {
-  'SUN': '1',
-  'MON': '2',
-  'TUE': '3',
-  'WED': '4',
-  'THU': '5',
-  'FRI': '6',
-  'SAT': '7',
+  SUN: '1',
+  MON: '2',
+  TUE: '3',
+  WED: '4',
+  THU: '5',
+  FRI: '6',
+  SAT: '7',
 }
 
 // cron 默认值
@@ -1020,127 +1020,127 @@ watch(
     <lay-input v-model="cronInput" :placeholder="placeholder" :allow-clear="allowClear" @change="cronInputChange" @clear="() => cronInputChange('')" />
     <template #content>
       <div class="content">
-        <lay-tab type="card" v-model="tabId">
+        <lay-tab v-model="tabId" type="card">
           <!-- 秒 tab -->
-          <lay-tab-item title="秒" id="1">
-            <lay-radio-group name="second" v-model="secondRadio" @change="secondRadioChange">
+          <lay-tab-item id="1" title="秒">
+            <lay-radio-group v-model="secondRadio" name="second" @change="secondRadioChange">
               <div><lay-radio value="1">每秒 允许的通配符[, - * /]</lay-radio></div>
               <div>
                 <lay-radio value="2">
                   周期 从
-                  <input type="number" v-model="secondStart0" :min="0" :max="59" @change="secondChange('2')" />
+                  <input v-model="secondStart0" type="number" :min="0" :max="59" @change="secondChange('2')">
                   秒开始 -
-                  <input type="number" v-model="secondEnd0" :min="0" :max="59" @change="secondChange('2')" />
+                  <input v-model="secondEnd0" type="number" :min="0" :max="59" @change="secondChange('2')">
                   秒结束
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="3">
                   从
-                  <input type="number" v-model="secondStart1" :min="0" :max="59" @change="secondChange('3')" />
+                  <input v-model="secondStart1" type="number" :min="0" :max="59" @change="secondChange('3')">
                   秒开始，每
-                  <input type="number" v-model="secondEnd1" :min="0" :max="59" @change="secondChange('3')" />
+                  <input v-model="secondEnd1" type="number" :min="0" :max="59" @change="secondChange('3')">
                   秒执行一次
                 </lay-radio>
               </div>
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="secondCheckBox">
-                  <lay-checkbox name="second_num" skin="primary" :value="item" v-for="item in secondAndMinuteRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
+                  <lay-checkbox v-for="item in secondAndMinuteRange" :key="item" name="second_num" skin="primary" :value="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
           </lay-tab-item>
 
           <!-- 分钟 tab -->
-          <lay-tab-item title="分钟" id="2">
-            <lay-radio-group name="minute" v-model="minuteRadio" @change="minuteRadioChange">
+          <lay-tab-item id="2" title="分钟">
+            <lay-radio-group v-model="minuteRadio" name="minute" @change="minuteRadioChange">
               <div><lay-radio value="1">分钟 允许的通配符[, - * /]</lay-radio></div>
               <div>
                 <lay-radio value="2">
                   周期 从
-                  <input type="number" v-model="minuteStart0" :min="0" :max="59" @change="minuteChange('2')" />
+                  <input v-model="minuteStart0" type="number" :min="0" :max="59" @change="minuteChange('2')">
                   分钟开始 -
-                  <input type="number" v-model="minuteEnd0" :min="0" :max="59" @change="minuteChange('2')" />
+                  <input v-model="minuteEnd0" type="number" :min="0" :max="59" @change="minuteChange('2')">
                   分钟结束
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="3">
                   从
-                  <input type="number" v-model="minuteStart1" :min="0" :max="59" @change="minuteChange('3')" />
+                  <input v-model="minuteStart1" type="number" :min="0" :max="59" @change="minuteChange('3')">
                   分钟开始，每
-                  <input type="number" v-model="minuteEnd1" :min="0" :max="59" @change="minuteChange('3')" />
+                  <input v-model="minuteEnd1" type="number" :min="0" :max="59" @change="minuteChange('3')">
                   分钟执行一次
                 </lay-radio>
               </div>
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="minuteCheckBox">
-                  <lay-checkbox name="minute_num" skin="primary" :value="item" v-for="item in secondAndMinuteRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
+                  <lay-checkbox v-for="item in secondAndMinuteRange" :key="item" name="minute_num" skin="primary" :value="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
           </lay-tab-item>
 
           <!-- 小时 tab -->
-          <lay-tab-item title="小时" id="3">
-            <lay-radio-group name="hour" v-model="hourRadio" @change="hourRadioChange">
+          <lay-tab-item id="3" title="小时">
+            <lay-radio-group v-model="hourRadio" name="hour" @change="hourRadioChange">
               <div><lay-radio value="1">小时 允许的通配符[, - * /]</lay-radio></div>
               <div>
                 <lay-radio value="2">
                   周期 从
-                  <input type="number" v-model="hourStart0" :min="0" :max="23" @change="hourChange('2')" />
+                  <input v-model="hourStart0" type="number" :min="0" :max="23" @change="hourChange('2')">
                   时开始 -
-                  <input type="number" v-model="hourEnd0" :min="0" :max="23" @change="hourChange('2')" />
+                  <input v-model="hourEnd0" type="number" :min="0" :max="23" @change="hourChange('2')">
                   时结束
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="3">
                   从
-                  <input type="number" v-model="hourStart1" :min="0" :max="23" @change="hourChange('3')" />
+                  <input v-model="hourStart1" type="number" :min="0" :max="23" @change="hourChange('3')">
                   小时开始，每
-                  <input type="number" v-model="hourEnd1" :min="0" @change="hourChange('3')" />
+                  <input v-model="hourEnd1" type="number" :min="0" @change="hourChange('3')">
                   小时执行一次
                 </lay-radio>
               </div>
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="hourCheckBox">
-                  <lay-checkbox name="hour_num" skin="primary" :value="item" v-for="item in hourRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
+                  <lay-checkbox v-for="item in hourRange" :key="item" name="hour_num" skin="primary" :value="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
           </lay-tab-item>
 
           <!-- 日 tab -->
-          <lay-tab-item title="日" id="4">
-            <lay-radio-group name="day" v-model="dayRadio" @change="dayRadioChange">
+          <lay-tab-item id="4" title="日">
+            <lay-radio-group v-model="dayRadio" name="day" @change="dayRadioChange">
               <div><lay-radio value="1">日 允许的通配符[, - * ? / L W]</lay-radio></div>
               <div><lay-radio value="2">不指定</lay-radio></div>
               <div>
                 <lay-radio value="3">
                   周期 从
-                  <input type="number" v-model="dayStart0" :min="1" :max="31" @change="dayChange('3')" />
+                  <input v-model="dayStart0" type="number" :min="1" :max="31" @change="dayChange('3')">
                   日开始 -
-                  <input type="number" v-model="dayEnd0" :min="1" :max="31" @change="dayChange('3')" />
+                  <input v-model="dayEnd0" type="number" :min="1" :max="31" @change="dayChange('3')">
                   日结束
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="4">
                   从
-                  <input type="number" v-model="dayStart1" :min="1" :max="31" @change="dayChange('4')" />
+                  <input v-model="dayStart1" type="number" :min="1" :max="31" @change="dayChange('4')">
                   日开始，每
-                  <input type="number" v-model="dayEnd1" :min="1" :max="31" @change="dayChange('4')" />
+                  <input v-model="dayEnd1" type="number" :min="1" :max="31" @change="dayChange('4')">
                   日执行一次
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="5">
                   每月
-                  <input type="number" v-model="dayStart2" :min="1" :max="31" />
+                  <input v-model="dayStart2" type="number" :min="1" :max="31">
                   号最近的那个工作日
                 </lay-radio>
               </div>
@@ -1148,63 +1148,63 @@ watch(
               <div><lay-radio value="7">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="dayCheckBox">
-                  <lay-checkbox name="day_num" skin="primary" :value="item" v-for="item in dayRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
+                  <lay-checkbox v-for="item in dayRange" :key="item" name="day_num" skin="primary" :value="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
           </lay-tab-item>
 
           <!-- 月 tab -->
-          <lay-tab-item title="月" id="5">
-            <lay-radio-group name="month" v-model="monthRadio" @change="monthRadioChange">
+          <lay-tab-item id="5" title="月">
+            <lay-radio-group v-model="monthRadio" name="month" @change="monthRadioChange">
               <div><lay-radio value="1">月 允许的通配符[, - * /]</lay-radio></div>
               <div>
                 <lay-radio value="2">
                   周期 从
-                  <input type="number" v-model="monthStart0" :min="1" :max="12" @change="monthChange('3')" />
+                  <input v-model="monthStart0" type="number" :min="1" :max="12" @change="monthChange('3')">
                   月开始 -
-                  <input type="number" v-model="monthEnd0" :min="1" :max="12" @change="monthChange('3')" />
+                  <input v-model="monthEnd0" type="number" :min="1" :max="12" @change="monthChange('3')">
                   月结束
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="3">
                   从
-                  <input type="number" v-model="monthStart1" :min="1" :max="12" @change="monthChange('4')" />
+                  <input v-model="monthStart1" type="number" :min="1" :max="12" @change="monthChange('4')">
                   月开始，每
-                  <input type="number" v-model="monthEnd1" :min="1" :max="12" @change="monthChange('4')" />
+                  <input v-model="monthEnd1" type="number" :min="1" :max="12" @change="monthChange('4')">
                   月执行一次
                 </lay-radio>
               </div>
               <div><lay-radio value="4">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="monthCheckBox">
-                  <lay-checkbox name="month_num" skin="primary" :value="item" v-for="item in monthRange" :key="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
+                  <lay-checkbox v-for="item in monthRange" :key="item" name="month_num" skin="primary" :value="item">{{ item < 10 ? `0${item}` : item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
           </lay-tab-item>
 
           <!-- 周 tab -->
-          <lay-tab-item title="周" id="6">
-            <lay-radio-group name="week" v-model="weekRadio" @change="weekRadioChange">
+          <lay-tab-item id="6" title="周">
+            <lay-radio-group v-model="weekRadio" name="week" @change="weekRadioChange">
               <div><lay-radio value="1">周 允许的通配符[, - * ? / L #]</lay-radio></div>
               <div><lay-radio value="2">不指定</lay-radio></div>
               <div>
                 <lay-radio value="3">
                   周期 从星期
-                  <input type="number" v-model="weekStart0" :min="1" :max="7" @change="weekChange('3')" />
+                  <input v-model="weekStart0" type="number" :min="1" :max="7" @change="weekChange('3')">
                   开始 - 星期
-                  <input type="number" v-model="weekEnd0" :min="1" :max="7" @change="weekChange('3')" />
+                  <input v-model="weekEnd0" type="number" :min="1" :max="7" @change="weekChange('3')">
                   结束
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="4">
                   从星期
-                  <input type="number" v-model="weekStart1" :min="1" :max="7" @change="weekChange('4')" />
+                  <input v-model="weekStart1" type="number" :min="1" :max="7" @change="weekChange('4')">
                   开始，间隔
-                  <input type="number" v-model="weekEnd1" :min="1" @change="weekChange('4')" />
+                  <input v-model="weekEnd1" type="number" :min="1" @change="weekChange('4')">
                   天执行一次
                 </lay-radio>
               </div>
@@ -1212,38 +1212,38 @@ watch(
                 <lay-radio value="5">
                   <!-- 6#3：表示第3周的星期5 -->
                   第
-                  <input type="number" v-model="weekEnd2" :min="1" :max="4" @change="weekChange('5')" />
+                  <input v-model="weekEnd2" type="number" :min="1" :max="4" @change="weekChange('5')">
                   周 的星期
-                  <input type="number" v-model="weekStart2" :min="1" :max="7" @change="weekChange('5')" />
+                  <input v-model="weekStart2" type="number" :min="1" :max="7" @change="weekChange('5')">
                   （7=星期六，1=星期日，以此类推）
                 </lay-radio>
               </div>
               <div>
                 <lay-radio value="6">
                   本月最后一个星期
-                  <input type="number" v-model="weekStart3" :min="1" :max="7" @change="weekChange('6')" />
+                  <input v-model="weekStart3" type="number" :min="1" :max="7" @change="weekChange('6')">
                 </lay-radio>
               </div>
               <div><lay-radio value="7">指定</lay-radio></div>
               <div style="margin-left: 5px;">
                 <lay-checkbox-group v-model="weekCheckBox">
-                  <lay-checkbox name="week_num" skin="primary" :value="item" v-for="item in weekRange" :key="item">{{ item }}</lay-checkbox>
+                  <lay-checkbox v-for="item in weekRange" :key="item" name="week_num" skin="primary" :value="item">{{ item }}</lay-checkbox>
                 </lay-checkbox-group>
               </div>
             </lay-radio-group>
           </lay-tab-item>
 
           <!-- 年 tab -->
-          <lay-tab-item title="年" id="7">
-            <lay-radio-group name="year" v-model="yearRadio" @change="yearRadioChange">
+          <lay-tab-item id="7" title="年">
+            <lay-radio-group v-model="yearRadio" name="year" @change="yearRadioChange">
               <div><lay-radio value="1">不指定 允许的通配符[, - * /] 非必填</lay-radio></div>
               <div><lay-radio value="2">每年</lay-radio></div>
               <div>
                 <lay-radio value="3">
                   周期 从
-                  <input type="number" v-model="yearStart0" :min="1970" @change="yearChange('3')" />
+                  <input v-model="yearStart0" type="number" :min="1970" @change="yearChange('3')">
                   年开始 -
-                  <input type="number" v-model="yearEnd0" :min="1970" @change="yearChange('3')" />
+                  <input v-model="yearEnd0" type="number" :min="1970" @change="yearChange('3')">
                   年结束
                 </lay-radio>
               </div>
@@ -1269,24 +1269,28 @@ watch(
 
         <div class="preview-container">
           <table class="cron-table">
-            <tr>
-              <th>秒</th>
-              <th>分</th>
-              <th>时</th>
-              <th>日</th>
-              <th>月</th>
-              <th>周</th>
-              <th>年</th>
-            </tr>
-            <tr>
-              <td>{{ cron.second }}</td>
-              <td>{{ cron.minute }}</td>
-              <td>{{ cron.hour }}</td>
-              <td>{{ cron.day }}</td>
-              <td>{{ cron.month }}</td>
-              <td>{{ cron.week }}</td>
-              <td>{{ cron.year }}</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>秒</th>
+                <th>分</th>
+                <th>时</th>
+                <th>日</th>
+                <th>月</th>
+                <th>周</th>
+                <th>年</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ cron.second }}</td>
+                <td>{{ cron.minute }}</td>
+                <td>{{ cron.hour }}</td>
+                <td>{{ cron.day }}</td>
+                <td>{{ cron.month }}</td>
+                <td>{{ cron.week }}</td>
+                <td>{{ cron.year }}</td>
+              </tr>
+            </tbody>
           </table>
           <p class="preview-title">
             最近几次运行时间:
