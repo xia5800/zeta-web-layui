@@ -3,7 +3,10 @@
     "baseUrl": ".",
     "module": "ESNext",
     "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
@@ -14,13 +17,22 @@
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
-      "~/*": ["./src/*"],
-      "@/*": ["./*"]
+      "~/*": [
+        "./src/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
     },
     "types": [
       "node",
       "vite/client"
     ]
   },
-  "exclude": ["node_modules", "dist", "_docs", "fakeServer"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "_docs",
+    "fakeServer"
+  ]
 }
