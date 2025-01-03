@@ -15,6 +15,7 @@ const form = reactive<SysUserUpdateParam>({
   id: '',
   username: '',
   sex: 1,
+  email: '',
   mobile: '',
   birthday: '',
 })
@@ -27,6 +28,42 @@ const rules = ref<Rules>({
   email: { type: 'email' },
   sex: { type: 'number', required: true, message: '性别不能为空' },
 })
+
+const tableColumns = [
+  {
+    title: '时间',
+    key: 'date',
+    align: 'center'
+  },
+  {
+    title: '打卡情况',
+    key: 'state',
+    align: 'center',
+    customSlot: 'state'
+  }
+]
+const tableData = [
+  {
+    date: '2025-05-03 09:00',
+    state: true
+  },
+  {
+    date: '2025-05-02 18:00',
+    state: true
+  },
+  {
+    date: '2025-05-02 09:00',
+    state: true
+  },
+  {
+    date: '2025-05-01 18:00',
+    state: true
+  },
+  {
+    date: '2025-05-01 09:00',
+    state: false
+  }
+]
 
 /**
  * 获取当前登录用户的信息
@@ -75,29 +112,41 @@ function handleSubmit() {
 <template>
   <lay-container fluid="true" class="z-container">
     <lay-row space="10">
-      <lay-col :md="6" :sm="24" :xs="24">
+      <lay-col :md="8" :sm="24" :xs="24">
         <lay-card>
-          <div class="z-text-center">
-            <div class="user-info-avatar-group">
-              <lay-avatar :src="avatar" radius style="width: 110px; height: 110px; line-height: 110px;" />
-            </div>
-            <h1>{{ userStore.info?.username }}</h1>
-          </div>
-          <lay-line />
-          <div class="user-info-item">
-            <lay-form-item class="text-center" label="账号：">
-              {{ sysUser.account }}
-            </lay-form-item>
-            <lay-form-item class="text-center" label="角色：">
+          <lay-descriptions border>
+            <lay-descriptions-item :width="140" align="center">
+              <img style="width: 100px; height: 140px" :src="avatar" alt="用户头像">
+            </lay-descriptions-item>
+            <lay-descriptions-item label="账号">{{ sysUser.account }}</lay-descriptions-item>
+            <lay-descriptions-item label="注册时间">{{ sysUser.createTime }}</lay-descriptions-item>
+            <lay-descriptions-item label="邮箱">{{ sysUser.email || '-' }}</lay-descriptions-item>
+            <lay-descriptions-item label="角色">
               {{ sysUser.roles?.map(item => item.name).join('、') }}
-            </lay-form-item>
-            <lay-form-item class="text-center" label="注册时间：">
-              {{ sysUser.createTime }}
-            </lay-form-item>
-          </div>
+            </lay-descriptions-item>
+            <lay-descriptions-item label="职务">
+              运维
+            </lay-descriptions-item>
+          </lay-descriptions>
+          <lay-descriptions direction="vertical" :column="1" border>
+            <lay-descriptions-item label="上次登录时间">
+              2025-05-03 07:00
+            </lay-descriptions-item>
+            <lay-descriptions-item label="个性签名">
+              <p>跟你们说了多少遍了，工作期间要称植物！！</p>
+            </lay-descriptions-item>
+            <lay-descriptions-item label="考勤记录">
+              <lay-table :columns="tableColumns" :data-source="tableData">
+                <template #state="{ row }">
+                  <lay-tag v-if="row.state" type="primary">已打卡</lay-tag>
+                  <lay-tag v-else type="danger">未打卡</lay-tag>
+                </template>
+              </lay-table>
+            </lay-descriptions-item>
+          </lay-descriptions>
         </lay-card>
       </lay-col>
-      <lay-col :md="18" :sm="24" :xs="24">
+      <lay-col :md="16" :sm="24" :xs="24">
         <lay-card>
           <lay-tab model-value="1" type="brief">
             <lay-tab-item id="1" title="基本信息">

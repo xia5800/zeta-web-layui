@@ -50,6 +50,8 @@ declare module 'vue' {
     LaySwitch: typeof import('@layui/layui-vue')['LaySwitch']
     LayTab: typeof import('@layui/layui-vue')['LayTab']
     LayTabItem: typeof import('@layui/layui-vue')['LayTabItem']
+    LayTable: typeof import('@layui/layui-vue')['LayTable']
+    LayTag: typeof import('@layui/layui-vue')['LayTag']
     LayTooltip: typeof import('@layui/layui-vue')['LayTooltip']
     PreLoadPage: typeof import('./components/PreLoadPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
