@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { layer } from '@layui/layer-vue'
 import type { Tab } from '~/types/theme'
-import 'iconify-icon'
 
 const route = useRoute()
 const router = useRouter()
@@ -169,25 +168,33 @@ function tabDropdownShow(name: string) {
             <template #content>
               <lay-dropdown-menu>
                 <lay-dropdown-menu-item @click="closeLeft(index)">
-                  <template #prefix><iconify-icon icon="ph:arrow-left-bold" /></template>
+                  <template #prefix>
+                    <i-ph-arrow-left-bold />
+                  </template>
                   <template #default>关闭左边</template>
                 </lay-dropdown-menu-item>
               </lay-dropdown-menu>
               <lay-dropdown-menu>
                 <lay-dropdown-menu-item @click="closeRight(index)">
-                  <template #prefix><iconify-icon icon="ph:arrow-right-bold" /></template>
+                  <template #prefix>
+                    <i-ph-arrow-right-bold />
+                  </template>
                   <template #default>关闭右边</template>
                 </lay-dropdown-menu-item>
               </lay-dropdown-menu>
               <lay-dropdown-menu>
                 <lay-dropdown-menu-item @click="closeOther(tab)">
-                  <template #prefix><iconify-icon icon="ph:arrow-u-up-right-bold" /></template>
+                  <template #prefix>
+                    <i-ph-arrow-u-up-right-bold />
+                  </template>
                   <template #default>关闭其他</template>
                 </lay-dropdown-menu-item>
               </lay-dropdown-menu>
               <lay-dropdown-menu>
                 <lay-dropdown-menu-item @click="closeCurrent(tab)">
-                  <template #prefix><iconify-icon icon="ph:x-bold" /></template>
+                  <template #prefix>
+                    <i-ph-x-bold />
+                  </template>
                   <template #default>关闭当前</template>
                 </lay-dropdown-menu-item>
               </lay-dropdown-menu>
@@ -202,25 +209,33 @@ function tabDropdownShow(name: string) {
       <template #content>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeLeft()">
-            <template #prefix><iconify-icon icon="ph:arrow-left-bold" /></template>
+            <template #prefix>
+              <i-ph-arrow-left-bold />
+            </template>
             <template #default>关闭左边</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeRight()">
-            <template #prefix><iconify-icon icon="ph:arrow-right-bold" /></template>
+            <template #prefix>
+              <i-ph-arrow-right-bold />
+            </template>
             <template #default>关闭右边</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeOther()">
-            <template #prefix><iconify-icon icon="ph:arrow-u-up-right-bold" /></template>
+            <template #prefix>
+              <i-ph-arrow-u-up-right-bold />
+            </template>
             <template #default>关闭其他</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeCurrent()">
-            <template #prefix><iconify-icon icon="ph:x-bold" /></template>
+            <template #prefix>
+              <i-ph-x-bold />
+            </template>
             <template #default>关闭当前</template>
           </lay-dropdown-menu-item>
         </lay-dropdown-menu>

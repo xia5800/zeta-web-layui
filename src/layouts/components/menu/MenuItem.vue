@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Meta, RouteItem } from '~/types/router'
-import 'iconify-icon'
+import { Icon } from '@iconify/vue'
 
 defineProps<{
   menuOptions: RouteItem[]
@@ -12,7 +12,11 @@ const themeStore = useThemeStore()
 /** 点击菜单 */
 function clickMenuItem(path: string, meta?: Meta) {
   // 判断是否有外链地址，如果有则打开外链，否则路由跳转
-  meta?.href ? useOpenWindow(meta?.href) : router.push(path)
+  if (meta?.href) {
+    useOpenWindow(meta.href)
+  } else {
+    router.push(path)
+  }
 }
 </script>
 
@@ -28,7 +32,7 @@ function clickMenuItem(path: string, meta?: Meta) {
             :type="meta.icon"
           />
           <!-- 如果icon不为空，且icon包含":"则使用iconify图标 -->
-          <iconify-icon
+          <Icon
             v-if="meta?.icon && meta?.icon.indexOf(':') !== -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon-svg' : 'nav-unfold-icon-svg'"
             :icon="meta.icon"
@@ -58,7 +62,7 @@ function clickMenuItem(path: string, meta?: Meta) {
             :type="meta.icon"
           />
           <!-- 如果icon不为空，且icon包含":"则使用iconify图标 -->
-          <iconify-icon
+          <Icon
             v-if="meta?.icon && meta?.icon.indexOf(':') !== -1"
             :class="themeStore.collaspeSide ? 'nav-fold-icon-svg' : 'nav-unfold-icon-svg'"
             :icon="meta.icon"

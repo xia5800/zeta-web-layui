@@ -51,7 +51,12 @@ function configAutoImport() {
     dts: 'src/auto-imports.d.ts',
     resolvers: [
       LayuiVueResolver(),
-      IconsResolver()
+      IconsResolver({
+        // 自定义前缀 搭配下方Icons配置可以在vue文件中使用 <i-mdi-home /> <i-mdi-account /> 来引入图标
+        prefix: 'i',
+        // 解析的图标库有: Phosphor. 除此之外的都不解析
+        enabledCollections: ['ph'],
+      })
     ],
     imports: [
       'vue',
@@ -75,10 +80,11 @@ function configComponents() {
     resolvers: [
       LayuiVueResolver({
         resolveIcons: true,
-        // 不自动导入IconifyIcon组件，会和'iconify-icon'组件冲突
-        exclude: ['IconifyIcon'],
       }),
-      IconsResolver()
+      IconsResolver({
+        // 解析的图标库有: Phosphor. 除此之外的都不解析
+        enabledCollections: ['ph'],
+      })
     ],
   })
 }
@@ -86,8 +92,8 @@ function configComponents() {
 /** 按需自动导入图标 插件配置 */
 function configIcons() {
   return Icons({
-    // 自动安装图标
-    autoInstall: true,
+    // 自动安装图标, 改成false则使用本地的图标，例如："@iconify-json/ph"
+    autoInstall: false,
   })
 }
 
