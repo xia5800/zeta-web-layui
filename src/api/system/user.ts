@@ -14,7 +14,18 @@ enum Api {
   RestPwd = '/system/user/restPwd',
   UpdateState = '/system/user/state',
   Existence = '/system/user/existence',
+  IMPORT_TEMPLATE = '/system/user/template',
+  IMPORT = '/system/user/import',
+  Export = '/system/user/export',
 }
+
+// 导入excel数据地址，用于ExcelFileUpload组件的url属性
+export const UserExcelImportUrl = Api.IMPORT
+
+// 获取excel导入模板地址，用于~/hooks/excel.ts的url属性
+export const UserImportTemplateUrl = Api.IMPORT_TEMPLATE
+// 获取excel导出数据地址，用于~/hooks/excel.ts的url属性
+export const UserExportUrl = Api.Export
 
 /**
  * 分页查询

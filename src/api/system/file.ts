@@ -10,6 +10,7 @@ enum Api {
   Upload = '/system/file/upload',
 }
 
+// 上传文件地址，用于FileUpload组件
 export const UploadUrl = Api.Upload
 
 /**

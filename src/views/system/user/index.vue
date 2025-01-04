@@ -11,6 +11,8 @@ defineOptions({
 })
 
 const { loading, setLoading } = useLoading(true)
+const downloadLoading = ref<boolean>(false)
+const exportLoading = ref<boolean>(false)
 const searchForm = ref()
 // 表格数据
 const dataSource = ref<SysUser[]>([])
@@ -52,7 +54,7 @@ async function fetchTableData(param?: PageParam<SysUser>) {
     page.value.total = Number(data!.count)
     // 表格数据赋值
     dataSource.value = data!.list as unknown as SysUser[]
-  } catch (err) {
+  } catch {
   } finally {
     setLoading(false)
   }
@@ -206,6 +208,58 @@ async function changeState(val: number, row: SysUser) {
   layer.msg(message || '修改成功', { icon: 1 })
   row.state = val
 }
+
+/** 导出数据 */
+async function exportData() {
+  exportLoading.value = true
+  try {
+    // UserExportUrl 在 ~/api/system/user.ts 中定义
+    await useExportExcel(UserExportUrl, {
+      fileName: '用户数据',
+      queryParam: { ...searchForm.value.formModel }
+    })
+  } catch (err) {
+    layer.msg((err as Error).message, { icon: 2 })
+  } finally {
+    exportLoading.value = false
+  }
+}
+
+/** 下载导入模板 */
+async function downloadTmpl() {
+  downloadLoading.value = true
+  try {
+    // UserImportTemplateUrl 在 ~/api/system/user.ts 中定义
+    await useDownloadExcelTemplate(UserImportTemplateUrl, '用户数据模板')
+  } catch (err) {
+    layer.msg((err as Error).message, { icon: 2 })
+  } finally {
+    downloadLoading.value = false
+  }
+}
+
+/**
+ * 处理excel上传成功回调
+ *
+ * @param result
+ */
+function handleImportSuccess(result: ApiResult<boolean>) {
+  const { success, message } = result
+  if (!success) {
+    layer.msg(message || '上传失败', { icon: 2 })
+    return
+  }
+
+  // 重新获取表格数据
+  fetchTableData()
+}
+
+/**
+ * 处理excel上传失败回调
+ */
+function handleImportError(msg: string) {
+  layer.msg(msg || '上传失败', { icon: 2 })
+}
 </script>
 
 <template>
@@ -217,6 +271,28 @@ async function changeState(val: number, row: SysUser) {
 
     <!-- 数据表格 -->
     <div class="z-table-box">
+      <!-- 导入导出按钮 -->
+      <div style="display: flex; justify-content: end;">
+        <lay-space style="margin-bottom: 10px;">
+          <lay-button v-any-permission="['sys:user:view', 'sys:user:export']" :loading="exportLoading" @click="exportData">
+            {{ exportLoading ? '导出中...' : '导出数据' }}
+          </lay-button>
+
+          <lay-button v-any-permission="['sys:user:view', 'sys:user:import']" :loading="downloadLoading" @click="downloadTmpl">
+            {{ downloadLoading ? '下载中...' : '下载模板' }}
+          </lay-button>
+
+          <!-- UserExcelImportUrl 在 ~/api/system/user.ts 中定义 -->
+          <ExcelFileUpload
+            v-any-permission="['sys:user:save', 'sys:user:import']"
+            :url="UserExcelImportUrl"
+            text="导入数据"
+            @success="handleImportSuccess"
+            @error="handleImportError"
+          />
+        </lay-space>
+      </div>
+
       <lay-table
         id="id"
         v-model:selected-keys="selectedKeys"
@@ -227,7 +303,7 @@ async function changeState(val: number, row: SysUser) {
         :default-toolbar="defaultToolbar"
         :auto-cols-width="true"
         :resize="true"
-        :height="'100%'"
+        height="540px"
         @change="changePage"
         @sort-change="changeSort"
       >

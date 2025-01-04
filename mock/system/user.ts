@@ -52,6 +52,8 @@ function getApi(): FakeRoute {
 
       const params = request.params
       if (!params.id) return checkFailure('用户id不能为空')
+      // 校验params.id是否为纯数字
+      if (!/^\d+$/.test(params.id as string)) return checkFailure(`错误的用户id${params.id}`)
 
       const user = queryResult.data?.find(i => i.id === params.id!)
       return resultOk<SysUser>(user as unknown as SysUser)
@@ -247,7 +249,69 @@ function existenceApi(): FakeRoute {
   }
 }
 
+/** 导入用户 */
+function importApi(): FakeRoute {
+  return {
+    url: '/mock-api/system/user/import',
+    method: 'post',
+    response: (request: ProcessedRequest) => {
+      const token = getRequestToken(request)
+      if (!token) {
+        return resultError('未能读取到有效Token', { code: 401 })
+      }
+
+      return resultOk<boolean>(true)
+    }
+  }
+}
+
+/** 获取导入模板 */
+function getImportTemplateApi(): FakeRoute {
+  return {
+    url: '/mock-api/system/user/template',
+    method: 'get',
+    response: (request: ProcessedRequest) => {
+      const token = getRequestToken(request)
+      if (!token) {
+        return resultError('未能读取到有效Token', { code: 401 })
+      }
+
+      const params = request.query
+      if (!params.fileName) return checkFailure('excel模板文件名不能为空')
+      if (!params.type) return checkFailure('excel模板类型不能为空')
+
+      // 响应excel文件
+      return checkFailure('mock环境暂不支持导出excel文件')
+    }
+  }
+}
+
+/** 导出用户数据 */
+function exportUserApi(): FakeRoute {
+  return {
+    url: '/mock-api/system/user/export',
+    method: 'post',
+    response: (request: ProcessedRequest) => {
+      const token = getRequestToken(request)
+      if (!token) {
+        return resultError('未能读取到有效Token', { code: 401 })
+      }
+
+      const params = request.body
+      if (!params.fileName) return checkFailure('excel文件名不能为空')
+      if (!params.queryParam) return checkFailure('查询条件不能为空')
+      if (!params.type) return checkFailure('excel文件类型不能为空')
+
+      // 响应excel文件
+      return checkFailure('mock环境暂不支持导出excel文件')
+    }
+  }
+}
+
 export default defineFakeRoute([
+  importApi(),
+  getImportTemplateApi(),
+  exportUserApi(),
   existenceApi(),
   getApi(),
   pageApi(),

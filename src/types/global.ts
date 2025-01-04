@@ -82,3 +82,19 @@ export interface UpdateStateParam<T, U> {
   /** 状态 */
   state: U
 }
+
+/**
+ * 导出excel参数
+ */
+export interface ExportExcelParam<T> {
+  // excel的文件名, 无后缀名
+  fileName: string
+  // 数据查询条件
+  queryParam: T
+  // sheet名
+  sheetName?: string
+  // 第一页sheet表格的表头
+  title?: string
+  // HSSF（excel97-2003版本，扩展名.xls）、XSSF（excel2007+版本，扩展名.xlsx）
+  type?: 'XSSF' | 'HSSF'
+}
