@@ -130,7 +130,7 @@ async function handleExpand() {
         <!-- 工具栏 -->
         <template #toolbar>
           <lay-button
-            v-any-permission="['sys:user:add', 'sys:user:save']"
+            v-any-permission="['sys:menu:add', 'sys:menu:save']"
             size="sm"
             type="primary"
             @click="openEditModal()"
@@ -139,7 +139,7 @@ async function handleExpand() {
             新增
           </lay-button>
           <lay-button
-            v-permission="'sys:user:delete'"
+            v-permission="'sys:menu:delete'"
             size="sm"
             type="danger"
             @click="handleExpand"
@@ -151,7 +151,7 @@ async function handleExpand() {
         <!-- 操作列 -->
         <template #operator="{ row }">
           <lay-button
-            v-any-permission="['sys:user:add', 'sys:user:save']"
+            v-any-permission="['sys:menu:add', 'sys:menu:save']"
             size="xs"
             type="primary"
             @click="openAddModal(row)"
@@ -159,14 +159,14 @@ async function handleExpand() {
             新增子级
           </lay-button>
           <lay-button
-            v-any-permission="['sys:user:edit', 'sys:user:update']"
+            v-any-permission="['sys:menu:edit', 'sys:menu:update']"
             size="xs"
             @click="openEditModal(row)"
           >
             编辑
           </lay-button>
           <lay-button
-            v-permission="'sys:user:delete'"
+            v-permission="'sys:menu:delete'"
             size="xs"
             type="danger"
             @click="handleDelete(row.id)"
