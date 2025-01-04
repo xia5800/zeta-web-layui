@@ -30,7 +30,7 @@ const menuTheme = computed(() => {
   <div class="zeta-admin">
     <lay-layout>
       <!-- 侧边栏 -->
-      <lay-side v-show="isPC" :width="sideWidth" :class="menuTheme">
+      <lay-side v-show="isPC" :width="sideWidth" :class="menuTheme" @contextmenu.prevent>
         <!-- logo -->
         <lay-logo v-if="themeStore.settings.showLogo">
           <TheLogo />
@@ -50,7 +50,7 @@ const menuTheme = computed(() => {
 
       <lay-layout>
         <!-- header -->
-        <lay-header>
+        <lay-header @contextmenu.prevent>
           <!-- 头部 -->
           <TheHeader />
           <!-- 多页签 -->
