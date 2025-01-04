@@ -3,6 +3,7 @@ import { PROJECT_NAME } from '~/config/setting'
 import LottieLogo from '~/assets/lottie/lf20_sfiiilbf.json'
 
 const themeStore = useThemeStore()
+const router = useRouter()
 
 function renderLottie() {
   // 不显示logo，不渲染
@@ -21,7 +22,7 @@ onUpdated(() => renderLottie())
 </script>
 
 <template>
-  <div class="the-logo">
+  <div class="the-logo" @click="router.push({ name: 'home' })">
     <div id="lottie-logo" class="logo" />
     <span v-if="!themeStore.collaspeSide" class="logo-title">{{ PROJECT_NAME }}</span>
   </div>
