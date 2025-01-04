@@ -12,15 +12,19 @@ tabStore.createTabs()
 
 const tabs = computed(() => tabStore.tabs)
 
-// 有多少个tab，就设置多少个false
-const dropdownValue = computed(() => tabs.value.map(() => false))
-// 下拉菜单的默认值。默认不显示
-const tabDropdownValue = ref<boolean[]>(dropdownValue.value)
+// 上一个打开的下拉菜单
+const lastOpenDropdown = ref<string>()
+// 存储所有下拉菜单的ref
+const tabDropdownRefs = ref<Record<string, any>>({})
 
-// 如果增加或者减少了tab，将计算之后的值赋值给下拉菜单
-watch(() => dropdownValue.value, (value) => {
-  tabDropdownValue.value = value
-})
+/** 动态添加、减少下拉菜单的ref */
+function setDropdownRef(name: string, el: any) {
+  if (el) {
+    tabDropdownRefs.value[name] = el
+  } else {
+    delete tabDropdownRefs.value[name]
+  }
+}
 
 /** 添加tab */
 function addTab() {
@@ -59,8 +63,15 @@ function handleClose(id: string) {
     layer.msg('已经是最后一个标签了', { icon: 7 })
     return
   }
+
+  // 找到当前tab对象
   const currentTab = tabs.value.find(i => i.path === id) as unknown as Tab
   if (!currentTab) return
+
+  // 删除tab的下拉菜单
+  setDropdownRef(id, null)
+
+  // 删除tab
   tabStore
     .removeOneTab(currentTab)
     .then(() => {
@@ -123,16 +134,16 @@ function closeOther(tab?: Tab) {
 }
 
 /** tabDropdown显示事件 */
-function tabDropdownShow(index: number) {
-  // 将所有下拉菜单设置成隐藏
-  tabDropdownValue.value = tabDropdownValue.value.map((item: boolean) => item = false)
-  // 将当前下拉菜单设置成显示
-  tabDropdownValue.value[index] = true
-}
+function tabDropdownShow(name: string) {
+  if (lastOpenDropdown.value !== undefined) {
+    // 关闭上一个dropdown
+    tabDropdownRefs.value[lastOpenDropdown.value]?.hide()
+  }
+  // 打开当前dropdown
+  tabDropdownRefs.value[name]?.show()
 
-/** tabDropdown隐藏事件 */
-function tabDropdownHide() {
-  tabDropdownValue.value.map((item: boolean) => item = false)
+  // 更新上一次打开的下拉菜单
+  lastOpenDropdown.value = name
 }
 </script>
 
@@ -144,9 +155,13 @@ function tabDropdownHide() {
       @change="handleChange"
       @close="handleClose"
     >
-      <lay-tab-item v-for="tab, index in tabs" :id="tab.path" :key="index" :title="tab.title" :closable="!tab.affix">
+      <lay-tab-item v-for="tab, index in tabs" :id="tab.path" :key="index" :closable="!tab.affix">
         <template #title>
-          <lay-dropdown trigger="contextMenu" :visible="tabDropdownValue[index]" updateAtScroll @show="tabDropdownShow(index)" @hide="tabDropdownHide">
+          <lay-dropdown
+            :ref="(el: any) => setDropdownRef(tab.path, el)"
+            trigger="contextMenu"
+            @show="tabDropdownShow(tab.path)"
+          >
             <div style="height: 100%; display: inline-block;">
               <span class="dot" />
               {{ tab.title }}
@@ -183,7 +198,7 @@ function tabDropdownHide() {
     </lay-tab>
 
     <lay-dropdown>
-      <lay-icon type="layui-icon-down" :class="themeStore.settings.tabTheme === 'designer' ? 'designer-last-icon' : ''" />
+      <lay-icon type="layui-icon-down" :trigger="['click', 'contextmenu']" :class="themeStore.settings.tabTheme === 'designer' ? 'designer-last-icon' : ''" />
       <template #content>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item @click="closeLeft()">
