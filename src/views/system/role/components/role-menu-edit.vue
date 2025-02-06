@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { cloneDeep } from 'lodash-es'
 import type { TreeData } from '~/types/layui/tree'
 import { filterCheckedMenuId, toTreeData } from '../../menu/utils'
 
@@ -58,11 +59,18 @@ function handleClose() {
 
 /** 表单提交 */
 async function handleSubmit() {
+  // fix bug: 解决“一级菜单下有多个二级菜单，如果只选择一部分二级菜单，则一级菜单的id不会包含在内”问题  --by gcc
+  let menuIds = [...cloneDeep(checkedKeys.value)]
+  if (menuIds.length > 0) {
+    // 对menuIds,进行子id找父id操作
+    menuIds = getAncestorsAndSelectedIds(treeData.value, menuIds)
+  }
+
   try {
     // 修改角色菜单关联关系
     const { success, message } = await updateRoleMenuApi({
       roleId: props.roleId,
-      menuIds: checkedKeys.value, // 菜单id列表 为空代表清空角色与菜单的关联
+      menuIds, // 菜单id列表 为空代表清空角色与菜单的关联
     })
     if (!success) {
       layer.msg(message || '操作失败', { icon: 2 })
@@ -76,6 +84,33 @@ async function handleSubmit() {
   } catch (e) {
     layer.msg((e as Error).message, { icon: 2 })
   }
+}
+
+/**
+ * 获取所有父节点id
+ *
+ * @param tree
+ * @param selectedIds
+ */
+function getAncestorsAndSelectedIds(tree: TreeData[], selectedIds: string[]): string[] {
+  const result = new Set<string>(selectedIds)
+
+  function findParents(node: TreeData, path: string[]) {
+    if (selectedIds.includes(node.id)) {
+      path.forEach(id => result.add(id))
+    }
+    if (node.children) {
+      node.children.forEach((child) => {
+        findParents(child, [...path, node.id])
+      })
+    }
+  }
+
+  tree.forEach((rootNode) => {
+    findParents(rootNode, [])
+  })
+
+  return Array.from(result).sort()
 }
 
 watch(
@@ -104,7 +139,7 @@ watch(
     @close="handleClose"
   >
     <lay-tree
-      v-model:checkedKeys="checkedKeys"
+      v-model:checked-keys="checkedKeys"
       :data="treeData"
       :show-checkbox="true"
       :show-line="false"
