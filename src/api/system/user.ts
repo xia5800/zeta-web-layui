@@ -87,7 +87,7 @@ export function deleteUserApi(id: string) {
  * @return
  */
 export function batchDeleteUserApi(ids: string[]) {
-  return request.delete<ApiResult<boolean>>(Api.Batch, { data: { ids } })
+  return request.delete<ApiResult<boolean>>(Api.Batch, { data: ids })
 }
 
 /**

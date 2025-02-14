@@ -134,7 +134,7 @@ function batchDeleteApi(): FakeRoute {
       }
 
       const body = request.body
-      if ('1610517190090424320' in (body.ids as string[])) {
+      if ('1610517190090424320' in (body as string[])) {
         return resultError('角色[超级管理员]禁止删除')
       }
 

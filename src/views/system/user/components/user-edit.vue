@@ -137,7 +137,7 @@ async function saveData(model: SysUser, layerId: string) {
     // 新增用户
     const { success, message } = await addUserApi({
       ...cloneDeep(model) as SysUserSaveParam,
-      ...{ roleIds: roles.value },
+      ...{ roleIds: roles.value || [] },
     })
     if (!success) {
       layer.msg(message || '操作失败', { icon: 2 })

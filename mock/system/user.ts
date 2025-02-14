@@ -144,7 +144,7 @@ function batchDeleteApi(): FakeRoute {
       }
 
       const body = request.body
-      if (body.ids.indexOf('1610517191113834496') === 0) {
+      if ('1610517191113834496' in (body as string[])) {
         return resultError('用户[zeta管理员]禁止删除')
       }
 

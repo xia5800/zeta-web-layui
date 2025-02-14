@@ -6,8 +6,17 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const DictExcelImportUrl: typeof import('./api/system/dict')['DictExcelImportUrl']
+  const DictExportUrl: typeof import('./api/system/dict')['DictExportUrl']
+  const DictImportTemplateUrl: typeof import('./api/system/dict')['DictImportTemplateUrl']
+  const DictItemExcelImportUrl: typeof import('./api/system/dictItem')['DictItemExcelImportUrl']
+  const DictItemExportUrl: typeof import('./api/system/dictItem')['DictItemExportUrl']
+  const DictItemImportTemplateUrl: typeof import('./api/system/dictItem')['DictItemImportTemplateUrl']
   const EffectScope: typeof import('vue')['EffectScope']
   const UploadUrl: typeof import('./api/system/file')['UploadUrl']
+  const UserExcelImportUrl: typeof import('./api/system/user')['UserExcelImportUrl']
+  const UserExportUrl: typeof import('./api/system/user')['UserExportUrl']
+  const UserImportTemplateUrl: typeof import('./api/system/user')['UserImportTemplateUrl']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addDictApi: typeof import('./api/system/dict')['addDictApi']
   const addDictItemApi: typeof import('./api/system/dictItem')['addDictItemApi']
@@ -61,6 +70,7 @@ declare global {
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const existenceUserApi: typeof import('./api/system/user')['existenceUserApi']
+  const exportUserApi: typeof import('./api/system/user')['exportUserApi']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
@@ -72,6 +82,7 @@ declare global {
   const getOptLogApi: typeof import('./api/system/optLog')['getOptLogApi']
   const getRoleApi: typeof import('./api/system/role')['getRoleApi']
   const getUserApi: typeof import('./api/system/user')['getUserApi']
+  const getUserImportTemplateApi: typeof import('./api/system/user')['getUserImportTemplateApi']
   const getUserInfoApi: typeof import('./api/login')['getUserInfoApi']
   const getUserMenuApi: typeof import('./api/login')['getUserMenuApi']
   const h: typeof import('vue')['h']
@@ -247,6 +258,7 @@ declare global {
   const useDevicesList: typeof import('@vueuse/core')['useDevicesList']
   const useDisplayMedia: typeof import('@vueuse/core')['useDisplayMedia']
   const useDocumentVisibility: typeof import('@vueuse/core')['useDocumentVisibility']
+  const useDownloadExcelTemplate: typeof import('./hooks/excel')['useDownloadExcelTemplate']
   const useDraggable: typeof import('@vueuse/core')['useDraggable']
   const useDropZone: typeof import('@vueuse/core')['useDropZone']
   const useElementBounding: typeof import('@vueuse/core')['useElementBounding']
@@ -257,6 +269,7 @@ declare global {
   const useEventBus: typeof import('@vueuse/core')['useEventBus']
   const useEventListener: typeof import('@vueuse/core')['useEventListener']
   const useEventSource: typeof import('@vueuse/core')['useEventSource']
+  const useExportExcel: typeof import('./hooks/excel')['useExportExcel']
   const useEyeDropper: typeof import('@vueuse/core')['useEyeDropper']
   const useFavicon: typeof import('@vueuse/core')['useFavicon']
   const useFetch: typeof import('@vueuse/core')['useFetch']
@@ -404,6 +417,9 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly UploadUrl: UnwrapRef<typeof import('./api/system/file')['UploadUrl']>
+    readonly UserExcelImportUrl: UnwrapRef<typeof import('./api/system/user')['UserExcelImportUrl']>
+    readonly UserExportUrl: UnwrapRef<typeof import('./api/system/user')['UserExportUrl']>
+    readonly UserImportTemplateUrl: UnwrapRef<typeof import('./api/system/user')['UserImportTemplateUrl']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addDictApi: UnwrapRef<typeof import('./api/system/dict')['addDictApi']>
     readonly addDictItemApi: UnwrapRef<typeof import('./api/system/dictItem')['addDictItemApi']>
@@ -643,6 +659,7 @@ declare module 'vue' {
     readonly useDevicesList: UnwrapRef<typeof import('@vueuse/core')['useDevicesList']>
     readonly useDisplayMedia: UnwrapRef<typeof import('@vueuse/core')['useDisplayMedia']>
     readonly useDocumentVisibility: UnwrapRef<typeof import('@vueuse/core')['useDocumentVisibility']>
+    readonly useDownloadExcelTemplate: UnwrapRef<typeof import('./hooks/excel')['useDownloadExcelTemplate']>
     readonly useDraggable: UnwrapRef<typeof import('@vueuse/core')['useDraggable']>
     readonly useDropZone: UnwrapRef<typeof import('@vueuse/core')['useDropZone']>
     readonly useElementBounding: UnwrapRef<typeof import('@vueuse/core')['useElementBounding']>
@@ -653,6 +670,7 @@ declare module 'vue' {
     readonly useEventBus: UnwrapRef<typeof import('@vueuse/core')['useEventBus']>
     readonly useEventListener: UnwrapRef<typeof import('@vueuse/core')['useEventListener']>
     readonly useEventSource: UnwrapRef<typeof import('@vueuse/core')['useEventSource']>
+    readonly useExportExcel: UnwrapRef<typeof import('./hooks/excel')['useExportExcel']>
     readonly useEyeDropper: UnwrapRef<typeof import('@vueuse/core')['useEyeDropper']>
     readonly useFavicon: UnwrapRef<typeof import('@vueuse/core')['useFavicon']>
     readonly useFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
