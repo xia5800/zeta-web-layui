@@ -35,6 +35,7 @@ declare global {
   const breakpoints: typeof import('./hooks/ui')['breakpoints']
   const cacheTabs: typeof import('./store/modules/tab')['cacheTabs']
   const captchaApi: typeof import('./api/login')['captchaApi']
+  const changeUserBaseInfoApi: typeof import('./api/system/user')['changeUserBaseInfoApi']
   const changeUserPasswordApi: typeof import('./api/system/user')['changeUserPasswordApi']
   const clearCachedTabs: typeof import('./store/modules/tab')['clearCachedTabs']
   const computed: typeof import('vue')['computed']
@@ -438,6 +439,7 @@ declare module 'vue' {
     readonly breakpoints: UnwrapRef<typeof import('./hooks/ui')['breakpoints']>
     readonly cacheTabs: UnwrapRef<typeof import('./store/modules/tab')['cacheTabs']>
     readonly captchaApi: UnwrapRef<typeof import('./api/login')['captchaApi']>
+    readonly changeUserBaseInfoApi: UnwrapRef<typeof import('./api/system/user')['changeUserBaseInfoApi']>
     readonly changeUserPasswordApi: UnwrapRef<typeof import('./api/system/user')['changeUserPasswordApi']>
     readonly clearCachedTabs: UnwrapRef<typeof import('./store/modules/tab')['clearCachedTabs']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

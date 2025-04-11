@@ -173,6 +173,28 @@ function changePwdApi(): FakeRoute {
   }
 }
 
+
+/** 修改用户基本信息 */
+function changeUserBaseInfoApi(): FakeRoute {
+  return {
+    url: '/mock-api/system/user/changeUserBaseInfo',
+    method: 'put',
+    response: (request: ProcessedRequest) => {
+      const token = getRequestToken(request)
+      if (!token) {
+        return resultError('未能读取到有效Token', { code: 401 })
+      }
+
+      const body = request.body
+      if (!body.username) return checkFailure('用户名不能为空')
+      if (body.username && body.username.length > 32) return checkFailure('用户名长度不能大于32')
+      if (!body.sex) return checkFailure('性别不能为空')
+
+      return resultOk<boolean>(true)
+    },
+  }
+}
+
 /** 重置用户密码 */
 function resetPwdApi(): FakeRoute {
   return {
@@ -321,6 +343,7 @@ export default defineFakeRoute([
   deleteApi(),
   batchDeleteApi(),
   changePwdApi(),
+  changeUserBaseInfoApi(),
   resetPwdApi(),
   updateStateApi(),
 ])

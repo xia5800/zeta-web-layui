@@ -1,7 +1,7 @@
 import type { ApiResult, PageParam, PageResult, UpdateStateParam, ExistParam } from '~/types/global'
 import type {
   SysUser, SysUserSaveParam, SysUserUpdateParam,
-  ChangePasswordParam, ResetPwdParam,
+  ChangePasswordParam, ResetPwdParam, ChangeUserBaseInfoParam,
 } from '~/types/system/user'
 import { request } from '~/utils/request'
 
@@ -11,6 +11,7 @@ enum Api {
   Common = '/system/user',
   Batch = '/system/user/batch',
   ChangePwd = '/system/user/changePwd',
+  ChangeUserBaseInfo = '/system/user/changeUserBaseInfo',
   RestPwd = '/system/user/restPwd',
   UpdateState = '/system/user/state',
   Existence = '/system/user/existence',
@@ -97,6 +98,18 @@ export function batchDeleteUserApi(ids: string[]) {
  */
 export function changeUserPasswordApi(param: ChangePasswordParam) {
   return request.put<ApiResult<boolean>>(Api.ChangePwd, {
+    data: param,
+    repeatSubmit: false,
+  })
+}
+
+/**
+ * 修改用户基本信息
+ * @param param
+ * @return
+ */
+export function changeUserBaseInfoApi(param: ChangeUserBaseInfoParam) {
+  return request.put<ApiResult<boolean>>(Api.ChangeUserBaseInfo, {
     data: param,
     repeatSubmit: false,
   })

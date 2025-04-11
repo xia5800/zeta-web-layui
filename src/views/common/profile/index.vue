@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Rules } from 'async-validator'
-import type { SysUser, SysUserUpdateParam } from '~/types/system/user'
+import type { SysUser, ChangeUserBaseInfoParam } from '~/types/system/user'
 import { cloneDeep } from 'lodash'
 import { assignObj } from '~/utils'
 import defaultAvatar from '~/assets/default-avatar.jpg'
@@ -11,8 +11,7 @@ const avatar = computed(() => userStore.info?.avatar || defaultAvatar)
 // 表单相关
 const refForm = ref()
 const sysUser = ref<SysUser>({})
-const form = reactive<SysUserUpdateParam>({
-  id: '',
+const form = reactive<ChangeUserBaseInfoParam>({
   username: '',
   sex: 1,
   email: '',
@@ -85,13 +84,13 @@ fetchUserInfo()
 
 /** 表单提交 */
 function handleSubmit() {
-  refForm.value.validate((isValidate: boolean, model: SysUserUpdateParam, _errors: any) => {
+  refForm.value.validate((isValidate: boolean, model: ChangeUserBaseInfoParam, _errors: any) => {
     if (!isValidate) return
 
     layer.msg('正在提交数据...', { icon: 16 }, async (layerId: string) => {
       try {
         // 修改用户数据
-        const { success, message } = await updateUserApi(cloneDeep(model))
+        const { success, message } = await changeUserBaseInfoApi(cloneDeep(model))
         if (!success) {
           layer.msg(message || '操作失败', { icon: 2 })
           return

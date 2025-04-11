@@ -104,6 +104,22 @@ export interface ChangePasswordParam {
 }
 
 /**
+ * 修改用户基本信息参数
+ */
+export interface ChangeUserBaseInfoParam {
+  /** 用户名 */
+  username: string
+  /** 邮箱 */
+  email?: string
+  /** 手机号 */
+  mobile?: string
+  /** 性别 0未知 1男 2女 */
+  sex: number
+  /** 生日 */
+  birthday?: string
+}
+
+/**
  * 重置用户密码参数
  */
 export interface ResetPwdParam {
